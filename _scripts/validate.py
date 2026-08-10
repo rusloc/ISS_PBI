@@ -23,8 +23,10 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
-# Directories never worth validating: git internals, PBIX backups, Desktop session state.
-SKIP_DIRS = {".git", "__backup__", ".pbi", "__pycache__", ".log"}
+# Directories never worth validating: git internals and PBIX backups.
+# `.pbi/` is NOT skipped — its *.json files are tracked (only cache.abf is
+# gitignored, and .abf is binary so no check picks it up anyway).
+SKIP_DIRS = {".git", "__backup__", "__pycache__", ".log"}
 
 JSON_SUFFIXES = {".json", ".pbir", ".pbip", ".pbism"}
 TEXT_SUFFIXES = JSON_SUFFIXES | {".tmdl", ".dax", ".md"}

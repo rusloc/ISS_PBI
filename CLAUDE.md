@@ -69,15 +69,15 @@ These two are the only skills in this workspace; don't reference others.
 - `*.pbix` files are **read-only backups** (pre-upgrade snapshots, Desktop exports). Never edit, parse, or "fix" them.
 - Gitignored by default (see below). They live in the report project's own `<CODE>/__backup__/` folder and are tracked via Git LFS only on explicit request.
 
-### `.pbi/` = local session state, never committed
-- Every `.pbi/` folder — at any depth, in `<Name>.Report/`, `<Name>.SemanticModel/`, `DAXQueries/`, `TMDLScripts/` — is ignored **as a folder**, not file by file.
-- Reason: `.pbi/cache.abf` is a full local copy of the **model data** (21 MB for AVS). Model data must never reach a public/cloud remote. The rest is Desktop session state (`localSettings.json`, `editorSettings.json`, `daxQueries.json`, `tmdlScripts.json`) — Desktop regenerates all of it on open, so a fresh clone loses nothing.
-- If a `.pbi/` file ever shows up in `git status`, the ignore rule has been weakened — fix the rule, don't add an exception.
+### `.pbi/` — only `cache.abf` is ignored
+- **`cache.abf` is the one file that must never reach GitHub**: a full local copy of the **model data** (21 MB for AVS, 968 KB for COMS). Ignored at any depth.
+- **Every `.json` under `.pbi/` is tracked** — `localSettings.json`, `editorSettings.json`, `daxQueries.json`, `tmdlScripts.json`. These carry Desktop session state: editor toggles, DAX/TMDL tab order, and the `datasetId` / `reportId` of the published Fabric items.
+- Known cost of tracking them: `localSettings.json` also holds a `securityBindingsSignature`, a DPAPI blob bound to the local Windows user. It is rewritten whenever a different machine opens the project, so expect recurring one-line diffs there. Commit or discard them; they are noise, not a change.
 
 ### .gitignore (root)
 ```gitignore
 *.pbix
-**/.pbi/
+**/.pbi/cache.abf
 **/cache.abf
 ```
 
