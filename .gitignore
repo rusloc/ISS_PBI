@@ -1,7 +1,9 @@
 # PBIX = backup only, never source (see CLAUDE.md)
 *.pbix
 
-# Power BI local/session artifacts
-**/.pbi/localSettings.json
-**/.pbi/cache.abf
+# Power BI local/session state — the WHOLE .pbi folder, at any depth.
+# .pbi/cache.abf is a full local copy of the model data (21 MB for AVS);
+# model data must never reach a public/cloud remote. Desktop regenerates
+# .pbi on open, so nothing here is needed by a fresh clone.
+**/.pbi/
 **/cache.abf
