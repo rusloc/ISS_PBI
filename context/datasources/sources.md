@@ -28,10 +28,14 @@ The M pattern is: connect → filter `Schema = "public"` and `Name = "public.sql
 
 Consequences, and they matter:
 
-- Changing a report's SQL is a **database** edit, not a repo edit. It will not show in a git diff.
-- The repo cannot be the source of truth for that SQL unless we mirror it into
-  `context/datasources/sql/`. TODO: decide whether to mirror, and how to keep it honest.
-- A model refresh can change shape without a single file changing here.
+- **Resolved 2026-08-10: the SQL is mirrored into `context/datasources/sql/`** — 34 deployable
+  `.sql` files, each writing one `(_report, _page)` row. See that folder's `README.md` for the
+  inventory and the deploy pattern.
+- The mirror is only honest if the loop is respected: **edit file → run file against Postgres →
+  refresh model → commit file**. A DB-only edit leaves the repo lying, which is worse than having no
+  mirror at all.
+- A model refresh can still change shape without a file changing here, if someone edits
+  `sql_source` directly. Treat that as a bug to correct, not a workflow.
 
 ## Direct-query expressions (AVS)
 
@@ -39,8 +43,16 @@ Consequences, and they matter:
 `__CLIENTS_SKU__`, `__CLIENTS_DIM__`, `__CLIENTS_MAIN__`, `_ETA_MAX_DATE`, plus `MAIN_SRC`,
 `SKU_SRC`, `CONTAINER_SRC`. These *are* in the repo and *do* diff.
 
+## Which file feeds which report
+
+| Report | `_report` key | Files |
+|---|---|---|
+| COMS · Coms report | `COMS` | `COMS PO VIEW.sql`, `COMS EK VIEW.sql` |
+| AVS · Tracking customer version | `TRACKER CLIENT PRODUCTION` | `TRACKER CLIENT PROD MAIN.sql`, `… SKU.sql`, `… CONTAINER.sql` |
+
 ## Table & schema docs
 
-One file per schema/table in `context/datasources/sql/`, named `<schema>.<table>.md` — columns,
-types, keys, grain, join paths, known quirks. **None written yet.** First candidates:
-`public.sql_source`, and the tables behind `__MAIN__` / `__CONTAINER__` / `__SKU__`.
+Per-table docs (`<schema>.<table>.md` — columns, types, keys, grain, join paths, known quirks) live
+in the same folder. **None written yet.** First candidates, from the COMS work:
+`portal.purchase_order_on_freight_unit`, `portal."PurchaseOrderLine"`, `portal.freight_unit`,
+`portal.freight_unit_enrich`, `portal.sla_master_coms`, `public.sql_source`.

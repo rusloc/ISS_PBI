@@ -33,6 +33,26 @@
 | `_ROLE` | role-driven behaviour, columns `active_auto` / `active_man` |
 | `SHIPMENT_param`, `CONTAINER_param`, `SKU_param` | field parameters; each has `_ETA_AUTO` / `_ETA_MAN` flags |
 
+## Sources
+
+Reads SQL text out of the `public.sql_source` indirection table (see `../datasources/sources.md`)
+under `_report = 'TRACKER CLIENT PRODUCTION'`:
+
+| M expression | `_page` | Mirrored file |
+|---|---|---|
+| `MAIN_SRC` | `MAIN` | `../datasources/sql/TRACKER CLIENT PROD MAIN.sql` |
+| `SKU_SRC` | `SKU` | `../datasources/sql/TRACKER CLIENT PROD SKU.sql` |
+| `CONTAINER_SRC` | `CONTAINER` | `../datasources/sql/TRACKER CLIENT PROD CONTAINER.sql` |
+
+Plus inline `Value.NativeQuery` expressions held directly in `expressions.tmdl`
+(`__CLIENTS_MAIN__`, `__CLIENTS_SKU__`, `__CLIENTS_DIM__`, `_ETA_MAX_DATE`) — these do diff in git.
+
+The `TRACKER CLIENT DEMO *` and `TRACKER APP *` files in the same folder are sibling variants (demo
+and app) not consumed by this report.
+
+Shares the shipment-tracking domain vocabulary with COMS —
+see [`../domains/shipment-tracking.md`](../domains/shipment-tracking.md).
+
 ## RLS
 
 Two roles, both `modelPermission: read`:

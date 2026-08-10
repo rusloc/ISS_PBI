@@ -54,7 +54,7 @@ _templates/               → house theme.json, style snippets, starter visuals
 | Report | Code | Folder | Context doc | Description | Status |
 |---|---|---|---|---|---|
 | Tracking customer version | AVS | `AVS/Tracking customer version.*` | `context/reports/avs.md` | Shipment / container / SKU tracking, 6 pages, RLS by client id via `CUSTOMDATA()` | active |
-| Coms report | COMS | `COMS/Coms report.*` | `context/reports/coms.md` | EK + PO views, 3 pages, FX table, no RLS | active |
+| Coms report | COMS | `COMS/Coms report.*` | `context/reports/coms.md` | Client shipment tracker (PO/FO/shipment, ETD-ETA-PTD-PTA-ATD-ATA), EK + PO views, Emirates-focused | active |
 
 ## Available skills
 
