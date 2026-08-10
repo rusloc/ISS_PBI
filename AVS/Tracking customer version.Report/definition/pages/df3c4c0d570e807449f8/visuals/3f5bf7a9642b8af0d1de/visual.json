@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "3f5bf7a9642b8af0d1de",
+  "position": {
+    "x": 699.92107194128641,
+    "y": 88.967683230141446,
+    "z": 4000,
+    "height": 594.30400341397058,
+    "width": 312.44659003013896,
+    "tabOrder": 4000
+  },
+  "visualGroup": {
+    "displayName": "SEARCH (sku)",
+    "groupMode": "ScaleMode"
+  },
+  "parentGroupName": "1d779e813a5b2fcb81c8",
+  "isHidden": true
+}

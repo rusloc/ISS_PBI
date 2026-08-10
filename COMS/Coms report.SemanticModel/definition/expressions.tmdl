@@ -1,0 +1,32 @@
+expression EK_SQL_SOURCE =
+		let
+		    Source = PostgreSQL.Database("c-powerbicosmos.k4mjimliu3npzv.postgres.cosmos.azure.com", "powerbi"),
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Schema] = "public") and ([Name] = "public.sql_source")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Data"}),
+		    #"Expanded Data" = Table.ExpandTableColumn(#"Removed Other Columns", "Data", {"_code", "_page", "_report"}, {"_code", "_page", "_report"}),
+		    #"Filtered Rows1" = Table.SelectRows(#"Expanded Data", each ([_report] = "COMS" and [_page] = "EK VIEW"))
+		in
+		    #"Filtered Rows1"
+	lineageTag: 5585a2fc-a33c-41fd-8105-64458abadb7b
+	queryGroup: SRC
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression PO_SQL_SOURCE =
+		let
+		    Source = PostgreSQL.Database("c-powerbicosmos.k4mjimliu3npzv.postgres.cosmos.azure.com", "powerbi"),
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Schema] = "public") and ([Name] = "public.sql_source")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Data"}),
+		    #"Expanded Data" = Table.ExpandTableColumn(#"Removed Other Columns", "Data", {"_code", "_page", "_report"}, {"_code", "_page", "_report"}),
+		    #"Filtered Rows1" = Table.SelectRows(#"Expanded Data", each ([_report] = "COMS" and [_page] = "PO VIEW"))
+		in
+		    #"Filtered Rows1"
+	lineageTag: cf0e3af7-f665-4e4b-84eb-9f0d1e43040e
+	queryGroup: SRC
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

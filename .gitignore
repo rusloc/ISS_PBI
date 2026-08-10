@@ -1,0 +1,7 @@
+# PBIX = backup only, never source (see CLAUDE.md)
+*.pbix
+
+# Power BI local/session artifacts
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+**/cache.abf

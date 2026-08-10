@@ -1,0 +1,67 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "4e4df8fc8d09b287710c",
+  "position": {
+    "x": 59.280223844595241,
+    "y": 5.2693532306306885,
+    "z": 7000,
+    "height": 90.896343228379379,
+    "width": 320.1132087608143,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Cargo tracking",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontFamily": "Arial Black",
+                      "fontSize": "24pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "By SKU / CONTAINER / SERIAL",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontFamily": "Arial Black",
+                      "fontSize": "12pt",
+                      "color": "#666666"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'NAME'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "isHidden": true
+}

@@ -1,0 +1,57 @@
+relationship 90934b70-d447-47c4-bff3-2540d03b3d21
+	toCardinality: many
+	fromColumn: __SKU__._sku_main_link
+	toColumn: __MAIN__.'_sku_main LINK'
+
+relationship e5598a9c-752d-917c-61c1-0b6282eb83f5
+	isActive: false
+	fromColumn: __MAIN__.arrival_date
+	toColumn: _calendar.Date
+
+relationship 4e942b9a-a59d-049c-df53-3660087ee29f
+	isActive: false
+	fromColumn: __MAIN__.loading_date
+	toColumn: _calendar.Date
+
+relationship 6c70ebf2-488a-755c-c5d2-532de5f47b61
+	isActive: false
+	fromColumn: __MAIN__.eta_date
+	toColumn: _calendar.Date
+
+relationship 5fc73750-b0b0-4c0a-574c-83fed6a9000a
+	isActive: false
+	fromColumn: __MAIN__.etd_date
+	toColumn: _calendar.Date
+
+relationship d7bd8a67-2da4-1d02-c5e8-82366078466e
+	isActive: false
+	fromColumn: __MAIN__._eta_auto_date
+	toColumn: _calendar.Date
+
+relationship c4e866e9-3be8-948b-854c-287fc032a4a3
+	isActive: false
+	fromColumn: __MAIN__._etd_auto_date
+	toColumn: _calendar.Date
+
+relationship 16ac0f06-fa97-9e58-4867-ad9d57d08402
+	isActive: false
+	fromColumn: __MAIN__._arrival_date_auto
+	toColumn: _calendar.Date
+
+relationship ecc0a1d4-c725-bdec-6968-2aa8b60438a3
+	fromColumn: __MAIN__.creation_date
+	toColumn: _calendar.Date
+
+relationship AutoDetected_aaab7f7f-38c5-4b77-bb7c-f03aceafbf13
+	fromColumn: __MAIN__._client_id
+	toColumn: __VISIBILITY._client_id
+
+relationship AutoDetected_be6fa8e9-6db1-4633-a3e9-9dfc0e76999e
+	fromColumn: __CONTAINER__._client_id
+	toColumn: __VISIBILITY._client_id
+
+relationship d23f09b5-62d5-ea0e-34eb-bafd51e8122d
+	toCardinality: many
+	fromColumn: __CONTAINER__.serial_no
+	toColumn: __MAIN__.serial_no
+

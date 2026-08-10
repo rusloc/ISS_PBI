@@ -1,0 +1,22 @@
+role CompanyID_MAN
+	modelPermission: read
+
+	tablePermission __MAIN__ =
+			VAR _filter = CUSTOMDATA()
+			// VAR _filter = "|385492|"
+			RETURN
+			    CONTAINSSTRING(
+			        _filter,
+			        "|" & FORMAT('__MAIN__'[_client_id], "0") & "|"
+			)
+
+	tablePermission SHIPMENT_param = [_ETA_MAN] == 1
+
+	tablePermission CONTAINER_param = [_ETA_MAN] == 1
+
+	tablePermission SKU_param = [_ETA_MAN] == 1
+
+	tablePermission _ROLE = [active_man] == 1
+
+	annotation PBI_Id = 2510de588aca4135ac0474ec69252e59
+

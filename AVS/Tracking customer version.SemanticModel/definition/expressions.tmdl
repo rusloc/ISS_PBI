@@ -1,0 +1,256 @@
+expression customCalendar =
+		(start_of_cal as date, end_of_cal as date, start_of_week as number) =>
+		
+		
+		
+		let
+		    /* ===============================================================================================================
+		     FUNCTION: fnCustomWeekCalendar
+		     DESCRIPTION: Creates a dynamic date table with a custom start of the week.
+		     PARAMETERS:
+		          - start_of_week: An integer representing the start day of the week (1=Monday, 2=Tuesday, ..., 7=Sunday).
+		     RETURNS: A table with a custom week calendar.
+		     =============================================================================================================== */
+		
+		    /* ---------------------------------------------------------------------------------------------------------------
+		     CONFIGURATION
+		          - Define the date range for the calendar.
+		     --------------------------------------------------------------------------------------------------------------- */
+		    _startDate = start_of_cal,
+		    _endDate = end_of_cal,
+		    _dateList = List.Dates(_startDate, Duration.Days(_endDate - _startDate) + 1, #duration(1, 0, 0, 0)),
+		
+		    /* ---------------------------------------------------------------------------------------------------------------
+		     INITIAL TABLE & CORE COLUMNS
+		          - Create the base table and add standard date columns (Year, Year-Mon, Sort).
+		     --------------------------------------------------------------------------------------------------------------- */
+		    _initialTable = Table.FromList(_dateList, Splitter.SplitByNothing(), {"Date"}, null, ExtraValues.Error),
+		    _baseTypedTable = Table.TransformColumnTypes(_initialTable,{{"Date", type date}}),
+		    _addedCoreColumns = Table.AddColumn(
+		        Table.AddColumn(
+		            Table.AddColumn(_baseTypedTable, "Year", each Date.Year([Date]), Int64.Type),
+		            "Year-Mon", each Date.ToText([Date], "yyyy-MM"), type text
+		        ),
+		        "Sort Column", each [Year] * 100 + Date.Month([Date]), Int64.Type
+		    ),
+		
+		    /* ---------------------------------------------------------------------------------------------------------------
+		     CUSTOM WEEK COLUMNS
+		          - Add week-related columns. Week boundaries are clamped to the calendar year.
+		          - Week 1 will always start on or after Jan 1st. The last week will always end on or before Dec 31st.
+		     --------------------------------------------------------------------------------------------------------------- */
+		    _addedWeekColumns = Table.AddColumn(
+		        Table.AddColumn(
+		            Table.AddColumn(_addedCoreColumns,
+		                "Week Start",
+		                each let rawStart = Date.StartOfWeek([Date], start_of_week), currentYear = [Year] in if Date.Year(rawStart) < currentYear then #date(currentYear, 1, 1) else rawStart,
+		                type date
+		            ),
+		            "Week End",
+		            each let rawEnd = Date.EndOfWeek([Date], start_of_week), currentYear = [Year] in if Date.Year(rawEnd) > currentYear then #date(currentYear, 12, 31) else rawEnd,
+		            type date
+		        ),
+		        "Week ISO Number", each Date.WeekOfYear([Date], Day.Monday), Int64.Type
+		    ),
+		
+		    /* ---------------------------------------------------------------------------------------------------------------
+		     CUSTOM WEEK NUMBERING
+		          - Generate a helper table to calculate the custom week number that resets each year.
+		     --------------------------------------------------------------------------------------------------------------- */
+		    _weekNumberMapping = Table.ExpandTableColumn(
+		        Table.Group(
+		            Table.Sort(
+		                Table.Distinct(
+		                    Table.SelectColumns(_addedWeekColumns, {"Year", "Week Start"})
+		                ),
+		                {{"Year", Order.Ascending}, {"Week Start", Order.Ascending}}
+		            ),
+		            {"Year"},
+		            {{"WeeksInYear", each Table.AddIndexColumn(_, "Custom Week Number", 1, 1), type table}}
+		        ),
+		        "WeeksInYear",
+		        {"Week Start", "Custom Week Number"},
+		        {"Week Start", "Custom Week Number"}
+		    ),
+		
+		    /* ---------------------------------------------------------------------------------------------------------------
+		     FINALIZATION
+		          - Join the week numbering back to the main table and perform final transformations.
+		     --------------------------------------------------------------------------------------------------------------- */
+		    _joinedWithWeekNumber = Table.ExpandTableColumn(
+		        Table.NestedJoin(_addedWeekColumns, {"Year", "Week Start"}, _weekNumberMapping, {"Year", "Week Start"}, "NewData", JoinKind.LeftOuter),
+		        "NewData",
+		        {"Custom Week Number"},
+		        {"Custom Week Number"}
+		    ),
+		    _finalTable = Table.TransformColumnTypes(
+		        Table.Sort(
+		            Table.ReorderColumns(
+		                Table.AddColumn(_joinedWithWeekNumber, "Custom Week Sort Column", each [Year] * 100 + [Custom Week Number], Int64.Type),
+		                {"Date", "Year", "Year-Mon", "Sort Column", "Week Start", "Week End", "Week ISO Number", "Custom Week Number", "Custom Week Sort Column"}
+		            ),
+		            {{"Date", Order.Ascending}}
+		        ),
+		        {
+		            {"Date", type date}, {"Year", Int64.Type}, {"Year-Mon", type text}, {"Sort Column", Int64.Type},
+		            {"Week Start", type date}, {"Week End", type date}, {"Week ISO Number", Int64.Type},
+		            {"Custom Week Number", Int64.Type}, {"Custom Week Sort Column", Int64.Type}
+		        }
+		    )
+		in
+		    _finalTable
+	lineageTag: bd466ce0-c40f-4289-b8d8-ae585be3469f
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression __CLIENTS_SKU__ = ```
+		let
+		    Source = Table.SelectRows(
+		        
+		                Table.Sort(
+		                    Table.Distinct(  
+		                        Table.Combine({
+		
+		                            __MAIN__[[_client]]
+		                            ,__SKU__[[_client]]
+		
+		    })), {{"_client", Order.Ascending}})
+		        ,(x) => x[_client] <> null)
+		in
+		    Source
+		```
+	lineageTag: 7cc47054-8f62-49e9-8b06-2ce81cab1c58
+	queryGroup: MAIN
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression __CLIENTS_DIM__ = ```
+		let
+		    Source = Table.SelectRows(
+		        
+		                Table.Sort(
+		                    Table.Distinct(  
+		                        Table.Combine({
+		
+		                            __MAIN__[[_client]]
+		                            ,__SKU__[[_client]]
+		
+		    })), {{"_client", Order.Ascending}})
+		        ,(x) => x[_client] <> null)
+		in
+		    Source
+		```
+	lineageTag: a192d797-3162-48b0-9c85-1e5bde30313c
+	queryGroup: MAIN
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression __CLIENTS_MAIN__ = ```
+		let
+		    Source = Table.SelectRows(
+		        
+		                Table.Sort(
+		                    Table.Distinct(  
+		                        Table.Combine({
+		
+		                            __MAIN__[[_client]]
+		                            ,__SKU__[[_client]]
+		
+		    })), {{"_client", Order.Ascending}})
+		        ,(x) => x[_client] <> null),
+		
+		
+		    _sort = Table.Sort(Source,{{"_client", Order.Ascending}})
+		in
+		    _sort
+		```
+	lineageTag: 790d989e-38f3-40db-a1aa-ca341e08118b
+	queryGroup: MAIN
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression _ETA_MAX_DATE = ```
+		let
+		    Source = Value.NativeQuery(PostgreSQL.Database("c-powerbicosmos.k4mjimliu3npzv.postgres.cosmos.azure.com", "powerbi", [HierarchicalNavigation=true]), 
+		    
+		
+		
+		    "
+		                select 
+		                    max(greatest(eta_date, eta_wakeo_date))::date 							_eta
+		                from portal.materialized_view_shipments_tracker t
+		
+		
+		    
+		    
+		    "
+		    
+			),
+		    #"Changed Type" = Table.TransformColumnTypes(Source,{{"_eta", type date}})
+		
+		in
+			#"Changed Type"
+		```
+	lineageTag: 5f64a0b3-ba67-4391-b00f-29ad0daf4659
+	queryGroup: MAIN
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression MAIN_SRC =
+		let
+		    Source = PostgreSQL.Database("c-powerbicosmos.k4mjimliu3npzv.postgres.cosmos.azure.com", "powerbi"),
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Schema] = "public") and ([Name] = "public.sql_source")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Data"}),
+		    #"Expanded Data" = Table.ExpandTableColumn(#"Removed Other Columns", "Data", {"_code", "_page", "_report"}, {"_code", "_page", "_report"}),
+		    #"Filtered Rows2" = Table.SelectRows(#"Expanded Data", each ([_report] = "TRACKER CLIENT PRODUCTION") and ([_page] = "MAIN"))
+		in
+		    #"Filtered Rows2"
+	lineageTag: b79a4205-d00f-4dd7-85ee-8e971bd0c9a5
+	queryGroup: 'SQL SRC'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression SKU_SRC =
+		let
+		    Source = PostgreSQL.Database("c-powerbicosmos.k4mjimliu3npzv.postgres.cosmos.azure.com", "powerbi"),
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Schema] = "public") and ([Name] = "public.sql_source")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Data"}),
+		    #"Expanded Data" = Table.ExpandTableColumn(#"Removed Other Columns", "Data", {"_code", "_page", "_report"}, {"_code", "_page", "_report"}),
+		    #"Filtered Rows2" = Table.SelectRows(#"Expanded Data", each ([_report] = "TRACKER CLIENT PRODUCTION") and ([_page] = "SKU"))
+		in
+		    #"Filtered Rows2"
+	lineageTag: 316d2003-442d-4890-989e-00a2e11c5dd5
+	queryGroup: 'SQL SRC'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression CONTAINER_SRC =
+		let
+		    Source = PostgreSQL.Database("c-powerbicosmos.k4mjimliu3npzv.postgres.cosmos.azure.com", "powerbi"),
+		    #"Filtered Rows" = Table.SelectRows(Source, each ([Schema] = "public") and ([Name] = "public.sql_source")),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Data"}),
+		    #"Expanded Data" = Table.ExpandTableColumn(#"Removed Other Columns", "Data", {"_code", "_page", "_report"}, {"_code", "_page", "_report"}),
+		    #"Filtered Rows2" = Table.SelectRows(#"Expanded Data", each ([_report] = "TRACKER CLIENT PRODUCTION") and ([_page] = "CONTAINER"))
+		in
+		    #"Filtered Rows2"
+	lineageTag: 67963156-980c-4ce7-bcbe-6944c8f1d996
+	queryGroup: 'SQL SRC'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

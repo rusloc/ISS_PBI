@@ -1,0 +1,16 @@
+// Welcome to DAX query view! Learn more about DAX queries at https://aka.ms/dax-queries.
+// Right-click on tables, columns, or measures in the data pane to access quick queries, or ask Copilot for help writing DAX.
+
+// Select "Run" to try this sample DAX query.
+EVALUATE
+FILTER(
+    SELECTCOLUMNS(
+        '__MAIN__'
+        ,"_bookingTracker"
+            ,'__MAIN__'[master_booking_no]
+        ,"__bookingNoFocus"
+            ,'__MAIN__'[_booking_no]
+    )
+    ,[_bookingTracker] <> BLANK()
+    || [__bookingNoFocus] <> BLANK()
+)

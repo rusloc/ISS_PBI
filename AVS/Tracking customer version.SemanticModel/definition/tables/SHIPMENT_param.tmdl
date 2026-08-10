@@ -1,0 +1,141 @@
+table SHIPMENT_param
+	lineageTag: 753c7830-dbe8-4cc9-9008-6d6def6d8554
+
+	column SHIPMENT_PARAM
+		lineageTag: 3f7717bd-6e09-4adf-89ea-85daf60f3a13
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'SHIPMENT_PARAM Order'
+
+		relatedColumnDetails
+			groupByColumn: 'SHIPMENT_PARAM Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SHIPMENT_PARAM Fields'
+		isHidden
+		lineageTag: 0ab97dd4-62e7-4252-b6c4-75c4b3accb74
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'SHIPMENT_PARAM Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SHIPMENT_PARAM Order'
+		isHidden
+		formatString: 0
+		lineageTag: 6e30139f-7636-4d10-8000-4d3859a64928
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Column is used in RLS roles for managing visuals in embedded report: when AUTO role is selected -> parameter table is filtered down by using _ETA_AUTO column
+	column _ETA_AUTO =
+			
+			
+			SWITCH(TRUE()
+			    ,'SHIPMENT_param'[SHIPMENT_PARAM Order] in {60,127,135}
+			        ,0
+			    ,1)
+		formatString: 0
+		lineageTag: 71f950b7-3006-46ee-bf6d-3c31c938e3c5
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Column is used in RLS roles for managing visuals in embedded report: when MAN role is selected -> parameter table is filtered down by using _ETA_MAN column
+	column _ETA_MAN =
+			
+			
+			SWITCH(TRUE()
+			    ,'SHIPMENT_param'[SHIPMENT_PARAM Order] in {61,130,150}
+			        ,0
+			    ,1)
+		formatString: 0
+		lineageTag: 258c2497-f05d-4182-9071-0c6d833d311e
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition SHIPMENT_param = calculated
+		mode: import
+		source = ```
+				{
+				
+				    ("ACRD (Actual Cargo Ready Date)", NAMEOF('__MAIN__'[actual_cargo_date]), 10),
+				    ("Arrival date (ISS)", NAMEOF('__MAIN__'[arrival_date]), 20),
+				    ("ATA (Actual Time of Arrival)", NAMEOF('__MAIN__'[_arrival_date_auto]), 30),
+				    ("ATD (Actual Time of Departure)", NAMEOF('__MAIN__'[loading_date]), 40),
+				    ("Book. conf. date (customer)", NAMEOF('__MAIN__'[booking_confirmed_date]), 50),
+				    ("Cargo Description", NAMEOF('__MAIN__'[short_description]), 60),
+				    ("Carrier", NAMEOF('__MAIN__'[_analytical_carrier]), 63),
+				    ("Carrier booking No", NAMEOF('__MAIN__'[_booking_no]), 65),
+				    ("Chargeable Weight, KG", NAMEOF('__MAIN__'[chargeable_weight]), 70),
+				    ("Co-loader", NAMEOF('__MAIN__'[_analytical_coloader]), 80),
+				    ("Consignee", NAMEOF('__MAIN__'[Consignee]), 90),
+				    ("Container No", NAMEOF('__MAIN__'[_containers_agg_ship_level]), 95),
+				    ("Container type", NAMEOF('__MAIN__'[_containers_type_agg_ship_level]), 100),
+				    ("Creation date", NAMEOF('__MAIN__'[creation_date]), 103),
+				    ("DCF (Delivery Date)", NAMEOF('__MAIN__'[shipment_delivered_date]), 104),
+				    ("Declared value", NAMEOF('__MAIN__'[declared_value]), 105),
+				    ("Declared value currency", NAMEOF('__MAIN__'[declared_value_currency]), 106),
+				    ("Delay (days)", NAMEOF('__MAIN__'[delay_days]), 108),
+				    ("Destination Country Code", NAMEOF('__MAIN__'[destination_country]), 109),
+				    ("Destination Country Name", NAMEOF('__MAIN__'[_destination_country_name]), 110),
+				    ("Destination Port Code", NAMEOF('__MAIN__'[_destination_port]), 115),
+				    ("Destination Port Name", NAMEOF('__MAIN__'[_destination_port_name]), 120),
+				    ("Direction", NAMEOF('__MAIN__'[_direction]), 123),
+				    ("Doc. HBL", NAMEOF('__MAIN__'[_web_url_hbl]), 124),
+				    ("Doc. MBL", NAMEOF('__MAIN__'[_web_url_mbl]), 125),
+				    ("ECRD (Estimated Cargo Ready Date)", NAMEOF('__MAIN__'[estimate_cargo_date]), 128),
+				    ("ETA", NAMEOF('__MAIN__'[_eta_auto_date]), 130),
+				    ("ETA (ISS)",NAMEOF('__MAIN__'[eta_date]), 140),
+				    ("ETA (Revised)", NAMEOF('__MAIN__'[eta_wakeo_date]), 145),
+				    ("ETD", NAMEOF('__MAIN__'[_etd_auto_date]), 150),
+				    ("ETD (ISS)", NAMEOF('__MAIN__'[etd_date]), 155),
+				    ("ETD (Revised)", NAMEOF('__MAIN__'[etd_wakeo_date]), 157),
+				    ("Gate out date", NAMEOF('__MAIN__'[_gate_out]), 158),
+				    ("Gross Volume, CBM", NAMEOF('__MAIN__'[gross_volume]), 160),
+				    ("Gross Weight, KG", NAMEOF('__MAIN__'[gross_weight]), 170),
+				    ("HBL/HAWB", NAMEOF('__MAIN__'[house_no]), 180),
+				    ("House PO No", NAMEOF('__MAIN__'[house_purchase_order_no]), 190),
+				    ("Incoterms", NAMEOF('__MAIN__'[incoterms]), 200),
+				    ("Last milestone/status", NAMEOF('__MAIN__'[_actual status (COLUMN)]), 210),
+				    ("Line of business", NAMEOF('__MAIN__'[line_of_business]), 221),
+				    ("Local handling", NAMEOF('__MAIN__'[_extra_local_handling]), 225),
+				    ("Master PO No", NAMEOF('__MAIN__'[master_purchase_order_no]), 230),
+				    ("MBL/MAWB", NAMEOF('__MAIN__'[master_no]), 240),
+				    ("Offer serial", NAMEOF('__MAIN__'[_offer_serial]), 241),
+				    ("Origin Country Code", NAMEOF('__MAIN__'[origin_country]), 248),
+				    ("Origin Country Name", NAMEOF('__MAIN__'[_origin_country_name]), 250),
+				    ("Origin Port Code", NAMEOF('__MAIN__'[_origin_port]), 260),
+				    ("Origin Port Name", NAMEOF('__MAIN__'[_origin_port_name]), 262),
+				    ("P2P transit time (days)", NAMEOF('__MAIN__'[_travel time]), 270),
+				    ("PCF (Pickup Date)", NAMEOF('__MAIN__'[pickup_date]), 280),
+				    ("POD (Proof of Delivery)", NAMEOF('__MAIN__'[pod_date]), 281),
+				    ("Port of discharge", NAMEOF('__MAIN__'[_port_of_discharge_name]), 282),
+				    ("Port of discharge code", NAMEOF('__MAIN__'[_port_of_discharge]), 283),
+				    ("PTA (Planned Time of Arrival)", NAMEOF('__MAIN__'[pta_date]), 284),
+				    ("PTD (Planned Time of Departure)", NAMEOF('__MAIN__'[ptd_date]), 288),
+				    ("Q-ty of Packages", NAMEOF('__MAIN__'[_packages_shipment]), 290),
+				    ("Remarks house", NAMEOF('__MAIN__'[house_remarks]), 300),
+				    ("Remarks master", NAMEOF('__MAIN__'[master_remarks]), 310),
+				    ("RFD (Delivery Order Date)", NAMEOF('__MAIN__'[delivery_order_signed_date]), 320),
+				    // ("Service type", NAMEOF('__MAIN__'[_service_type_clean]), 340),
+				    ("Shipment type", NAMEOF('__MAIN__'[shipment_type]), 350),
+				    ("Shipper", NAMEOF('__MAIN__'[shipper]), 360),
+				    ("Transport Mode", NAMEOF('__MAIN__'[_service_type_short]), 365),
+				    ("Vessel name", NAMEOF('__MAIN__'[_vessel_agg_ship_level]), 370)
+				    
+				}
+				```
+
+	annotation PBI_Id = ef7546b00c8f4c4f882edb14ce0dc655
+

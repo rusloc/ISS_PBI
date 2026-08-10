@@ -1,0 +1,16 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "439892124467ed2088a1",
+  "position": {
+    "x": 847.42070850022674,
+    "y": 26.316027455246108,
+    "z": 2000,
+    "height": 94.8880308880309,
+    "width": 413.52438152438151,
+    "tabOrder": 7000
+  },
+  "visualGroup": {
+    "displayName": "DATE controls",
+    "groupMode": "ScaleMode"
+  }
+}

@@ -1,0 +1,56 @@
+table _ROLE
+	lineageTag: 475a1d96-7c11-4204-9c8b-c09f036fee40
+
+	column role
+		lineageTag: df9edbac-5ff7-4024-a562-13bb4b14dfc4
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [role]
+
+		annotation SummarizationSetBy = Automatic
+
+	column sort
+		formatString: 0
+		lineageTag: af75d147-6972-4da1-a22c-c794f188bd2d
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [sort]
+
+		annotation SummarizationSetBy = Automatic
+
+	column active_auto
+		formatString: 0
+		lineageTag: 86c6e940-29fc-4284-b25d-bbc8aa29c346
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [active_auto]
+
+		annotation SummarizationSetBy = Automatic
+
+	column active_man
+		formatString: 0
+		lineageTag: 72e4384b-2816-45c4-8036-1d82c3f92a52
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [active_man]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _ROLE = calculated
+		mode: import
+		source =
+				
+				
+				DATATABLE(
+				            "role", STRING
+				            ,"sort", INTEGER
+				            ,"active_auto", INTEGER
+				            ,"active_man", INTEGER
+				        ,{
+				            {"auto", 0,1,0}
+				            ,{"man",1,0,1}
+				        }
+				)
+
+	annotation PBI_Id = 40e42bc291084f178caa212a09969dac
+

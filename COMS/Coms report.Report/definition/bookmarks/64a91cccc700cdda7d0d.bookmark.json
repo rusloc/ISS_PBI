@@ -1,0 +1,916 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.0.0/schema.json",
+  "displayName": "Filters ON",
+  "name": "64a91cccc700cdda7d0d",
+  "options": {
+    "applyOnlyToTargetVisuals": true,
+    "targetVisualNames": [
+      "ed99aa80bd9cce0d2285",
+      "d3ad742d07e9327430c6",
+      "8e29cf061b6226883754",
+      "82bfda3471cfdb1a277f",
+      "775e211c812945a526a9",
+      "a426c10c04bae612834d",
+      "c716ffc22ac93b8422d8",
+      "0fe5c0a696d19218c573",
+      "6e7540de5d023fee75bd"
+    ],
+    "suppressData": true
+  },
+  "explorationState": {
+    "version": "1.11",
+    "activeSection": "540809bb63101a0db3a8",
+    "sections": {
+      "540809bb63101a0db3a8": {
+        "visualContainers": {
+          "3c312046c662eed97800": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "18995ca07e14cc460730",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_EK_VIEW_"
+                        }
+                      },
+                      "Property": "_branch_bu"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "e59145559338a621a17a",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_EK_VIEW_"
+                        }
+                      },
+                      "Property": "_supplier_name"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "99d9c17d5b08ec8dcc50",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_EK_VIEW_"
+                        }
+                      },
+                      "Property": "_po_no_ekporef"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "49e46f363960a88986cb",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_EK_VIEW_"
+                        }
+                      },
+                      "Property": "_destination_country_dest"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "359bdf86a6975708aa3b",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_EK_VIEW_"
+                        }
+                      },
+                      "Property": "_origin_country"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "88ffbea08dd98073cd02",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_EK_VIEW_"
+                        }
+                      },
+                      "Property": "_origin_port_name"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "d6709d9207832a5878e6",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_EK_VIEW_"
+                        }
+                      },
+                      "Property": "_origin_port_pol"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "cf0a326a49903501c04d",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_EK_VIEW_"
+                        }
+                      },
+                      "Property": "_origin_region_org_reg"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "e1f1900a424e733b336e",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_EK_VIEW_"
+                        }
+                      },
+                      "Property": "_inner_qty"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "4e3426078501e852bb61",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_EK_VIEW_"
+                        }
+                      },
+                      "Property": "_shipment_serial_iss_job"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "tableEx",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_EK_VIEW_"
+                        }
+                      },
+                      "Property": "_po_no_ekporef"
+                    }
+                  }
+                }
+              ],
+              "projections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "__MAIN__"
+                        }
+                      },
+                      "Property": "_branch_bu"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "__MAIN__"
+                        }
+                      },
+                      "Property": "_supplier_name"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "__MAIN__"
+                        }
+                      },
+                      "Property": "_po_no_ekporef"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "__MAIN__"
+                        }
+                      },
+                      "Property": "_destination_country_dest"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "__MAIN__"
+                        }
+                      },
+                      "Property": "_origin_country"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "__MAIN__"
+                        }
+                      },
+                      "Property": "_origin_port_name"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "__MAIN__"
+                        }
+                      },
+                      "Property": "_origin_port_pol"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "__MAIN__"
+                        }
+                      },
+                      "Property": "_origin_region_org_reg"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "__MAIN__"
+                        }
+                      },
+                      "Property": "_inner_qty"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "__MAIN__"
+                        }
+                      },
+                      "Property": "_shipment_serial_iss_job"
+                    }
+                  }
+                ]
+              },
+              "parameters": {
+                "Values": [
+                  {
+                    "expr": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Parameter"
+                          }
+                        },
+                        "Property": "Parameter"
+                      }
+                    },
+                    "index": 3,
+                    "length": 7
+                  }
+                ]
+              }
+            }
+          },
+          "5ef0c230e7a3c6367196": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "6bac6c207d2e6203b2bd",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "EK_VIEW_PARAM"
+                        }
+                      },
+                      "Property": "Parameter"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "advancedSlicerVisual",
+              "objects": {
+                "merge": {
+                  "general": [
+                    {
+                      "properties": {
+                        "filter": {
+                          "filter": {
+                            "Version": 2,
+                            "From": [
+                              {
+                                "Name": "p",
+                                "Entity": "EK_VIEW_PARAM",
+                                "Type": 0
+                              }
+                            ],
+                            "Where": [
+                              {
+                                "Condition": {
+                                  "In": {
+                                    "Expressions": [
+                                      {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "p"
+                                            }
+                                          },
+                                          "Property": "Parameter Fields"
+                                        }
+                                      }
+                                    ],
+                                    "Values": [
+                                      [
+                                        {
+                                          "Literal": {
+                                            "Value": "'''__MAIN__''[_destination_country_dest]'"
+                                          }
+                                        }
+                                      ],
+                                      [
+                                        {
+                                          "Literal": {
+                                            "Value": "'''__MAIN__''[_origin_country]'"
+                                          }
+                                        }
+                                      ],
+                                      [
+                                        {
+                                          "Literal": {
+                                            "Value": "'''__MAIN__''[_origin_port_name]'"
+                                          }
+                                        }
+                                      ],
+                                      [
+                                        {
+                                          "Literal": {
+                                            "Value": "'''__MAIN__''[_origin_port_pol]'"
+                                          }
+                                        }
+                                      ],
+                                      [
+                                        {
+                                          "Literal": {
+                                            "Value": "'''__MAIN__''[_origin_region_org_reg]'"
+                                          }
+                                        }
+                                      ],
+                                      [
+                                        {
+                                          "Literal": {
+                                            "Value": "'''__MAIN__''[_inner_qty]'"
+                                          }
+                                        }
+                                      ],
+                                      [
+                                        {
+                                          "Literal": {
+                                            "Value": "'''__MAIN__''[_shipment_serial_iss_job]'"
+                                          }
+                                        }
+                                      ]
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "cachedFilterDisplayItems": [
+                {
+                  "id": {
+                    "scopeId": {
+                      "Comparison": {
+                        "ComparisonKind": 0,
+                        "Left": {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Entity": "Parameter"
+                              }
+                            },
+                            "Property": "Parameter Fields"
+                          }
+                        },
+                        "Right": {
+                          "Literal": {
+                            "Value": "'''__MAIN__''[_destination_country_dest]'"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "displayName": "Destination Country"
+                },
+                {
+                  "id": {
+                    "scopeId": {
+                      "Comparison": {
+                        "ComparisonKind": 0,
+                        "Left": {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Entity": "Parameter"
+                              }
+                            },
+                            "Property": "Parameter Fields"
+                          }
+                        },
+                        "Right": {
+                          "Literal": {
+                            "Value": "'''__MAIN__''[_origin_country]'"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "displayName": "Origin Country"
+                },
+                {
+                  "id": {
+                    "scopeId": {
+                      "Comparison": {
+                        "ComparisonKind": 0,
+                        "Left": {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Entity": "Parameter"
+                              }
+                            },
+                            "Property": "Parameter Fields"
+                          }
+                        },
+                        "Right": {
+                          "Literal": {
+                            "Value": "'''__MAIN__''[_origin_port_name]'"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "displayName": "Origin Port Name"
+                },
+                {
+                  "id": {
+                    "scopeId": {
+                      "Comparison": {
+                        "ComparisonKind": 0,
+                        "Left": {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Entity": "Parameter"
+                              }
+                            },
+                            "Property": "Parameter Fields"
+                          }
+                        },
+                        "Right": {
+                          "Literal": {
+                            "Value": "'''__MAIN__''[_origin_port_pol]'"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "displayName": "Origin Port Code"
+                },
+                {
+                  "id": {
+                    "scopeId": {
+                      "Comparison": {
+                        "ComparisonKind": 0,
+                        "Left": {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Entity": "Parameter"
+                              }
+                            },
+                            "Property": "Parameter Fields"
+                          }
+                        },
+                        "Right": {
+                          "Literal": {
+                            "Value": "'''__MAIN__''[_origin_region_org_reg]'"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "displayName": "Origin Region"
+                },
+                {
+                  "id": {
+                    "scopeId": {
+                      "Comparison": {
+                        "ComparisonKind": 0,
+                        "Left": {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Entity": "Parameter"
+                              }
+                            },
+                            "Property": "Parameter Fields"
+                          }
+                        },
+                        "Right": {
+                          "Literal": {
+                            "Value": "'''__MAIN__''[_inner_qty]'"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "displayName": "Inner Quantity"
+                },
+                {
+                  "id": {
+                    "scopeId": {
+                      "Comparison": {
+                        "ComparisonKind": 0,
+                        "Left": {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Entity": "Parameter"
+                              }
+                            },
+                            "Property": "Parameter Fields"
+                          }
+                        },
+                        "Right": {
+                          "Literal": {
+                            "Value": "'''__MAIN__''[_shipment_serial_iss_job]'"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "displayName": "Shipment No."
+                }
+              ]
+            }
+          },
+          "692445e944bd349f422f": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "531486500a1609462435",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_EK_VIEW_"
+                        }
+                      },
+                      "Property": "_po_need_by_date"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Between'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_EK_VIEW_"
+                        }
+                      },
+                      "Property": "_po_need_by_date"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_EK_VIEW_"
+                        }
+                      },
+                      "Property": "_po_need_by_date"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "6e7540de5d023fee75bd": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "fcba6606b78bdd235568",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_EK_VIEW_"
+                        }
+                      },
+                      "Property": "_supplier_name"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_EK_VIEW_"
+                        }
+                      },
+                      "Property": "_supplier_name"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "775e211c812945a526a9": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "94194c069ab78e7dde1b",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_EK_VIEW_"
+                        }
+                      },
+                      "Property": "_status"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_EK_VIEW_"
+                        }
+                      },
+                      "Property": "_status"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "82bfda3471cfdb1a277f": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "6ec5892930a63062c8b2",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_EK_VIEW_"
+                        }
+                      },
+                      "Property": "_po_no_ekporef"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_EK_VIEW_"
+                        }
+                      },
+                      "Property": "_po_no_ekporef"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "21d14a2f3150a82194b5": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "ed99aa80bd9cce0d2285": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "c716ffc22ac93b8422d8": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "0fe5c0a696d19218c573": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "d3ad742d07e9327430c6": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          }
+        },
+        "visualContainerGroups": {
+          "8e29cf061b6226883754": {
+            "isHidden": false,
+            "children": {
+              "a426c10c04bae612834d": {
+                "isHidden": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "objects": {
+      "merge": {
+        "outspacePane": [
+          {
+            "properties": {
+              "expanded": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

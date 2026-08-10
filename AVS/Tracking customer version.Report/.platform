@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Tracking customer version"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "93f489f1-9bd3-4c59-9bd6-1fd95c7be067"
+  }
+}

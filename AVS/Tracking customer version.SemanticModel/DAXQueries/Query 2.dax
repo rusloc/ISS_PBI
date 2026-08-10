@@ -1,0 +1,23 @@
+
+
+EVALUATE
+
+VAR _start = DATE(2025,5,1)
+VAR _end = DATE(2025,10,5)
+RETURN
+	FILTER(
+		SELECTCOLUMNS(
+			'__MAIN__'
+			,"__client",'__MAIN__'[_client_id]
+			,"__serial", '__MAIN__'[serial_no]
+			,"__eta_man", '__MAIN__'[eta_date]
+			,"__eta_auto",'__MAIN__'[_eta_auto_date]
+			,"__etd_man", '__MAIN__'[etd_date]
+			,"__etd_auto",'__MAIN__'[_etd_auto_date]
+			,"__arrival",'__MAIN__'[arrival_date]
+			,"__loading",'__MAIN__'[loading_date]
+		)
+		,[__arrival] >= _start 
+		&& [__arrival] <= _end
+		// && [__client] = 385492
+	)

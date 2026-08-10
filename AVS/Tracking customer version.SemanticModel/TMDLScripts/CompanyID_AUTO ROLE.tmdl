@@ -1,0 +1,18 @@
+createOrReplace
+
+	role CompanyID_AUTO
+		modelPermission: read
+
+		tablePermission __MAIN__ =
+				// VAR _filter = CUSTOMDATA()
+				VAR _filter = "|111627|"
+				RETURN
+				    CONTAINSSTRING(
+				        _filter,
+				        "|" & FORMAT('__MAIN__'[_client_id], "0") & "|"
+				    )
+
+		tablePermission SHIPMENT_param = [_ETA_AUTO] == 1
+
+		annotation PBI_Id = 45e42b2ba1a749ca9cd6ee6d2f56c6d1
+

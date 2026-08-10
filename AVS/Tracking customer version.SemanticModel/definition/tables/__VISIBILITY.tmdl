@@ -1,0 +1,73 @@
+table __VISIBILITY
+	lineageTag: 2a284b93-5578-4d00-a904-8de29cbb0510
+
+	column _client_id
+		dataType: int64
+		formatString: 0
+		lineageTag: f1ca452a-34ac-4f34-8c37-60e336b0ffcb
+		summarizeBy: none
+		sourceColumn: _client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column _client_name
+		dataType: string
+		lineageTag: 55c1f33f-fc82-48cb-bb1e-1465ad513894
+		summarizeBy: none
+		sourceColumn: _client_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column _date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 166a4277-0655-4af3-aa44-221789d4a42c
+		summarizeBy: none
+		sourceColumn: _date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition __VISIBILITY = m
+		mode: import
+		queryGroup: MAIN
+		source = ```
+				let
+				    Source = Value.NativeQuery(PostgreSQL.Database("c-powerbicosmos.k4mjimliu3npzv.postgres.cosmos.azure.com", "powerbi"), 
+				    
+				    
+				    "
+				    
+				    select
+				            c.""extId""                                     _client_id
+				            ,c.name                                         _client_name
+				            ,coalesce(
+				                least(
+				                    min(osc.operation_visibility_date)
+				                    ,min(o.operation_visibility_date)
+				                    ,min(c.operation_visibility_date)
+				                )
+				                ,'2025-05-01'
+				            )::date                                         _date
+				    from portal.""Company"" c
+				    left join portal.""OrganizationScopeCompany"" osc
+				        on osc.""companyId"" = c.id
+				    left join portal.""Organization"" o
+				        on o.id = osc.""organizationId""
+				    group by 1,2
+				    
+				    "
+				    
+				    
+				    , null, [EnableFolding=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"_date", type date}}),
+				    #"Sorted Rows" = Table.Sort(#"Changed Type",{{"_client_name", Order.Ascending}})
+				in
+				    #"Sorted Rows"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

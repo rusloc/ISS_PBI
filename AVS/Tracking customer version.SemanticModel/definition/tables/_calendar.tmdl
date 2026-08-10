@@ -1,0 +1,101 @@
+table _calendar
+	lineageTag: a137a4ea-d9d7-4bbf-af74-90d83a6c890b
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 42502a8f-b24f-4312-9eca-4a8a0c41f531
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: abb1213e-b185-497e-a922-708915aab14c
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year-Mon
+		dataType: string
+		lineageTag: e252ed2d-2b5c-431b-8aef-b44cec512673
+		summarizeBy: none
+		sourceColumn: Year-Mon
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sort Column'
+		dataType: int64
+		formatString: 0
+		lineageTag: f9c2c47c-7da8-4d0f-a16c-3ee4572caaaa
+		summarizeBy: none
+		sourceColumn: Sort Column
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Week Start'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1026fc81-93e7-47af-94d6-79b1918ebed4
+		summarizeBy: none
+		sourceColumn: Week Start
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Week End'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 06cf2f32-b20f-4a42-9a6e-0dda81da903c
+		summarizeBy: none
+		sourceColumn: Week End
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Week ISO Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: 61b13297-e5a5-4ac4-8518-3a9ac87b1d7d
+		summarizeBy: none
+		sourceColumn: Week ISO Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Custom Week Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: 35bca6f3-8ad2-4677-b442-3546dc6d555f
+		summarizeBy: none
+		sourceColumn: Custom Week Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Custom Week Sort Column'
+		dataType: int64
+		formatString: 0
+		lineageTag: ec71169f-a238-4b50-a19e-13f5e7f29606
+		summarizeBy: none
+		sourceColumn: Custom Week Sort Column
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _calendar = m
+		mode: import
+		source =
+				let
+				    Source = customCalendar(#date(2025,5,1), _ETA_MAX_DATE{0}[_eta], 4)
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,109 @@
+table _DATE_SWITCHER
+	lineageTag: e4992e66-d230-4864-a49c-c339f3d8f16c
+
+	calculationGroup
+
+		calculationItem 'Arrival date' = ```
+				
+				
+				// ARRIVAL date is switched depending on a role since under the hood there are two dates: WAKEO & FOCUS
+				
+				VAR _role = FIRSTNONBLANK('_ROLE'[role],1)
+				
+				RETURN
+				
+				SWITCH(TRUE()
+				    ,_role = "auto"
+				        ,CALCULATE(
+				            SELECTEDMEASURE()
+				            ,USERELATIONSHIP('_calendar'[Date],'__MAIN__'[_arrival_date_auto]))
+				    
+				    ,_role = "man"
+				        ,CALCULATE(
+				            SELECTEDMEASURE()
+				            ,USERELATIONSHIP('_calendar'[Date],'__MAIN__'[arrival_date]))
+				)
+				
+				
+				```
+
+		calculationItem 'Departure date' =
+				
+				
+				// [loading_date] = "departure date" in report
+				
+				CALCULATE(
+				    SELECTEDMEASURE()
+				    ,USERELATIONSHIP('_calendar'[Date],'__MAIN__'[loading_date])
+				)
+
+		calculationItem 'ETA date' = ```
+				
+				
+				VAR _role = FIRSTNONBLANK('_ROLE'[role],1)
+				
+				RETURN
+				
+				SWITCH(TRUE()
+				    ,_role = "auto"
+				        ,CALCULATE(
+				            SELECTEDMEASURE()
+				            ,USERELATIONSHIP('_calendar'[Date],'__MAIN__'[_eta_auto_date]))
+				    
+				    ,_role = "man"
+				        ,CALCULATE(
+				            SELECTEDMEASURE()
+				            ,USERELATIONSHIP('_calendar'[Date],'__MAIN__'[eta_date]))
+				)
+				        
+				```
+
+		calculationItem 'ETD date' = ```
+				
+				
+				VAR _role = FIRSTNONBLANK('_ROLE'[role],1)
+				
+				RETURN
+				
+				SWITCH(TRUE()
+				    ,_role = "auto"
+				        ,CALCULATE(
+				            SELECTEDMEASURE()
+				            ,USERELATIONSHIP('_calendar'[Date],'__MAIN__'[_etd_auto_date]))
+				    
+				    ,_role = "man"
+				        ,CALCULATE(
+				            SELECTEDMEASURE()
+				            ,USERELATIONSHIP('_calendar'[Date],'__MAIN__'[etd_date]))
+				)
+				
+				```
+
+		calculationItem 'Creation date' =
+				
+				
+				// [creation_date] = FOCUS creation date
+				
+				CALCULATE(
+				    SELECTEDMEASURE()
+				    ,USERELATIONSHIP('_calendar'[Date],'__MAIN__'[creation_date])
+				)
+
+	column 'Date switcher params'
+		dataType: string
+		lineageTag: 720afd06-b56e-4966-8096-f80249df9e22
+		summarizeBy: none
+		sourceColumn: Name
+		sortByColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordinal
+		dataType: int64
+		formatString: 0
+		lineageTag: 8d3b3555-07cc-439d-a5bf-9ee1b14d2989
+		summarizeBy: sum
+		sourceColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+

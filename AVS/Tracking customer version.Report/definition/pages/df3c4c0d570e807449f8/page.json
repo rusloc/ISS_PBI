@@ -1,0 +1,71 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "df3c4c0d570e807449f8",
+  "displayName": "SKU",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "f9021973c0e085a65207",
+        "ordinal": 0,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_calendar"
+              }
+            },
+            "Property": "Date"
+          }
+        },
+        "type": "Advanced",
+        "howCreated": "User"
+      }
+    ],
+    "filterSortOrder": "Custom"
+  },
+  "visualInteractions": [
+    {
+      "source": "6d2bc44f91f06dade9d5",
+      "target": "560f1bdeea67518e7201",
+      "type": "DataFilter"
+    },
+    {
+      "source": "6d2bc44f91f06dade9d5",
+      "target": "19bed8dd85187ea91813",
+      "type": "DataFilter"
+    },
+    {
+      "source": "6d2bc44f91f06dade9d5",
+      "target": "9cf0e86790c429145a30",
+      "type": "DataFilter"
+    },
+    {
+      "source": "6d2bc44f91f06dade9d5",
+      "target": "3a7e87894a0b1f2ed9c4",
+      "type": "DataFilter"
+    },
+    {
+      "source": "6d2bc44f91f06dade9d5",
+      "target": "10421f8d4dd9b3dc5c63",
+      "type": "DataFilter"
+    },
+    {
+      "source": "6d2bc44f91f06dade9d5",
+      "target": "577a86a2609ffff1a53a",
+      "type": "DataFilter"
+    },
+    {
+      "source": "6d2bc44f91f06dade9d5",
+      "target": "fe61c62889848392a1c2",
+      "type": "DataFilter"
+    },
+    {
+      "source": "48a1bff51919216c1365",
+      "target": "fe61c62889848392a1c2",
+      "type": "NoFilter"
+    }
+  ]
+}

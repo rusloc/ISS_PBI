@@ -1,0 +1,71 @@
+table __FX__
+	lineageTag: d2517f71-4c34-413f-ba37-a10c6c580c6a
+
+	measure quantity =
+			
+			
+			SUM('_PO_VIEW_'[_qnty_shipped_remaning])
+		lineageTag: ce45ceee-0106-49ac-a011-0d61a4674502
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'billing notes PO view (FX)' =
+			
+			
+			FIRSTNONBLANK('_PO_VIEW_'[_ship_billing_remarks],1)
+		lineageTag: 2f8c1b11-fe05-43c1-b25a-136e1de8469e
+
+	measure 'billing notes EK (FX)' =
+			
+			
+			FIRSTNONBLANK('_EK_VIEW_'[_ship_billing_remarks],1)
+		lineageTag: d5cdfef3-2405-4dca-80aa-069068e5099c
+
+	measure 'PO line status PO view (FX)' =
+			
+			
+			FIRSTNONBLANK(_PO_VIEW_[_po_line_status],1)
+		lineageTag: f4678989-0bfd-4b21-b923-ec2f52b6bd0b
+
+	measure '_PO no PO view (FX)' =
+			
+			
+			FIRSTNONBLANK('_PO_VIEW_'[_po_no_ekporef],1)
+		lineageTag: 3f66c69e-78a9-45dc-a2a9-60858ca67c7d
+
+	measure '_PO no EK view (FX)' =
+			
+			
+			FIRSTNONBLANK('_EK_VIEW_'[_po_no_ekporef],1)
+		lineageTag: e4744f99-2fb4-4eb0-9e51-0ae1449ac855
+
+	measure '_po outer qty PO VIEW (FX)' =
+			
+			
+			FIRSTNONBLANK('_PO_VIEW_'[_po_outer_qty],1)
+		lineageTag: ed665f90-9bc7-4e75-9106-cde9c408a72d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Placeholder
+		lineageTag: 221bf11d-943d-4219-862c-f2503288e43a
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Placeholder]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition __FX__ = calculated
+		mode: import
+		source = ```
+				
+				DATATABLE (
+				    "Placeholder", STRING, 
+				    { 
+				        {} 
+				    }
+				)
+				```
+
+	annotation PBI_Id = 8cf67c8b957a4f7fb3c66055e2df7193
+

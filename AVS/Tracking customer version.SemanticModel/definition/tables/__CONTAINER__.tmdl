@@ -1,0 +1,161 @@
+table __CONTAINER__
+	lineageTag: 6f67ef85-d1f9-4565-952d-2907ffce0fc3
+
+	column serial_no
+		dataType: string
+		lineageTag: 5c0e3415-0496-4a96-b2cb-5173534b3ece
+		summarizeBy: none
+		sourceColumn: serial_no
+
+		annotation SummarizationSetBy = Automatic
+
+	column _shipment_id
+		dataType: string
+		lineageTag: 5cf4f036-2e0f-4561-bf5a-c574b1590f5f
+		summarizeBy: none
+		sourceColumn: _shipment_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column service
+		dataType: string
+		lineageTag: 33684285-c3b8-4e54-b0c2-1891e56f8dfd
+		summarizeBy: none
+		sourceColumn: service
+
+		annotation SummarizationSetBy = Automatic
+
+	column _container
+		dataType: string
+		lineageTag: 016a7ac2-913e-41f1-b340-d6b18a5aaedd
+		summarizeBy: none
+		sourceColumn: _container
+
+		annotation SummarizationSetBy = Automatic
+
+	column _volume
+		dataType: string
+		lineageTag: 91247c80-bf64-4941-8024-c786c76d246c
+		summarizeBy: none
+		sourceColumn: _volume
+
+		annotation SummarizationSetBy = Automatic
+
+	column _weight
+		dataType: string
+		lineageTag: c520432e-51d7-4e8e-a70d-e8c4333aa229
+		summarizeBy: none
+		sourceColumn: _weight
+
+		annotation SummarizationSetBy = Automatic
+
+	column _packages
+		dataType: string
+		lineageTag: cb14bf7d-d96c-4ada-a38d-1b81791f60a3
+		summarizeBy: none
+		sourceColumn: _packages
+
+		annotation SummarizationSetBy = Automatic
+
+	column _container_type
+		dataType: string
+		lineageTag: 836d9574-dc1c-42ed-b85d-45583a3b6527
+		summarizeBy: none
+		sourceColumn: _container_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column _wakeo_gross_volume
+		dataType: string
+		lineageTag: 6993662d-54c8-40a5-9346-e3d9df1fba9c
+		summarizeBy: none
+		sourceColumn: _wakeo_gross_volume
+
+		annotation SummarizationSetBy = Automatic
+
+	column _wakeo_gross_weight
+		dataType: string
+		lineageTag: 879c380e-0d25-4d17-841a-9296a8f452a4
+		summarizeBy: none
+		sourceColumn: _wakeo_gross_weight
+
+		annotation SummarizationSetBy = Automatic
+
+	column _container_type_code
+		dataType: string
+		lineageTag: 6ae6de3c-d3f9-455f-89de-e4202b416133
+		summarizeBy: none
+		sourceColumn: _container_type_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column creation_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: baae6867-15f2-4074-b2f6-400dbcf30691
+		summarizeBy: none
+		sourceColumn: creation_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column _client_id
+		dataType: int64
+		formatString: 0
+		lineageTag: b29640a1-9192-42da-a6a6-6bdbe685022a
+		summarizeBy: none
+		sourceColumn: _client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column '_IS_VISIBLE (FX COL)' =
+			
+			
+			VAR LimitDate =
+			    RELATED(__VISIBILITY[_date])
+			RETURN
+			    IF('__CONTAINER__'[creation_date] >= LimitDate, 1, 0)
+		formatString: 0
+		lineageTag: b37b837b-bd97-4609-a86c-dbee3c54b5a9
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column gate_out_date
+		dataType: string
+		lineageTag: 5b10324d-44b5-4dfb-972b-9c0b7b809686
+		summarizeBy: none
+		sourceColumn: gate_out_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column empty_container_returned_date
+		dataType: string
+		lineageTag: c45b5cba-2b51-4419-8aa7-52cf7ff50b80
+		summarizeBy: none
+		sourceColumn: empty_container_returned_date
+
+		annotation SummarizationSetBy = Automatic
+
+	partition __CONTAINER__ = m
+		mode: import
+		queryGroup: MAIN
+		source = ```
+				let
+				   
+				   
+				    Source = PostgreSQL.Database("c-powerbicosmos.k4mjimliu3npzv.postgres.cosmos.azure.com", "powerbi", 
+				    
+				    					[Query = CONTAINER_SRC[_code]{0}]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"creation_date", type date}})
+				in
+					#"Changed Type"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

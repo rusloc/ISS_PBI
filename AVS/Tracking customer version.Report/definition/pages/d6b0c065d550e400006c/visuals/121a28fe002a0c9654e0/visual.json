@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "121a28fe002a0c9654e0",
+  "position": {
+    "x": 27.3268647841158,
+    "y": 20.198117449129068,
+    "z": 0,
+    "height": 58.218103235724961,
+    "width": 597.62665158305413,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Shipment tracking information",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontFamily": "Tahoma",
+                      "fontSize": "20pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

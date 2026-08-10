@@ -1,0 +1,66 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "d622ed9fa0ff523e7f31",
+  "displayName": "Container",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "f9021973c0e085a65207",
+        "ordinal": 0,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_calendar"
+              }
+            },
+            "Property": "Date"
+          }
+        },
+        "type": "Advanced",
+        "howCreated": "User"
+      }
+    ],
+    "filterSortOrder": "Custom"
+  },
+  "visualInteractions": [
+    {
+      "source": "f1cd03477d679e76d9e0",
+      "target": "bb1a23ccb59e47566219",
+      "type": "NoFilter"
+    },
+    {
+      "source": "9bf0243a8e42e586e4c0",
+      "target": "bb1a23ccb59e47566219",
+      "type": "NoFilter"
+    },
+    {
+      "source": "bb1a23ccb59e47566219",
+      "target": "f1cd03477d679e76d9e0",
+      "type": "DataFilter"
+    },
+    {
+      "source": "f1cd03477d679e76d9e0",
+      "target": "8f45354a3a3f036ac7f5",
+      "type": "DataFilter"
+    },
+    {
+      "source": "e6fa2a18172d104de5e7",
+      "target": "de9abe1057a642ac791e",
+      "type": "DataFilter"
+    },
+    {
+      "source": "f1cd03477d679e76d9e0",
+      "target": "4d7a57ba305b8526675f",
+      "type": "NoFilter"
+    },
+    {
+      "source": "0989c46b8f17af0f665d",
+      "target": "4f2fe9bd41e9f32c2886",
+      "type": "NoFilter"
+    }
+  ]
+}

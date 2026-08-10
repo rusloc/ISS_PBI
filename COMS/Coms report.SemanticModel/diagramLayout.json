@@ -1,0 +1,111 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 873.5,
+            "y": 260
+          },
+          "nodeIndex": "__FX__",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "_EK_VIEW_",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 249,
+            "y": 0
+          },
+          "nodeIndex": "EK_VIEW_PARAM",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 385,
+            "y": 404
+          },
+          "nodeIndex": "PO_VIEW_PARAM",
+          "nodeLineageTag": "1662e189-37ff-45b0-a0dd-2e9706b6ed9f",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 13.25,
+            "y": 422.5
+          },
+          "nodeIndex": "_PO_VIEW_",
+          "nodeLineageTag": "837bc572-9426-4f40-a9fb-f7c94a1ce32e",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 80,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 1,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 543,
+            "y": 16
+          },
+          "nodeIndex": "_PO_VIEW_",
+          "size": {
+            "height": 781.25,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "PO lines",
+      "zoomValue": 80,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

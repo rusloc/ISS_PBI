@@ -1,0 +1,259 @@
+table __SKU__
+	lineageTag: 08d77010-c30f-418c-a965-7d6561ddbc00
+
+	column _serial
+		dataType: string
+		lineageTag: 1ed5e556-e3d7-4f7f-baa7-69a68e571b8a
+		summarizeBy: none
+		sourceColumn: _serial
+
+		annotation SummarizationSetBy = Automatic
+
+	column _sku
+		dataType: string
+		lineageTag: aa3e019b-0b69-4c0e-9ade-801261c9333e
+		summarizeBy: none
+		sourceColumn: _sku
+
+		annotation SummarizationSetBy = Automatic
+
+	column _description
+		dataType: string
+		lineageTag: 4cc8e01b-0318-4167-ac85-de1d8c58fc42
+		summarizeBy: none
+		sourceColumn: _description
+
+		annotation SummarizationSetBy = Automatic
+
+	column _client
+		dataType: string
+		lineageTag: a17b53fc-8907-4368-bbb2-3e6ca0f5c733
+		summarizeBy: none
+		sourceColumn: _client
+
+		annotation SummarizationSetBy = Automatic
+
+	column '_HOUSE PO (SKU COL)' =
+			
+			
+			CALCULATE(
+			    MAXX('__MAIN__'
+			            ,__MAIN__[house_purchase_order_no])
+			)
+		displayFolder: __COL__
+		lineageTag: 872f46ec-505a-428c-a64f-045b805939d2
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column _container
+		dataType: string
+		lineageTag: 1b1a1680-aea3-41ff-ac41-1266904f9396
+		summarizeBy: none
+		sourceColumn: _container
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'FAVORITES (SKU COL)' =
+			
+			
+			SWITCH(TRUE()
+			    ,'__SKU__'[_serial] in {
+			                // first showcase
+			                                "DXBSI25011295"
+			                                ,"DXBSI25013822"
+			                                ,"DXBSI25015236"
+			                                ,"DXBSI25015467"
+			                                ,"DXBAI25015576"
+			                                ,"DXBSI25015761"
+			
+			                // second showcase
+			
+			                            ,"DOHAI25002787-2"
+			                            ,"DOHAI25002787-3"
+			                            ,"DOHAI25002787-5"
+			                            ,"DOHAI25002787-4"
+			    }
+			        ,"FAVORITE SHIPMENT"
+			    ,BLANK())
+		displayFolder: __COL__
+		lineageTag: 0ba3cfdb-ccd1-4a92-a3fc-66d9c017d55a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column '_service type short (SKU COL)' =
+			
+			
+			CALCULATE(
+			    MAXX('__MAIN__'
+			            ,__MAIN__[_service_type_short])
+			)
+		displayFolder: __COL__
+		lineageTag: 26457234-ef28-421b-a544-db5ca96e28eb
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column '_container (SKU COL)' =
+			
+			
+			SWITCH(TRUE()
+			    ,[_service type short (SKU COL)] = "AIR"
+			        ,BLANK()
+			    ,'__SKU__'[_container])
+		displayFolder: __COL__
+		lineageTag: 28cb704e-bbd6-4983-9ed0-81f8a66f8780
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column _sku_main_link
+		dataType: string
+		lineageTag: 252a0a78-2e34-4b50-ac68-cc9590dcd37f
+		summarizeBy: none
+		sourceColumn: _sku_main_link
+
+		annotation SummarizationSetBy = Automatic
+
+	column _qnty
+		dataType: string
+		lineageTag: 5bd3bad7-93df-40f8-a3c3-de25aa43d690
+		summarizeBy: none
+		sourceColumn: _qnty
+
+		annotation SummarizationSetBy = Automatic
+
+	column _po_number_sku
+		dataType: string
+		lineageTag: 445b2195-6626-41f2-8c78-4289c984c4c0
+		summarizeBy: none
+		sourceColumn: _po_number_sku
+
+		annotation SummarizationSetBy = Automatic
+
+	column _invoice_number
+		dataType: string
+		lineageTag: 6093e4bb-d044-4982-948d-9675b401407d
+		summarizeBy: none
+		sourceColumn: _invoice_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column _row_id
+		dataType: string
+		lineageTag: 3a9ed90e-8b87-4320-8300-0f012b61e41a
+		summarizeBy: none
+		sourceColumn: _row_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column _iss_dom
+		dataType: string
+		lineageTag: dbf5227a-2618-4ab7-9cbd-a99d08f59efc
+		summarizeBy: none
+		sourceColumn: _iss_dom
+
+		annotation SummarizationSetBy = Automatic
+
+	column _origin_country
+		dataType: string
+		lineageTag: 6c442d8a-e342-418a-a405-abd4063e1fb8
+		summarizeBy: none
+		sourceColumn: _origin_country
+
+		annotation SummarizationSetBy = Automatic
+
+	column _origin_port
+		dataType: string
+		lineageTag: 9aca931b-1d00-4d9c-9f04-c01258e6d9ba
+		summarizeBy: none
+		sourceColumn: _origin_port
+
+		annotation SummarizationSetBy = Automatic
+
+	column _destination_country
+		dataType: string
+		lineageTag: 2693b7cb-2754-4c5b-9619-25be2574b5f7
+		summarizeBy: none
+		sourceColumn: _destination_country
+
+		annotation SummarizationSetBy = Automatic
+
+	column _destination_port
+		dataType: string
+		lineageTag: 479adddf-1624-4fa2-bb25-e90347efbd1a
+		summarizeBy: none
+		sourceColumn: _destination_port
+
+		annotation SummarizationSetBy = Automatic
+
+	column _actual_status
+		dataType: string
+		lineageTag: c5734c38-0da6-4121-9aea-89283b6704ae
+		summarizeBy: none
+		sourceColumn: _actual_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column _creation_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 16161b1d-34db-4dfc-99f2-1aba53ef9be7
+		summarizeBy: none
+		sourceColumn: _creation_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column _client_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 87354600-8c58-4bb8-bac5-bfa69469bd44
+		summarizeBy: sum
+		sourceColumn: _client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column _vis_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 9c160c50-9cfa-42b6-83c7-6a48eab18a41
+		summarizeBy: none
+		sourceColumn: _vis_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column _is_visible
+		dataType: int64
+		formatString: 0
+		lineageTag: 6fc26225-0780-4d31-8c0a-656752b2f629
+		summarizeBy: sum
+		sourceColumn: _is_visible
+
+		annotation SummarizationSetBy = Automatic
+
+	partition __SKU__ = m
+		mode: import
+		queryGroup: MAIN
+		source = ```
+				let
+				  
+				    Source = PostgreSQL.Database("c-powerbicosmos.k4mjimliu3npzv.postgres.cosmos.azure.com", "powerbi", 
+				    
+				    					[Query = SKU_SRC[_code]{0}])
+				
+					,_fillNulls = (x) => let  
+				
+												_input = x ?? "NA"
+										in 
+												_input,
+				
+					_replaceNulls = Table.TransformColumns(Source, {{"_sku", _fillNulls}})
+				in
+				    _replaceNulls
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

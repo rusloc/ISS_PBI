@@ -1,0 +1,1647 @@
+table _EK_VIEW_
+	lineageTag: 20b88885-df76-4c10-9a3a-765f15711525
+
+	measure '_calendar button' = ```
+			
+			"data:image/svg+xml;utf8," & 
+			"
+			<svg width='64' height='64' viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'>
+			  <defs>
+			    <filter id='glow'>
+			      <feGaussianBlur stdDeviation='2' result='coloredBlur'/>
+			      <feMerge>
+			        <feMergeNode in='coloredBlur'/>
+			        <feMergeNode in='SourceGraphic'/>
+			      </feMerge>
+			    </filter>
+			    
+			    <linearGradient id='orangeGrad' x1='0%' y1='0%' x2='100%' y2='100%'>
+			      <stop offset='0%' style='stop-color:#ff8c42;stop-opacity:1' />
+			      <stop offset='100%' style='stop-color:#ff6b35;stop-opacity:1' />
+			    </linearGradient>
+			    
+			    <linearGradient id='orangeGradHover' x1='0%' y1='0%' x2='100%' y2='100%'>
+			      <stop offset='0%' style='stop-color:#ffa366;stop-opacity:1' />
+			      <stop offset='100%' style='stop-color:#ff8142;stop-opacity:1' />
+			    </linearGradient>
+			  </defs>
+			  
+			  <style>
+			    .button-container {
+			      cursor: pointer;
+			      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+			    }
+			    
+			    .button-bg {
+			      fill: url(#orangeGrad);
+			      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+			    }
+			    
+			    .button-border {
+			      fill: none;
+			      stroke: #2d3436;
+			      stroke-width: 2.5;
+			      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+			    }
+			    
+			    .button-icon {
+			      fill: none;
+			      stroke: #2d3436;
+			      stroke-width: 2.5;
+			      stroke-linecap: round;
+			      stroke-linejoin: round;
+			      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+			    }
+			    
+			    .shine {
+			      fill: white;
+			      opacity: 0.2;
+			      transition: opacity 0.3s ease;
+			    }
+			    
+			    /* Hover effects */
+			    .button-container:hover .button-bg {
+			      fill: url(#orangeGradHover);
+			      filter: url(#glow);
+			    }
+			    
+			    .button-container:hover .button-border {
+			      stroke: #1a1d1f;
+			      stroke-width: 3;
+			    }
+			    
+			    .button-container:hover .button-icon {
+			      stroke: #1a1d1f;
+			      transform: scale(1.1);
+			      transform-origin: center;
+			    }
+			    
+			    .button-container:hover .shine {
+			      opacity: 0.35;
+			    }
+			    
+			    /* Active/Click effects */
+			    .button-container:active {
+			      transform: scale(0.95);
+			    }
+			    
+			    .button-container:active .button-bg {
+			      fill: #ff5722;
+			    }
+			    
+			    .button-container:active .button-icon {
+			      transform: scale(0.9);
+			      transform-origin: center;
+			    }
+			  </style>
+			  
+			  <g class='button-container'>
+			    <!-- Outer glow background (subtle) -->
+			    <rect x='6' y='6' width='52' height='52' rx='12' fill='#ff8c42' opacity='0.1'/>
+			    
+			    <!-- Main button background -->
+			    <rect class='button-bg' x='8' y='8' width='48' height='48' rx='10'/>
+			    
+			    <!-- Shine effect -->
+			    <rect class='shine' x='12' y='10' width='40' height='14' rx='6'/>
+			    
+			    <!-- Border -->
+			    <rect class='button-border' x='8' y='8' width='48' height='48' rx='10'/>
+			    
+			    <!-- Icon: Calendar -->
+			    <g class='button-icon'>
+			      <!-- Calendar body -->
+			      <rect x='22' y='26' width='20' height='18' rx='2' fill='none'/>
+			      <!-- Calendar top bar -->
+			      <line x1='22' y1='30' x2='42' y2='30'/>
+			      <!-- Left ring -->
+			      <line x1='27' y1='23' x2='27' y2='28'/>
+			      <!-- Right ring -->
+			      <line x1='37' y1='23' x2='37' y2='28'/>
+			      <!-- Calendar dots (days) -->
+			      <circle cx='27' cy='35' r='1' fill='#2d3436'/>
+			      <circle cx='32' cy='35' r='1' fill='#2d3436'/>
+			      <circle cx='37' cy='35' r='1' fill='#2d3436'/>
+			      <circle cx='27' cy='39' r='1' fill='#2d3436'/>
+			      <circle cx='32' cy='39' r='1' fill='#2d3436'/>
+			    </g>
+			  </g>
+			</svg>
+			"
+			```
+		lineageTag: 8a5ac414-fb72-4c83-b62a-0058718ae60a
+
+	column _branch_bu
+		dataType: string
+		lineageTag: 0a4555a2-666e-43c9-99fe-6d7ca08ec8ff
+		summarizeBy: none
+		sourceColumn: _branch_bu
+
+		annotation SummarizationSetBy = Automatic
+
+	column _supplier_code
+		dataType: string
+		lineageTag: 93fff57f-2fcb-4970-87a5-47690db1cbce
+		summarizeBy: none
+		sourceColumn: _supplier_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column _supplier_name
+		dataType: string
+		lineageTag: 09c12667-d0c7-4c9e-8b01-804d9619f5c6
+		summarizeBy: none
+		sourceColumn: _supplier_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column _po_no_ekporef
+		dataType: string
+		lineageTag: 9cb2dd03-578d-4498-b9d5-23ecb2f1da81
+		summarizeBy: none
+		sourceColumn: _po_no_ekporef
+
+		annotation SummarizationSetBy = Automatic
+
+	column _secondary_po
+		dataType: string
+		lineageTag: fed99ada-d536-4eac-88e4-4aa96e3c8c96
+		summarizeBy: none
+		sourceColumn: _secondary_po
+
+		annotation SummarizationSetBy = Automatic
+
+	column _po_remarks
+		dataType: string
+		lineageTag: 785939dc-cdf2-4e22-be5c-f9e222ee4236
+		summarizeBy: none
+		sourceColumn: _po_remarks
+
+		annotation SummarizationSetBy = Automatic
+
+	column _commodity
+		dataType: string
+		lineageTag: f18fc57a-0d78-42ce-9c8d-568faa6cd200
+		summarizeBy: none
+		sourceColumn: _commodity
+
+		annotation SummarizationSetBy = Automatic
+
+	column _iss_ref
+		dataType: string
+		lineageTag: 19ebccc1-f1e9-4575-8f3e-d975d9bdefe1
+		summarizeBy: none
+		sourceColumn: _iss_ref
+
+		annotation SummarizationSetBy = Automatic
+
+	column _mode
+		dataType: string
+		lineageTag: c4742d88-004b-4ea1-9fcb-46d30f21affc
+		summarizeBy: none
+		sourceColumn: _mode
+
+		annotation SummarizationSetBy = Automatic
+
+	column _routed_by
+		dataType: string
+		lineageTag: 0be1bb65-e33a-49fb-a4c0-5088a7fba5dc
+		summarizeBy: none
+		sourceColumn: _routed_by
+
+		annotation SummarizationSetBy = Automatic
+
+	column _incoterms
+		dataType: string
+		lineageTag: d662b774-40c2-493f-8bf4-9f9ca56dcaa5
+		summarizeBy: none
+		sourceColumn: _incoterms
+
+		annotation SummarizationSetBy = Automatic
+
+	column _shipment_serial_iss_job
+		dataType: string
+		lineageTag: 53750eee-492d-4275-bb15-f15f05507ebc
+		summarizeBy: none
+		sourceColumn: _shipment_serial_iss_job
+
+		annotation SummarizationSetBy = Automatic
+
+	column _hbl_hawb
+		dataType: string
+		lineageTag: aab0c3a2-b952-4536-b4c3-78d000021255
+		summarizeBy: none
+		sourceColumn: _hbl_hawb
+
+		annotation SummarizationSetBy = Automatic
+
+	column _mbl_mawb
+		dataType: string
+		lineageTag: 05f76ee4-454b-4d29-8ecf-a8fcf0a15b10
+		summarizeBy: none
+		sourceColumn: _mbl_mawb
+
+		annotation SummarizationSetBy = Automatic
+
+	column _container_no
+		dataType: string
+		lineageTag: 503a8947-8d4a-4a16-9d54-4ee3f2faa871
+		summarizeBy: none
+		sourceColumn: _container_no
+
+		annotation SummarizationSetBy = Automatic
+
+	column _origin_port_pol
+		dataType: string
+		lineageTag: 71c7c71c-7801-420a-a4a8-e62fe3edcb69
+		summarizeBy: none
+		sourceColumn: _origin_port_pol
+
+		annotation SummarizationSetBy = Automatic
+
+	column _origin_port_name
+		dataType: string
+		lineageTag: 2b92077c-e75b-40ee-821c-d59bc64b94ce
+		summarizeBy: none
+		sourceColumn: _origin_port_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column _origin_region_org_reg
+		dataType: string
+		lineageTag: b6304bda-e9e6-4867-a9c9-b618b0bedd9f
+		summarizeBy: none
+		sourceColumn: _origin_region_org_reg
+
+		annotation SummarizationSetBy = Automatic
+
+	column _destination_country_dest
+		dataType: string
+		lineageTag: 3bfd6d35-e349-4cd1-a21d-a5b5f4c7d3dd
+		summarizeBy: none
+		sourceColumn: _destination_country_dest
+
+		annotation SummarizationSetBy = Automatic
+
+	column _eqpt_type
+		dataType: string
+		lineageTag: ab8a164a-d802-4852-8913-e8c7fc546d16
+		summarizeBy: none
+		sourceColumn: _eqpt_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column _20_ft
+		dataType: int64
+		formatString: 0
+		lineageTag: e32cef9d-4511-466f-90ef-2f0ea9c510cf
+		summarizeBy: sum
+		sourceColumn: _20_ft
+
+		annotation SummarizationSetBy = Automatic
+
+	column _40_ft
+		dataType: int64
+		formatString: 0
+		lineageTag: bcfb4ab8-3672-4b16-9211-d00712f4be6c
+		summarizeBy: sum
+		sourceColumn: _40_ft
+
+		annotation SummarizationSetBy = Automatic
+
+	column _count_of_cont
+		dataType: int64
+		formatString: 0
+		lineageTag: 0cae3142-0362-4687-ab64-f1e4919e891f
+		summarizeBy: sum
+		sourceColumn: _count_of_cont
+
+		annotation SummarizationSetBy = Automatic
+
+	column _teus
+		dataType: int64
+		formatString: 0
+		lineageTag: 50993612-de09-45a8-aa57-24278760aa97
+		summarizeBy: sum
+		sourceColumn: _teus
+
+		annotation SummarizationSetBy = Automatic
+
+	column _carrier
+		dataType: string
+		lineageTag: 0494fbaf-fa5c-4c42-b14f-627528e3f240
+		summarizeBy: none
+		sourceColumn: _carrier
+
+		annotation SummarizationSetBy = Automatic
+
+	column _pr_appr_date
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: 238d0309-45a3-4937-bb51-5ea8044d2dcd
+		summarizeBy: none
+		sourceColumn: _pr_appr_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column _po_creation_date
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: cfdcb6a0-bf58-4731-8cce-749e648814db
+		summarizeBy: none
+		sourceColumn: _po_creation_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column _po_recd_date
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: ca89d2e9-4ce4-49a5-84b7-fbcdf4cd9e3f
+		summarizeBy: none
+		sourceColumn: _po_recd_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column _po_need_by_date
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: 8c33a11e-31f2-4746-ae90-fbdd827a4af7
+		summarizeBy: none
+		sourceColumn: _po_need_by_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column _crd
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: 1468434e-4e9a-4907-9bbc-47b767580160
+		summarizeBy: none
+		sourceColumn: _crd
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column _pickup_date
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: 415407f5-fc1c-44e9-8664-36bc310df5d7
+		summarizeBy: none
+		sourceColumn: _pickup_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _cargo_ho
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: 3db21396-df94-4120-b380-253de322228b
+		summarizeBy: none
+		sourceColumn: _cargo_ho
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _etd
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: ea427a73-00dd-4a4c-bfbb-52218560886d
+		summarizeBy: none
+		sourceColumn: _etd
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _revised_etd
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: b7202ba0-9f4b-4aa1-9f06-1f7ba3301ff3
+		summarizeBy: none
+		sourceColumn: _revised_etd
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _eta
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: 28272122-8fb9-443b-849b-fad1c047da5f
+		summarizeBy: none
+		sourceColumn: _eta
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _do_exp
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: e2855f68-b929-4396-861e-1384d3c9ea4d
+		summarizeBy: none
+		sourceColumn: _do_exp
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _del
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: 8b33320f-6140-4646-8963-9b99951269bd
+		summarizeBy: none
+		sourceColumn: _del
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _client
+		dataType: string
+		lineageTag: 94d0af84-e346-4c90-bff5-6b1d827874bf
+		summarizeBy: none
+		sourceColumn: _client
+
+		annotation SummarizationSetBy = Automatic
+
+	column _fo_id
+		dataType: string
+		lineageTag: f03d4ba1-bc1a-4ed4-bc6c-df22697170c7
+		summarizeBy: none
+		sourceColumn: _fo_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column _fe_id
+		dataType: int64
+		formatString: 0
+		lineageTag: ec0ea1f6-178e-4858-8c5d-31d3df628005
+		summarizeBy: sum
+		sourceColumn: _fe_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column _pid
+		dataType: int64
+		formatString: 0
+		lineageTag: 4a7c6f53-1d23-4188-a263-929ebbc494cf
+		summarizeBy: sum
+		sourceColumn: _pid
+
+		annotation SummarizationSetBy = Automatic
+
+	column _origin_country
+		dataType: string
+		lineageTag: 2ec6433c-ca84-4bfe-8e73-50597e2c4998
+		summarizeBy: none
+		sourceColumn: _origin_country
+
+		annotation SummarizationSetBy = Automatic
+
+	column _status
+		dataType: string
+		lineageTag: fa81a193-7736-4879-b73b-6998b3cac74e
+		summarizeBy: none
+		sourceColumn: _status
+
+		annotation SummarizationSetBy = Automatic
+
+	column _delivery_location
+		dataType: string
+		lineageTag: 6f3b956e-8471-4332-96d4-1f2b3483c7b7
+		summarizeBy: none
+		sourceColumn: _delivery_location
+
+		annotation SummarizationSetBy = Automatic
+
+	column _inner_qty
+		dataType: string
+		lineageTag: 62010a0c-63b2-4797-8319-3ddc7ed81c0f
+		summarizeBy: none
+		sourceColumn: _inner_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column _cbm
+		dataType: string
+		lineageTag: 6550292a-b930-4f7f-9c5e-55e94485ffb5
+		summarizeBy: none
+		sourceColumn: _cbm
+
+		annotation SummarizationSetBy = Automatic
+
+	column _gross_weight
+		dataType: string
+		lineageTag: 420d0981-8eb2-47cb-bbc4-82e06aaa88db
+		summarizeBy: none
+		sourceColumn: _gross_weight
+
+		annotation SummarizationSetBy = Automatic
+
+	column _chargeable_weight
+		dataType: string
+		lineageTag: b707bb8f-4df1-4393-800a-48893bff89a7
+		summarizeBy: none
+		sourceColumn: _chargeable_weight
+
+		annotation SummarizationSetBy = Automatic
+
+	column _quantity
+		dataType: string
+		lineageTag: 313aa7a7-6106-409b-a6cc-0223186492bd
+		summarizeBy: none
+		sourceColumn: _quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column _pack_type
+		dataType: string
+		lineageTag: f9a3df13-bf8c-43fa-9401-1f1456c21caf
+		summarizeBy: none
+		sourceColumn: _pack_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column _pre_alert
+		dataType: string
+		lineageTag: 539f49eb-8c75-460e-845f-0e215341de90
+		summarizeBy: none
+		sourceColumn: _pre_alert
+
+		annotation SummarizationSetBy = Automatic
+
+	column _client_id
+		dataType: string
+		lineageTag: 9b11837d-fca0-4ca3-b6e6-cb3c866a1442
+		summarizeBy: none
+		sourceColumn: _client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column _revised_eta
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: 2eb9f1c1-df4e-487e-be3d-af0babb53ff6
+		summarizeBy: none
+		sourceColumn: _revised_eta
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _row_type
+		dataType: string
+		lineageTag: 26839b0b-a2a5-4617-93fc-1ac9a9cd36ad
+		summarizeBy: none
+		sourceColumn: _row_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column _destination_country_code_dest
+		dataType: string
+		lineageTag: ec0cb939-9095-40a8-8d8e-3ea2331ace47
+		summarizeBy: none
+		sourceColumn: _destination_country_code_dest
+
+		annotation SummarizationSetBy = Automatic
+
+	column _destination_port_code_dest
+		dataType: string
+		lineageTag: bc1f4cfc-fcee-4955-b0ec-5fe804c9d54c
+		summarizeBy: none
+		sourceColumn: _destination_port_code_dest
+
+		annotation SummarizationSetBy = Automatic
+
+	column _destination_port_name_dest
+		dataType: string
+		lineageTag: 3e9549a6-a345-46a1-a969-8c400fcf3e95
+		summarizeBy: none
+		sourceColumn: _destination_port_name_dest
+
+		annotation SummarizationSetBy = Automatic
+
+	column _ship_remarks_updates
+		dataType: string
+		lineageTag: 41aa6e7a-2e32-4e95-a38f-d9fc39dc7321
+		summarizeBy: none
+		sourceColumn: _ship_remarks_updates
+
+		annotation SummarizationSetBy = Automatic
+
+	column _ship_billing_remarks
+		dataType: string
+		lineageTag: 277c5d24-097c-451c-b437-b154d7cb27f1
+		summarizeBy: none
+		sourceColumn: _ship_billing_remarks
+
+		annotation SummarizationSetBy = Automatic
+
+	column _arrival_date
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: 7294a534-866d-44fe-9238-c0ce984005aa
+		summarizeBy: none
+		sourceColumn: _arrival_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column _departure_date
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: 15274cce-39f5-4f26-9c5a-308f7146a844
+		summarizeBy: none
+		sourceColumn: _departure_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column _est_cargo_ready_date
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: f659f53d-1f78-4934-ba26-b3ae6a0a6364
+		summarizeBy: none
+		sourceColumn: _est_cargo_ready_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _goods_cleared_origin
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: d60dbfd4-0b00-4ed2-9375-d535d163b7c1
+		summarizeBy: none
+		sourceColumn: _goods_cleared_origin
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _goods_cleared_destination
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: 1bcf7236-37a7-4fd0-9d40-e96676e92995
+		summarizeBy: none
+		sourceColumn: _goods_cleared_destination
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _pod_date
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: 78caaada-5357-47f9-a4e2-a76d711b2859
+		summarizeBy: none
+		sourceColumn: _pod_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _do_date
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: b133b141-6ecd-4c25-957d-609a4884bb95
+		summarizeBy: none
+		sourceColumn: _do_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _incoterms_fo
+		dataType: string
+		lineageTag: 13645d9f-ca41-4f87-bf24-ffb2bb71bef5
+		summarizeBy: none
+		sourceColumn: _incoterms_fo
+
+		annotation SummarizationSetBy = Automatic
+
+	column _days_order_placement_lt
+		dataType: int64
+		formatString: 0
+		lineageTag: 17258125-3f60-47ce-bef4-2e8326307431
+		summarizeBy: sum
+		sourceColumn: _days_order_placement_lt
+
+		annotation SummarizationSetBy = Automatic
+
+	column _days_custom_clearance_lt
+		dataType: int64
+		formatString: 0
+		lineageTag: a42a30f2-f1e1-4186-981c-cd350fb20328
+		summarizeBy: sum
+		sourceColumn: _days_custom_clearance_lt
+
+		annotation SummarizationSetBy = Automatic
+
+	column _days_iss_cont_booking_lt
+		dataType: int64
+		formatString: 0
+		lineageTag: c65f9783-2581-4ba7-bfd4-4232be7f6917
+		summarizeBy: sum
+		sourceColumn: _days_iss_cont_booking_lt
+
+		annotation SummarizationSetBy = Automatic
+
+	column _days_transit_lt
+		dataType: int64
+		formatString: 0
+		lineageTag: 0df897e2-fb80-4e4a-b5a1-f1463204d0d0
+		summarizeBy: sum
+		sourceColumn: _days_transit_lt
+
+		annotation SummarizationSetBy = Automatic
+
+	column _e2e_total_lt
+		dataType: int64
+		formatString: 0
+		lineageTag: bf0f9234-845a-41af-9b50-20be85385a0a
+		summarizeBy: sum
+		sourceColumn: _e2e_total_lt
+
+		annotation SummarizationSetBy = Automatic
+
+	column _p2p_value_aed
+		dataType: double
+		lineageTag: 3b361577-a392-439d-a638-ed2f6d2d9f07
+		summarizeBy: sum
+		sourceColumn: _p2p_value_aed
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column _total_charges_aed
+		dataType: double
+		lineageTag: 9d2ce561-ef40-4ba2-9f75-f4a16960d6e6
+		summarizeBy: sum
+		sourceColumn: _total_charges_aed
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column _p2p_value_usd
+		dataType: double
+		lineageTag: 4b347fb6-ec54-4256-a8eb-cda4854cf7d9
+		summarizeBy: sum
+		sourceColumn: _p2p_value_usd
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column _total_charges_usd
+		dataType: double
+		lineageTag: 5116fcd7-81cc-4683-9150-2af96cf28f7e
+		summarizeBy: sum
+		sourceColumn: _total_charges_usd
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column _pr_number
+		dataType: string
+		lineageTag: b3eb9fab-137e-4982-bc07-d5b66a098001
+		summarizeBy: none
+		sourceColumn: _pr_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column _pr_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 0089338b-5a7b-4191-9717-2a0e8445e53e
+		summarizeBy: none
+		sourceColumn: _pr_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column _req_status
+		dataType: string
+		lineageTag: dcccf12e-2d59-4553-9707-9a26da75ddfe
+		summarizeBy: none
+		sourceColumn: _req_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column _spo_number
+		dataType: string
+		lineageTag: 5301e967-25aa-40f9-8a47-e04286b6f9a0
+		summarizeBy: none
+		sourceColumn: _spo_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column _po_status
+		dataType: string
+		lineageTag: 702ce3fa-c276-45ca-a3dc-8c65d78e31c1
+		summarizeBy: none
+		sourceColumn: _po_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column _spo_invoice_val_aed
+		dataType: double
+		lineageTag: 6ae96b42-9080-4bae-bd7f-360c38005bb3
+		summarizeBy: sum
+		sourceColumn: _spo_invoice_val_aed
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column _invoice_no
+		dataType: string
+		lineageTag: 08aa2ce2-157b-4004-8b4f-af8ef0603d79
+		summarizeBy: none
+		sourceColumn: _invoice_no
+
+		annotation SummarizationSetBy = Automatic
+
+	column _invoice_issue_date
+		dataType: string
+		lineageTag: dde6133d-aabf-4d78-9da5-4f32bb95660a
+		summarizeBy: none
+		sourceColumn: _invoice_issue_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column _billing_status
+		dataType: string
+		lineageTag: d0811b6a-64d4-47dd-a75c-1aa6ff8d3282
+		summarizeBy: none
+		sourceColumn: _billing_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column _grn_no
+		dataType: string
+		lineageTag: e212b4cd-cd2d-4643-9ce5-746272024973
+		summarizeBy: none
+		sourceColumn: _grn_no
+
+		annotation SummarizationSetBy = Automatic
+
+	column _grn_status
+		dataType: string
+		lineageTag: 749c2710-e966-4e54-8c9b-af20037862dc
+		summarizeBy: none
+		sourceColumn: _grn_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column _addl_po
+		dataType: string
+		lineageTag: f4931c6d-52fc-48be-a971-86543a8993ab
+		summarizeBy: none
+		sourceColumn: _addl_po
+
+		annotation SummarizationSetBy = Automatic
+
+	column _addl_issued_invoices
+		dataType: string
+		lineageTag: 6ed68140-196c-4e23-8f36-b81bee486457
+		summarizeBy: none
+		sourceColumn: _addl_issued_invoices
+
+		annotation SummarizationSetBy = Automatic
+
+	column _addl_invoice_issue_date
+		dataType: string
+		lineageTag: 0a357504-65af-4331-b286-74d7a23dbbc8
+		summarizeBy: none
+		sourceColumn: _addl_invoice_issue_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column _addl_po_grn
+		dataType: string
+		lineageTag: 3912551e-ae8a-4194-8617-e815733a37eb
+		summarizeBy: none
+		sourceColumn: _addl_po_grn
+
+		annotation SummarizationSetBy = Automatic
+
+	column _days_delayed_eta
+		dataType: int64
+		formatString: 0
+		lineageTag: 14641696-e9ac-445a-8d81-f1350c0bd235
+		summarizeBy: sum
+		sourceColumn: _days_delayed_eta
+
+		annotation SummarizationSetBy = Automatic
+
+	column _days_delayed_etd
+		dataType: int64
+		formatString: 0
+		lineageTag: 5daed2fb-1f59-4539-b062-ad6382fed394
+		summarizeBy: sum
+		sourceColumn: _days_delayed_etd
+
+		annotation SummarizationSetBy = Automatic
+
+	column _rdd_eta
+		dataType: int64
+		formatString: 0
+		lineageTag: edab1a13-3e45-4c0e-a719-ce4ec7c2d3ea
+		summarizeBy: sum
+		sourceColumn: _rdd_eta
+
+		annotation SummarizationSetBy = Automatic
+
+	column _nbd_2_crd
+		dataType: int64
+		formatString: 0
+		lineageTag: da6efe0b-2ed1-4804-8811-6ce92635b399
+		summarizeBy: sum
+		sourceColumn: _nbd_2_crd
+
+		annotation SummarizationSetBy = Automatic
+
+	column _po_2_crd
+		dataType: int64
+		formatString: 0
+		lineageTag: 4a291c63-0dfe-447c-b75a-f9c0d2e9a844
+		summarizeBy: sum
+		sourceColumn: _po_2_crd
+
+		annotation SummarizationSetBy = Automatic
+
+	column _crd_2_etd
+		dataType: int64
+		formatString: 0
+		lineageTag: 6ace3b8f-5554-4964-8c73-d5f02af616d6
+		summarizeBy: sum
+		sourceColumn: _crd_2_etd
+
+		annotation SummarizationSetBy = Automatic
+
+	column _etd_2_eta
+		dataType: int64
+		formatString: 0
+		lineageTag: fe6184bd-a18d-4198-81f2-bc1c07d96c72
+		summarizeBy: sum
+		sourceColumn: _etd_2_eta
+
+		annotation SummarizationSetBy = Automatic
+
+	column _eta_2_del
+		dataType: int64
+		formatString: 0
+		lineageTag: cf1f8d49-9b79-4f54-9fc5-7beae594bde8
+		summarizeBy: sum
+		sourceColumn: _eta_2_del
+
+		annotation SummarizationSetBy = Automatic
+
+	column _nbd_2_eta
+		dataType: int64
+		formatString: 0
+		lineageTag: cb3ae59b-e1e0-4418-a936-3f459c7318ed
+		summarizeBy: sum
+		sourceColumn: _nbd_2_eta
+
+		annotation SummarizationSetBy = Automatic
+
+	column _nbd_2_del
+		dataType: int64
+		formatString: 0
+		lineageTag: b06a54db-cc11-4372-b100-c33d74f3632d
+		summarizeBy: sum
+		sourceColumn: _nbd_2_del
+
+		annotation SummarizationSetBy = Automatic
+
+	column _avg_lt
+		dataType: int64
+		formatString: 0
+		lineageTag: 327d8f4b-3350-463a-b8c6-e816cfc60a9c
+		summarizeBy: sum
+		sourceColumn: _avg_lt
+
+		annotation SummarizationSetBy = Automatic
+
+	column _customs_invoice_aed
+		dataType: double
+		lineageTag: 0bef4e23-df08-4e33-a55c-4856b57ee2de
+		summarizeBy: sum
+		sourceColumn: _customs_invoice_aed
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column _customs_invoice_usd
+		dataType: double
+		lineageTag: eb78c68d-afdf-43f7-8165-9d183dc86018
+		summarizeBy: sum
+		sourceColumn: _customs_invoice_usd
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column _dn
+		dataType: string
+		lineageTag: 004aaed1-3e95-44ef-a8b3-33d77402cd17
+		summarizeBy: none
+		sourceColumn: _dn
+
+		annotation SummarizationSetBy = Automatic
+
+	column _ontime_order_placement_perf
+		dataType: double
+		formatString: 0%;-0%;0%
+		lineageTag: 1481bbe5-5015-40be-94a6-a2ff8a40f210
+		summarizeBy: sum
+		sourceColumn: _ontime_order_placement_perf
+
+		annotation SummarizationSetBy = Automatic
+
+	column _iss_cont_booking_perf
+		dataType: double
+		formatString: 0%;-0%;0%
+		lineageTag: e4e550e5-269f-4c9f-9696-2d986f121123
+		summarizeBy: sum
+		sourceColumn: _iss_cont_booking_perf
+
+		annotation SummarizationSetBy = Automatic
+
+	column _aux_charge_type
+		dataType: string
+		lineageTag: 3e9838bd-e85b-4170-8d8a-4515462b4fc6
+		summarizeBy: none
+		sourceColumn: _aux_charge_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column _aux_charge_form_no
+		dataType: string
+		lineageTag: b04989fb-c3b3-4185-a436-e54bee83755d
+		summarizeBy: none
+		sourceColumn: _aux_charge_form_no
+
+		annotation SummarizationSetBy = Automatic
+
+	column _destination_region_reg
+		dataType: string
+		lineageTag: 19f71f3d-f9c5-4b1a-9494-f8a462a728d3
+		summarizeBy: none
+		sourceColumn: _destination_region_reg
+
+		annotation SummarizationSetBy = Automatic
+
+	column _days_supplier_production_lt
+		dataType: int64
+		formatString: 0
+		lineageTag: 3ce36bce-c937-4da3-a901-60710f045124
+		summarizeBy: sum
+		sourceColumn: _days_supplier_production_lt
+
+		annotation SummarizationSetBy = Automatic
+
+	column _actual_lead
+		dataType: int64
+		formatString: 0
+		lineageTag: 2e975cf8-afbd-456a-971b-564c0b2b7799
+		summarizeBy: sum
+		sourceColumn: _actual_lead
+
+		annotation SummarizationSetBy = Automatic
+
+	column _supplier_committed_prod_rdy_perf
+		dataType: double
+		formatString: 0%;-0%;0%
+		lineageTag: cd219fa9-6ad1-4204-b604-07a0bc9fda61
+		summarizeBy: sum
+		sourceColumn: _supplier_committed_prod_rdy_perf
+
+		annotation SummarizationSetBy = Automatic
+
+	column _iss_transit_lead_time_perf
+		dataType: double
+		formatString: 0%;-0%;0%
+		lineageTag: d949532e-1dd4-47a1-b2f2-b91493817f21
+		summarizeBy: sum
+		sourceColumn: _iss_transit_lead_time_perf
+
+		annotation SummarizationSetBy = Automatic
+
+	column _iss_custom_clear_perf
+		dataType: double
+		formatString: 0%;-0%;0%
+		lineageTag: 39d6b821-acf4-4d6a-8e67-b3147bd702ae
+		summarizeBy: sum
+		sourceColumn: _iss_custom_clear_perf
+
+		annotation SummarizationSetBy = Automatic
+
+	column _e2e_total_lead_time_perf
+		dataType: double
+		formatString: 0%;-0%;0%
+		lineageTag: 682da518-5d77-4a82-8ea2-af93d8f364c8
+		summarizeBy: sum
+		sourceColumn: _e2e_total_lead_time_perf
+
+		annotation SummarizationSetBy = Automatic
+
+	column _days_total_comm_perf
+		dataType: int64
+		formatString: 0
+		lineageTag: be1d2cde-d984-49dc-a2c7-be5e7e43d3a2
+		summarizeBy: sum
+		sourceColumn: _days_total_comm_perf
+
+		annotation SummarizationSetBy = Automatic
+
+	column _health_check
+		dataType: string
+		lineageTag: 13de3893-9947-43c7-b855-4f386b72e349
+		summarizeBy: none
+		sourceColumn: _health_check
+
+		annotation SummarizationSetBy = Automatic
+
+	column _reason_code
+		dataType: string
+		lineageTag: d9eb5d3d-9e30-4771-a48d-5b10fdcf5ec0
+		summarizeBy: none
+		sourceColumn: _reason_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column _po_app_date
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: a1dd7d70-0d70-46ad-aec8-abe5a332f8a6
+		summarizeBy: none
+		sourceColumn: _po_app_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _supplier_lead_time
+		dataType: int64
+		formatString: 0
+		lineageTag: 5eb5a9af-e521-4e5d-9b72-d46965a20a15
+		summarizeBy: sum
+		sourceColumn: _supplier_lead_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column _etd_wakeo
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: 3bf82997-d0a6-47a9-89dd-2f22c31c8cc7
+		summarizeBy: none
+		sourceColumn: _etd_wakeo
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _full_etd
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: 8f81f0bf-34ef-4c6f-9e81-36ce1b7b95c2
+		summarizeBy: none
+		sourceColumn: _full_etd
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _eta_wakeo
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: 6f131e97-25e3-441d-8120-eea37a113576
+		summarizeBy: none
+		sourceColumn: _eta_wakeo
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _full_eta
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: 0906d210-6790-49e0-81e2-08e1d1479364
+		summarizeBy: none
+		sourceColumn: _full_eta
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _country_lead_time
+		dataType: int64
+		formatString: 0
+		lineageTag: 2d774489-15d8-477b-af17-100b6cfacd5e
+		summarizeBy: sum
+		sourceColumn: _country_lead_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column _org_charges_aed
+		dataType: double
+		formatString: 0.00
+		lineageTag: 0dfdd05c-48fc-4d51-b452-7c78087bc064
+		summarizeBy: sum
+		sourceColumn: _org_charges_aed
+
+		annotation SummarizationSetBy = Automatic
+
+	column _dest_charges_aed
+		dataType: double
+		formatString: 0.00
+		lineageTag: a7150f70-8ddc-4e45-b854-97c7f8c821c5
+		summarizeBy: sum
+		sourceColumn: _dest_charges_aed
+
+		annotation SummarizationSetBy = Automatic
+
+	column _frt_charges_aed
+		dataType: double
+		formatString: 0.00
+		lineageTag: 0ff5a6de-2c58-4465-b6f4-717dac07d8ac
+		summarizeBy: sum
+		sourceColumn: _frt_charges_aed
+
+		annotation SummarizationSetBy = Automatic
+
+	column _aux_charges_aed
+		dataType: double
+		formatString: 0.00
+		lineageTag: aca7a7c5-caeb-48b4-9608-59efca899d28
+		summarizeBy: sum
+		sourceColumn: _aux_charges_aed
+
+		annotation SummarizationSetBy = Automatic
+
+	column _org_charges_usd
+		dataType: double
+		formatString: 0.00
+		lineageTag: 136fa431-e78b-4a93-8cd4-703096bc940e
+		summarizeBy: sum
+		sourceColumn: _org_charges_usd
+
+		annotation SummarizationSetBy = Automatic
+
+	column _dest_charges_usd
+		dataType: double
+		formatString: 0.00
+		lineageTag: 2f6c6ed1-f45c-4c38-a477-11e8b6554290
+		summarizeBy: sum
+		sourceColumn: _dest_charges_usd
+
+		annotation SummarizationSetBy = Automatic
+
+	column _frt_charges_usd
+		dataType: double
+		formatString: 0.00
+		lineageTag: f570a287-78b7-4668-bbf1-65edc02ea957
+		summarizeBy: sum
+		sourceColumn: _frt_charges_usd
+
+		annotation SummarizationSetBy = Automatic
+
+	column _aux_charges_usd
+		dataType: double
+		lineageTag: e8d8b796-161d-4139-8d2c-f3874320ee82
+		summarizeBy: sum
+		sourceColumn: _aux_charges_usd
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column _inbound_iss_job_no
+		dataType: string
+		lineageTag: c54c2558-e260-49e0-9fb2-700a9fcfa112
+		summarizeBy: none
+		sourceColumn: _inbound_iss_job_no
+
+		annotation SummarizationSetBy = Automatic
+
+	column _outbound_iss_job_no
+		dataType: string
+		lineageTag: acfc05a7-b1db-45d5-9706-3e8f85737fbb
+		summarizeBy: none
+		sourceColumn: _outbound_iss_job_no
+
+		annotation SummarizationSetBy = Automatic
+
+	column _po_qty_ordered
+		dataType: double
+		lineageTag: d12f290d-3d82-4263-a454-33a1ccdd68ea
+		summarizeBy: sum
+		sourceColumn: _po_qty_ordered
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column _remaining_quantity
+		dataType: double
+		lineageTag: e2b4ab3f-f085-496c-8cb0-d063c0c1aed0
+		summarizeBy: sum
+		sourceColumn: _remaining_quantity
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column _item_code
+		dataType: string
+		lineageTag: 70bdf0f0-1703-4c90-9ea1-e9f1bd9ad82f
+		summarizeBy: none
+		sourceColumn: _item_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column _response_shipment_id
+		dataType: string
+		lineageTag: da63b5af-3871-4dfc-bd90-0bac9a98c041
+		summarizeBy: none
+		sourceColumn: _response_shipment_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column _arrival_date_actual
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: d9469b0e-566c-4a8b-971d-59db789ee227
+		summarizeBy: none
+		sourceColumn: _arrival_date_actual
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _departure_date_actual
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: 67d3de27-03ff-46fe-beec-e0ee679540a0
+		summarizeBy: none
+		sourceColumn: _departure_date_actual
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _etd_iss
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: 57dd05e7-b815-4bff-a60f-c97d1350c44e
+		summarizeBy: none
+		sourceColumn: _etd_iss
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _eta_iss
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: 5e58a368-33d5-49f4-bbb7-11aee2014a20
+		summarizeBy: none
+		sourceColumn: _eta_iss
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _pta
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: 52d0f3bc-7bb6-42c8-b8e3-18973f80ecb2
+		summarizeBy: none
+		sourceColumn: _pta
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _ptd
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: 3d2bba03-a9b0-40d9-a313-76a41c9de0f8
+		summarizeBy: none
+		sourceColumn: _ptd
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _arrival_date_full
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 566fe775-3629-4d3e-acb9-e8cb31b6d99f
+		summarizeBy: none
+		sourceColumn: _arrival_date_full
+
+		annotation SummarizationSetBy = Automatic
+
+	column _departure_date_full
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2ea968da-cc2b-4370-a2df-cba5f7f1bc60
+		summarizeBy: none
+		sourceColumn: _departure_date_full
+
+		annotation SummarizationSetBy = Automatic
+
+	column _arrival_date_fallback
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: ca95d779-abbb-4a52-8876-2ec83721f6d1
+		summarizeBy: none
+		sourceColumn: _arrival_date_fallback
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _departure_date_fallback
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: 851f0296-bd2a-4de4-a20e-53174f2b03dd
+		summarizeBy: none
+		sourceColumn: _departure_date_fallback
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _po_uom
+		dataType: string
+		lineageTag: 0f7d4aeb-d6ce-4b2b-89e3-aea5714b6527
+		summarizeBy: none
+		sourceColumn: _po_uom
+
+		annotation SummarizationSetBy = Automatic
+
+	column _origin_country_code
+		dataType: string
+		lineageTag: 5373b2be-a324-457d-94ca-3144568f18dd
+		summarizeBy: none
+		sourceColumn: _origin_country_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column _port_of_discharge
+		dataType: string
+		lineageTag: a2d9ba12-0022-4de9-9305-2ddb94ddb1dd
+		summarizeBy: none
+		sourceColumn: _port_of_discharge
+
+		annotation SummarizationSetBy = Automatic
+
+	column _port_of_discharge_name
+		dataType: string
+		lineageTag: 1d41e870-ce52-47ce-82fa-c369464742a8
+		summarizeBy: none
+		sourceColumn: _port_of_discharge_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column _transport_mode
+		dataType: string
+		lineageTag: 2f4339c7-c642-47a9-b087-04b19bd765b4
+		summarizeBy: none
+		sourceColumn: _transport_mode
+
+		annotation SummarizationSetBy = Automatic
+
+	column _slt_category
+		dataType: string
+		lineageTag: 0d93bd5f-3c41-42dd-bb38-bcccc39cba65
+		summarizeBy: none
+		sourceColumn: _slt_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column _customs_declared_currency
+		dataType: string
+		lineageTag: 087b6a35-7d17-40ba-b136-19ce49f30068
+		summarizeBy: none
+		sourceColumn: _customs_declared_currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column _direction
+		dataType: string
+		lineageTag: 15cc43f8-a308-41c7-8717-c20424ad31f3
+		summarizeBy: none
+		sourceColumn: _direction
+
+		annotation SummarizationSetBy = Automatic
+
+	column _ptd_discrepancy_days
+		dataType: int64
+		formatString: 0
+		lineageTag: a7b268e5-a967-4448-a8df-2f651f929b2a
+		summarizeBy: sum
+		sourceColumn: _ptd_discrepancy_days
+
+		annotation SummarizationSetBy = Automatic
+
+	column _pta_discrepancy_days
+		dataType: int64
+		formatString: 0
+		lineageTag: 41cefb49-ad6f-4377-a7f5-b2e24400e8dc
+		summarizeBy: sum
+		sourceColumn: _pta_discrepancy_days
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _EK_VIEW_ = m
+		mode: import
+		queryGroup: TABLES
+		source = ```
+				let
+				    Source = PostgreSQL.Database("c-powerbicosmos.k4mjimliu3npzv.postgres.cosmos.azure.com", "powerbi", 
+				    
+				    [Query = EK_SQL_SOURCE[_code]{0}]), 
+				        
+				    colTypes = Table.TransformColumnTypes(Source,{
+				                                        {"_pickup_date", type date}, {"_cargo_ho", type date}
+				                                        , {"_etd", type date}, {"_revised_etd", type date}
+				                                        , {"_eta", type date}, {"_revised_eta", type date}
+				                                        , {"_do_exp", type date}, {"_del", type date}
+				                                        , {"_crd", type date}, {"_po_need_by_date", type date}
+				                                        , {"_po_recd_date", type date}, {"_po_creation_date", type date}
+				                                        , {"_po_app_date", type date}, {"_pr_appr_date", type date}
+				                                        , {"_client_id", type text}, {"_pod_date", type date}
+				                                        , {"_do_date", type date}
+				                                        , {"_arrival_date", type date}, {"_departure_date", type date}
+				                                        , {"_goods_cleared_destination", type date}, {"_goods_cleared_origin", type date}})
+				
+				in
+				    colTypes
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

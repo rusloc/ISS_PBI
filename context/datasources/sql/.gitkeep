@@ -1,0 +1,3 @@
+# One file per schema/table: <schema>.<table>.md
+# Columns, types, keys, grain, join paths, known quirks.
+# Delete this placeholder once the first schema doc lands.

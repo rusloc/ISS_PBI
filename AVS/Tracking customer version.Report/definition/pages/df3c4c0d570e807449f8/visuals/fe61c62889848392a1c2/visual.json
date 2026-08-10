@@ -1,0 +1,694 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "fe61c62889848392a1c2",
+  "position": {
+    "x": 243.59844920389958,
+    "y": 148.00918432641998,
+    "z": 1000,
+    "height": 543.728184088029,
+    "width": 1016.5353006863151,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__SKU__"
+                    }
+                  },
+                  "Property": "_row_id"
+                }
+              },
+              "queryRef": "__SKU__._row_id",
+              "nativeQueryRef": "_row_id"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__SKU__"
+                    }
+                  },
+                  "Property": "_client"
+                }
+              },
+              "queryRef": "__SKU__._client",
+              "nativeQueryRef": "Client",
+              "displayName": "Client"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__SKU__"
+                    }
+                  },
+                  "Property": "_po_number_sku"
+                }
+              },
+              "queryRef": "__SKU__._po_number_sku",
+              "nativeQueryRef": "Purchase Order No (PKL)",
+              "displayName": "Purchase Order No (PKL)"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__SKU__"
+                    }
+                  },
+                  "Property": "_invoice_number"
+                }
+              },
+              "queryRef": "__SKU__._invoice_number",
+              "nativeQueryRef": "Invoice No",
+              "displayName": "Invoice No"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__SKU__"
+                    }
+                  },
+                  "Property": "_sku"
+                }
+              },
+              "queryRef": "__SKU__._sku",
+              "nativeQueryRef": "Item code",
+              "displayName": "Item code"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__SKU__"
+                    }
+                  },
+                  "Property": "_description"
+                }
+              },
+              "queryRef": "__SKU__._description",
+              "nativeQueryRef": "Item Description",
+              "displayName": "Item Description"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__SKU__"
+                    }
+                  },
+                  "Property": "_qnty"
+                }
+              },
+              "queryRef": "__SKU__._qnty",
+              "nativeQueryRef": "Q-ty of Packages",
+              "displayName": "Q-ty of Packages"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__SKU__"
+                    }
+                  },
+                  "Property": "_container (SKU COL)"
+                }
+              },
+              "queryRef": "__SKU__._container (SKU COL)",
+              "nativeQueryRef": "Container No",
+              "displayName": "Container No"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "__test__MAIN"
+                }
+              },
+              "queryRef": "__MAIN__.__test__MAIN",
+              "nativeQueryRef": "__check__",
+              "displayName": "__check__"
+            }
+          ],
+          "fieldParameters": [
+            {
+              "parameterExpr": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "SKU_param"
+                    }
+                  },
+                  "Property": "SKU_param"
+                }
+              },
+              "index": 7,
+              "length": 1,
+              "sortDirection": "Descending"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "__SKU__"
+                  }
+                },
+                "Property": "_container (SKU COL)"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "158.24184589692504D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "__SKU__._sku"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "223.05443413059197D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "__SKU__._container ID agg"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "308.6727556530078D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "__SKU__._shipment ID agg"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "227.4659996170341D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "__SKU__._description"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "109.68648648648649D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "__MAIN__.container_equipment_no"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "204.43199636737407D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "__SKU__._client"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "4D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "__SKU__._row_id"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "4D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "__MAIN__.__test__MAIN"
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Verdana'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#F47922'"
+                    }
+                  }
+                }
+              }
+            },
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "grid": [
+        {
+          "properties": {
+            "gridVertical": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "gridVerticalColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0.6
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "stylePreset": [
+        {
+          "properties": {
+            "name": {
+              "expr": {
+                "Literal": {
+                  "Value": "'None'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'MATRIX (sku)'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "parentGroupName": "1d779e813a5b2fcb81c8",
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "25eb34b946260b1af6bc",
+        "ordinal": 0,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "__SKU__"
+              }
+            },
+            "Property": "_row_id"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "ccb418a6925bf6c9aab9",
+        "ordinal": 1,
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "__MAIN__"
+              }
+            },
+            "Property": "_arrival date MAN (FX)"
+          }
+        },
+        "type": "Advanced",
+        "howCreated": "User"
+      },
+      {
+        "name": "77d069e6f034525a8f19",
+        "ordinal": 2,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "__SKU__"
+              }
+            },
+            "Property": "_client"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "bbb3bba5f435d2626d46",
+        "ordinal": 3,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "__MAIN__"
+              }
+            },
+            "Property": "estimate_cargo_date"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "ded1ad28341010b998f4",
+        "ordinal": 4,
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "__MAIN__"
+              }
+            },
+            "Property": "_COB date"
+          }
+        },
+        "type": "Advanced",
+        "howCreated": "User"
+      },
+      {
+        "name": "4682cca37f08c5d13dfd",
+        "ordinal": 5,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "__SKU__"
+              }
+            },
+            "Property": "_description"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "c03797c3f2f0920c4c0f",
+        "ordinal": 6,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "__MAIN__"
+              }
+            },
+            "Property": "eta_date"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "4df83b3c48866b4060b9",
+        "displayName": "DATE SWITCH FILTER",
+        "ordinal": 7,
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "__MAIN__"
+              }
+            },
+            "Property": "_shipment count (main)"
+          }
+        },
+        "type": "Advanced",
+        "howCreated": "User"
+      },
+      {
+        "name": "1099b012ed021ab51d7f",
+        "ordinal": 8,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "__MAIN__"
+              }
+            },
+            "Property": "etd_date"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "ff3101f36aa9e0523518",
+        "ordinal": 9,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "__SKU__"
+              }
+            },
+            "Property": "_invoice_number"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "a409b4ee7b3447c0ab1e",
+        "ordinal": 10,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "__SKU__"
+              }
+            },
+            "Property": "_po_number_sku"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "21bdf23679302d6eb8d9",
+        "ordinal": 11,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "__SKU__"
+              }
+            },
+            "Property": "_qnty"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "3f0b2d63b42961daba84",
+        "ordinal": 12,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "__SKU__"
+              }
+            },
+            "Property": "_serial"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "ac1dd17f26297bf1fc1c",
+        "ordinal": 13,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "__SKU__"
+              }
+            },
+            "Property": "_sku"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "c82ae6342baeae8b8c3a",
+        "ordinal": 14,
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "__MAIN__"
+              }
+            },
+            "Property": "_creation date (FX)"
+          }
+        },
+        "type": "Advanced",
+        "howCreated": "User"
+      },
+      {
+        "name": "733d117888c0020a0a57",
+        "ordinal": 15,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "__SKU__"
+              }
+            },
+            "Property": "_is_visible"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      }
+    ],
+    "filterSortOrder": "Custom"
+  }
+}

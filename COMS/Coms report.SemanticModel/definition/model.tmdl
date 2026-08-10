@@ -1,0 +1,33 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+/// SQL source code retrieved from DB
+queryGroup SRC
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup TABLES
+
+	annotation PBI_QueryGroupOrder = 1
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["_EK_VIEW_","_PO_VIEW_","EK_SQL_SOURCE","PO_SQL_SOURCE"]
+
+annotation PBI_ProTooling = ["DevMode","TMDLView_Desktop"]
+
+ref table _EK_VIEW_
+ref table EK_VIEW_PARAM
+ref table _PO_VIEW_
+ref table __FX__
+ref table PO_VIEW_PARAM
+
+ref role MAIN
+
+ref cultureInfo en-US
+

@@ -1,0 +1,682 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "3433f65920cd2b0180d8",
+  "position": {
+    "x": 26.25,
+    "y": 146.25,
+    "z": 1000,
+    "height": 552.5,
+    "width": 1227.5,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "_client"
+                }
+              },
+              "queryRef": "__MAIN__._client",
+              "nativeQueryRef": "_client",
+              "displayName": "Client"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "serial_no"
+                }
+              },
+              "queryRef": "__MAIN__.serial_no",
+              "nativeQueryRef": "Serial",
+              "displayName": "Serial"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "house_purchase_order_no"
+                }
+              },
+              "queryRef": "__MAIN__.house_purchase_order_no",
+              "nativeQueryRef": "House PO",
+              "displayName": "House PO"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "master_purchase_order_no"
+                }
+              },
+              "queryRef": "__MAIN__.master_purchase_order_no",
+              "nativeQueryRef": "Master PO",
+              "displayName": "Master PO"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "shipper"
+                }
+              },
+              "queryRef": "__MAIN__.shipper",
+              "nativeQueryRef": "Shipper",
+              "displayName": "Shipper"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "_origin_country_name"
+                }
+              },
+              "queryRef": "__MAIN__._origin_country_name",
+              "nativeQueryRef": "Origin country",
+              "displayName": "Origin country"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "_origin_port_name"
+                }
+              },
+              "queryRef": "__MAIN__._origin_port_name",
+              "nativeQueryRef": "Origin port",
+              "displayName": "Origin port"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "booking_confirmed_date"
+                }
+              },
+              "queryRef": "__MAIN__.booking_confirmed_date",
+              "nativeQueryRef": "GL date",
+              "displayName": "GL date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "incoterms"
+                }
+              },
+              "queryRef": "__MAIN__.incoterms",
+              "nativeQueryRef": "Incoterms",
+              "displayName": "Incoterms"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "cargo_ready_date_actual"
+                }
+              },
+              "queryRef": "__MAIN__.cargo_ready_date_actual",
+              "nativeQueryRef": "Cargo ready date",
+              "displayName": "Cargo ready date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "service"
+                }
+              },
+              "queryRef": "__MAIN__.service",
+              "nativeQueryRef": "Service",
+              "displayName": "Service"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "shipment_type"
+                }
+              },
+              "queryRef": "__MAIN__.shipment_type",
+              "nativeQueryRef": "Shipment type",
+              "displayName": "Shipment type"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "house_no"
+                }
+              },
+              "queryRef": "__MAIN__.house_no",
+              "nativeQueryRef": "House no",
+              "displayName": "House no"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "master_no"
+                }
+              },
+              "queryRef": "__MAIN__.master_no",
+              "nativeQueryRef": "Master no",
+              "displayName": "Master no"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "actual_status"
+                }
+              },
+              "queryRef": "__MAIN__.actual_status",
+              "nativeQueryRef": "Last milestone/status",
+              "displayName": "Last milestone/status"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "container_type"
+                }
+              },
+              "queryRef": "__MAIN__.container_type",
+              "nativeQueryRef": "Container type",
+              "displayName": "Container type"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "_container count (AGG)"
+                }
+              },
+              "queryRef": "__MAIN__._container count (AGG)",
+              "nativeQueryRef": "Cont. count Total",
+              "displayName": "Cont. count Total"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "_container 40 count (AGG)"
+                }
+              },
+              "queryRef": "__MAIN__._container 40 count (AGG)",
+              "nativeQueryRef": "Cont. 40 count",
+              "displayName": "Cont. 40 count"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "_container 20 count (AGG)"
+                }
+              },
+              "queryRef": "__MAIN__._container 20 count (AGG)",
+              "nativeQueryRef": "Cont. 20 count",
+              "displayName": "Cont. 20 count"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "_container ID (AGG SHIP LEVEL)"
+                }
+              },
+              "queryRef": "__MAIN__._containner numbers (AGG)",
+              "nativeQueryRef": "Container number",
+              "displayName": "Container number"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "_package count"
+                }
+              },
+              "queryRef": "__MAIN__._package count",
+              "nativeQueryRef": "Number of pieces",
+              "displayName": "Number of pieces"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "etd_date"
+                }
+              },
+              "queryRef": "__MAIN__.etd_date",
+              "nativeQueryRef": "ETD date",
+              "displayName": "ETD date"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "_COB date"
+                }
+              },
+              "queryRef": "__MAIN__._COB date",
+              "nativeQueryRef": "COB date",
+              "displayName": "COB date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "eta_date"
+                }
+              },
+              "queryRef": "__MAIN__.eta_date",
+              "nativeQueryRef": "ETA date",
+              "displayName": "ETA date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "eta_plus_ten_days"
+                }
+              },
+              "queryRef": "__MAIN__.eta_plus_ten_days",
+              "nativeQueryRef": "ETA date +10",
+              "displayName": "ETA date +10"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "arrival_date"
+                }
+              },
+              "queryRef": "__MAIN__.arrival_date",
+              "nativeQueryRef": "Arrival date",
+              "displayName": "Arrival date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "_destination_country_name"
+                }
+              },
+              "queryRef": "__MAIN__._destination_country_name",
+              "nativeQueryRef": "Destination country",
+              "displayName": "Destination country"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "_destination_port_name"
+                }
+              },
+              "queryRef": "__MAIN__._destination_port_name",
+              "nativeQueryRef": "Destination port",
+              "displayName": "Destination port"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "carrier"
+                }
+              },
+              "queryRef": "__MAIN__.carrier",
+              "nativeQueryRef": "Carrier",
+              "displayName": "Carrier"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "_container total gross weight"
+                }
+              },
+              "queryRef": "__MAIN__._container total weight",
+              "nativeQueryRef": "Gross weight",
+              "displayName": "Gross weight"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "_container total gross volume"
+                }
+              },
+              "queryRef": "__MAIN__._container total volume",
+              "nativeQueryRef": "Gross volume",
+              "displayName": "Gross volume"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "_container total charge weight"
+                }
+              },
+              "queryRef": "__MAIN__._container total charge weight",
+              "nativeQueryRef": "Charge. weight",
+              "displayName": "Charge. weight"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "__MAIN__"
+                  }
+                },
+                "Property": "serial_no"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "webURL": {
+              "expr": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "__MAIN__"
+                    }
+                  },
+                  "Property": "_web url link"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "__MAIN__.serial_no"
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "228.26224573749934D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "__MAIN__._client"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "278.2408324483001D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "__MAIN__.shipper"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "177.36369586916487D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "__MAIN__._containner numbers (AGG)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "187.94180453777858D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "__MAIN__.house_purchase_order_no"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "215.58766516351756D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "__MAIN__.master_purchase_order_no"
+          }
+        }
+      ],
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "stylePreset": [
+        {
+          "properties": {
+            "name": {
+              "expr": {
+                "Literal": {
+                  "Value": "'None'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

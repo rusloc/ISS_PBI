@@ -1,0 +1,23 @@
+role MAIN
+	modelPermission: read
+
+	tablePermission _EK_VIEW_ =
+			VAR _filter = CUSTOMDATA()
+			
+			RETURN
+			    CONTAINSSTRING(
+			        _filter,
+			        "|" & FORMAT('_EK_VIEW_'[_client_id], "0") & "|"
+			    )
+
+	tablePermission _PO_VIEW_ =
+			VAR _filter = CUSTOMDATA()
+			
+			RETURN
+			    CONTAINSSTRING(
+			        _filter,
+			        "|" & FORMAT('_PO_VIEW_'[_client_id], "0") & "|"
+			    )
+
+	annotation PBI_Id = 369314cf579a4f50879c7cfca710c2b6
+

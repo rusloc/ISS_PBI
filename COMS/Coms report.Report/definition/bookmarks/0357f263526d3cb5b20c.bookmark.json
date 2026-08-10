@@ -1,0 +1,341 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.0.0/schema.json",
+  "displayName": "PO view FILTERS ON",
+  "name": "0357f263526d3cb5b20c",
+  "options": {
+    "applyOnlyToTargetVisuals": true,
+    "targetVisualNames": [
+      "87f7717408d6c04db632",
+      "6adda00b5d465d075bbb",
+      "650bddd7d467839223d5",
+      "da2979870e0d78a02408",
+      "e679f9cf976b2697ab31",
+      "9a11585022a4cb04e684",
+      "e76ff6233901393aa777",
+      "f7b200bcdc1962405498",
+      "3cc383d75ac85539c7b0"
+    ],
+    "suppressData": true
+  },
+  "explorationState": {
+    "version": "1.3",
+    "activeSection": "ea84587d0043583b839d",
+    "sections": {
+      "ea84587d0043583b839d": {
+        "visualContainers": {
+          "24790fd7e2555524a641": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "9190d4c4e4e1c1c01ede",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_PO_VIEW_"
+                        }
+                      },
+                      "Property": "_line_id"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "cff0f0a0007b19107bd1",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "__FX__"
+                        }
+                      },
+                      "Property": "quantity"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "d74d87ad8852eba27857",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_PO_VIEW_"
+                        }
+                      },
+                      "Property": "_branch_bu"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "cd9db68c0ab75d0b9bd0",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_PO_VIEW_"
+                        }
+                      },
+                      "Property": "_supplier_name"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "5b735d01100809d59804",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_PO_VIEW_"
+                        }
+                      },
+                      "Property": "_po_no_ekporef"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "7e00095a6145291c8de3",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_PO_VIEW_"
+                        }
+                      },
+                      "Property": "_line_type"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "9b75e00c6a52401d5145",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_PO_VIEW_"
+                        }
+                      },
+                      "Property": "_line_no"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "326ef930317591aa8304",
+                  "type": "Advanced",
+                  "expression": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "_PO_VIEW_"
+                            }
+                          },
+                          "Property": "_ordered"
+                        }
+                      },
+                      "Function": 0
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "tableEx",
+              "objects": {}
+            }
+          },
+          "da2979870e0d78a02408": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "acd8879040dab0080624",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_EK_VIEW_"
+                        }
+                      },
+                      "Property": "_po_no_ekporef"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_EK_VIEW_"
+                        }
+                      },
+                      "Property": "_po_no_ekporef"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "e76ff6233901393aa777": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "f7b200bcdc1962405498": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "3cc383d75ac85539c7b0": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "431422bcd4204cade8c8",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_EK_VIEW_"
+                        }
+                      },
+                      "Property": "_supplier_name"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_EK_VIEW_"
+                        }
+                      },
+                      "Property": "_supplier_name"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "87f7717408d6c04db632": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "4d8f3858dec740335810": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "6adda00b5d465d075bbb": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "80061f471ea058897d3a": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          }
+        },
+        "visualContainerGroups": {
+          "650bddd7d467839223d5": {
+            "isHidden": false,
+            "children": {
+              "9a11585022a4cb04e684": {
+                "isHidden": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "objects": {
+      "merge": {
+        "outspacePane": [
+          {
+            "properties": {
+              "expanded": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
