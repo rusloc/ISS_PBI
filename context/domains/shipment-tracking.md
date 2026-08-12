@@ -23,19 +23,21 @@ Purchase Order (po_no / EKPOREF)          ← what the client ordered
 - The link table `purchase_order_on_freight_unit` is therefore genuinely many-to-many and **carries
   the shipped quantity** (`pofu.quantity`). It is the pivot of the whole domain.
 
-### ⚠ Join trap — read before writing any join
+### ⚠ Key relationship — confirmed correct, read before writing any join
 
 `portal.purchase_order_on_freight_unit.purchase_order_id` points at **`PurchaseOrderLine.id`**, not
-at a PO header. Both queries join it that way:
+at a PO header. This is **intentional and correct** (confirmed 2026-08-10) — both queries join it
+that way and it must stay that way:
 
 ```sql
 left join portal."PurchaseOrderLine" pol
     on pol.id = pofu.purchase_order_id
 ```
 
-Joining it to anything else, or assuming `PurchaseOrderLine` is keyed by PO number, silently changes
-the grain. `po_no` is **not** unique in `PurchaseOrderLine` — a PO number spans many lines, and line
-identity is synthesised with `row_number() over(partition by p.po_no order by p.id)`.
+The trap is for anyone reading the column name and assuming otherwise. Joining it to anything else,
+or assuming `PurchaseOrderLine` is keyed by PO number, silently changes the grain. `po_no` is **not**
+unique in `PurchaseOrderLine` — a PO number spans many lines, and line identity is synthesised with
+`row_number() over(partition by p.po_no order by p.id)`.
 
 ## 2. Quantity flow — how a PO line disappears
 
@@ -102,9 +104,10 @@ scoring. Never substitute one for another to "fill a gap".
 | `_pod_date`, `_do_date`, `_do_exp` | proof of delivery, delivery order, D/O expiry |
 | `_po_need_by_date` (**NBD**) | the client's required date on the PO line |
 
-**Known quirk**: `_crd_actual` reads `coalesce(date_templates, custom_dates)` while `_crd_estimated`
-and `_crd` read `coalesce(custom_dates, date_templates)` — the two arrays are consulted in opposite
-order (lines 269–289). Looks unintentional; confirm before relying on `_crd_actual` in a new measure.
+**Deliberate asymmetry — do not "fix"**: `_crd_actual` reads `coalesce(date_templates, custom_dates)`
+while `_crd_estimated` and `_crd` read `coalesce(custom_dates, date_templates)` — the two arrays are
+consulted in opposite order (lines 269–289). Confirmed 2026-08-10 as intentional: left that way as a
+hook for further amendments and corrections. Leave it alone unless the change *is* that amendment.
 
 ### EDD — Expected Delivery Date
 

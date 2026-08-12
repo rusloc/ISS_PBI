@@ -58,9 +58,12 @@ family for another to fill a gap — that is what the `coalesce` chains already 
 
 ### Currency
 
-Charges are carried natively and converted: `_*_charges_aed`, `_*_charges_usd`,
-`_*_charges_local`, with `_currency_native` / `_iss_dom`. The COMS model also has an `__FX__` table.
-TODO: document rate source, rate date, and which measures convert.
+Charges are carried natively and converted in the SQL: `_*_charges_aed`, `_*_charges_usd`,
+`_*_charges_local`, with `_currency_native` / `_iss_dom`. TODO: document the rate source and rate
+date used by the query.
+
+Note: COMS's `__FX__` table is **not** about currency — it is a measures table of
+`FIRSTNONBLANK(...)` column wrappers (`FX` = fix). See `reports/coms.md`.
 
 ## Fiscal calendar
 

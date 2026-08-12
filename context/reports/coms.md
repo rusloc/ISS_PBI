@@ -52,6 +52,10 @@ lines carry only the balance, and disappear once shipments fully cover the order
 Same three-CTE waterfall (`pre_calc` → `calc` → `main`), then **aggregated up**: the final `select`
 does `group by _fo_id`, collapsing every PO on a freight order onto one line.
 
+**Confirmed grain (2026-08-10)**: one row per **currently active (main) freight order**. The other
+orders linked to the purchase order are aggregated into the *secondary order* columns on that same
+line. This is the intended design, not an accident of the query.
+
 How the collapse works — this is the part to be careful with:
 
 ```sql
@@ -59,19 +63,19 @@ How the collapse works — this is the part to be careful with:
 ,first_value(p.po_no) over (partition by f.id order by p.current_po_promised_dt) _primary_po
 ```
 
-- POs on a freight order are ranked by `current_po_promised_dt`; **`_sort = 1` is the primary PO**.
+- POs on a freight order are ranked by `current_po_promised_dt`; **`_sort = 1` is the primary
+  (active/main) PO**.
 - Nearly every attribute is taken as `max(...) filter (where _sort = 1)` — i.e. **the primary PO's
   value**, not an average or a sum across the freight order.
-- The remaining POs are string-aggregated into `_secondary_po`, so one line shows the primary PO and
-  lists the others.
+- The remaining linked POs are string-aggregated into `_secondary_po`, so one line shows the main
+  order and lists the secondary ones.
 - The query then `union all`s its own pending block (`remaining_quantity > 0`).
 
-> **Wording to confirm**: the EK view is described in the brief as "grouped by Purchase order". The
-> SQL groups by **freight order** (`_fo_id`, a sha256 of `freight_unit.id`) and picks a *primary PO*
-> per freight order. Same intent — one line per shipment rather than per PO line — but if a measure
-> is meant to be per-PO rather than per-freight-order, that distinction changes the number.
+`_fo_id` is a technical key (sha256 of `freight_unit.id`) and is not shown in the report.
 
-`_fo_id` is a technical key and is not shown in the report.
+**Consequence for measures**: a measure written here is per *freight order*, and any attribute it
+reads is the **primary PO's** value. Anything that must be per-PO or summed across all linked POs
+belongs in PO VIEW, not here.
 
 ## Model
 
@@ -82,7 +86,12 @@ How the collapse works — this is the part to be careful with:
 | `_PO_VIEW_` | PO VIEW fact |
 | `_EK_VIEW_` | EK VIEW fact |
 | `PO_VIEW_PARAM`, `EK_VIEW_PARAM` | field parameters driving the column pickers |
-| `__FX__` | FX rates / currency conversion — TODO: rate source, rate date, which measures convert |
+| `__FX__` | **measures table**, not FX rates — one `Placeholder` column and 7 measures |
+
+`__FX__` holds `FIRSTNONBLANK(...)` wrappers that let a column be used where a measure is required
+(field parameters, matrix values): `quantity`, `billing notes PO view (FX)`, `billing notes EK (FX)`,
+`PO line status PO view (FX)`, `_PO no PO view (FX)`, `_PO no EK view (FX)`,
+`_po outer qty PO VIEW (FX)`. The `(FX)` suffix means *fix/wrapper*, not foreign exchange.
 
 Charge columns are carried in three currencies: `_*_charges_aed`, `_*_charges_usd`,
 `_*_charges_local` (with `_currency_native` / `_iss_dom`).
@@ -148,4 +157,9 @@ reference feeds. TODO: confirm whether either populates `portal.sla_master_coms`
 - `__FX__`: rate source, rate date, which measures convert.
 - Is `EK check` a permanent QA page or a leftover?
 - Refresh schedule and workspace.
-- The `_crd_actual` array-order quirk noted in the domain doc.
+- `COMS COUNTRY SLA.sql` / `COMS SUPPLIER REACTION TIME SLA.sql` write `_report = 'COMS DUMMY'` —
+  intentional, or a leftover? Do they feed `portal.sla_master_coms`?
+
+Closed 2026-08-10: EK VIEW grain (confirmed as designed), the
+`purchase_order_on_freight_unit → PurchaseOrderLine.id` key (correct), and the `_crd_actual` array
+order (deliberate).
