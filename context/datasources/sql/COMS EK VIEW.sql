@@ -16,7 +16,7 @@
 
 -- 1. assign your code to a session variable
 set dev.ek_view = 
-$sql$ 
+--$sql$ 
 
 
 
@@ -444,21 +444,21 @@ $sql$
 				    						,(feic._ship_response ->> 'etd_date'::text)
 				    						)::date,0)
 				    end																												_days_delayed_etd
-				    ,coalesce(
-						(feic._ship_response ->> 'eta_wakeo_date'::text)::date
-						,(feic._ship_response ->> 'eta_date'::text)::date
-						,(feic._ship_response ->> 'pta_date'::text)::date)
-				    	- coalesce(
-						(feic._ship_response ->> 'etd_wakeo_date'::text)::date
-						,(feic._ship_response ->> 'etd_date'::text)::date
-						,(feic._ship_response ->> 'ptd_date'::text)::date)															_etd_2_eta
-				    	,(feic._ship_response ->> 'delivery_date'::text)::date
-				    	- coalesce(
-						(feic._ship_response ->> 'eta_wakeo_date'::text)::date
-						,(feic._ship_response ->> 'eta_date'::text)::date
-						,(feic._ship_response ->> 'pta_date'::text)::date)															_eta_2_del
-    					,p.current_po_promised_dt - (feic._ship_response ->> 'delivery_date'::text)::date									_nbd_2_del
-				    	,(feic._ship_response ->> 'delivery_date'::text)::date															_del
+--				    ,coalesce(
+--						(feic._ship_response ->> 'eta_wakeo_date'::text)::date
+--						,(feic._ship_response ->> 'eta_date'::text)::date
+--						,(feic._ship_response ->> 'pta_date'::text)::date)
+--				    	- coalesce(
+--						(feic._ship_response ->> 'etd_wakeo_date'::text)::date
+--						,(feic._ship_response ->> 'etd_date'::text)::date
+--						,(feic._ship_response ->> 'ptd_date'::text)::date)															_etd_2_eta
+--				    	,(feic._ship_response ->> 'delivery_date'::text)::date
+--				    	- coalesce(
+--						(feic._ship_response ->> 'eta_wakeo_date'::text)::date
+--						,(feic._ship_response ->> 'eta_date'::text)::date
+--						,(feic._ship_response ->> 'pta_date'::text)::date)															_eta_2_del
+    					,p.current_po_promised_dt - (feic._ship_response ->> 'delivery_date'::text)::date							_nbd_2_del
+				    	,(feic._ship_response ->> 'delivery_date'::text)::date														_del
 					,_aux_charge_type
 					,coalesce(case 
 						when p.req_app_dt is null or p.po_app_dt is null
@@ -644,7 +644,7 @@ $sql$
   					,costs._ship_focus_status																						_ship_focus_status
   		-- sort attr used to select primary POs and secondary POs and place them in one line
 					,row_number() over(partition by f.id order by p.current_po_promised_dt)											_sort
-					,first_value(p.po_no) over(partition by f.id order by p.current_po_promised_dt) 									_primary_po
+					,first_value(p.po_no) over(partition by f.id order by p.current_po_promised_dt) 								_primary_po
 				from portal."PurchaseOrderLine" p
 		-- many to many rel
 				inner join (
@@ -905,6 +905,16 @@ $sql$
 	select 
 		y.*
 		,case 
+			when coalesce(_departure_date_full, _full_etd) is not null
+				and coalesce(_arrival_date_full, _full_eta) is not null
+					then coalesce(_arrival_date_full, _full_eta) - coalesce(_departure_date_full, _full_etd)
+			else null end 																							_etd_2_eta
+	    ,case 
+			when coalesce(_arrival_date_full, _full_eta) is not null
+				then _del 
+						- coalesce(_arrival_date_full, _full_eta)
+			else null end																							_eta_2_del
+		,case 
 			when _del is null
 			or _crd_actual is null
 				then null
@@ -918,7 +928,7 @@ $sql$
                 + coalesce(_days_supplier_production_lt, 0)
                 + coalesce(_days_custom_clearance_lt, 0)
                 + coalesce(_days_iss_cont_booking_lt, 0))
-		end																										_actual_lead
+		end																											_actual_lead
 		,case 
 			when 
 				(_supplier_lead_time is null 
@@ -1039,14 +1049,14 @@ end																													_health_check
 		  		else 0
 			end																												_e2e_total_lead_time_perf
 		,case 
-			when y._full_etd is not null 
+			when coalesce(coalesce(_departure_date_actual,_departure_date), y._full_etd) is not null
 			and y._days_iss_cont_booking_lt > 0
-				then 
-					case 
-						when (y._full_etd - y._crd) <= 7
+				then
+					case
+						when (coalesce(coalesce(_departure_date_actual,_departure_date),y._full_etd) - y._crd) <= 7
 							then 1
-						else 1 - abs(y._full_etd - y._crd)::numeric / 7 
-					end 
+						else 1 - abs(coalesce(coalesce(_departure_date_actual,_departure_date),y._full_etd) - y._crd)::numeric / 7
+					end
 			else 0 end																										_iss_cont_booking_perf
 		,case 
 			when _po_app_date is null or _crd is null
@@ -1078,15 +1088,15 @@ end																													_health_check
 			else null 					
 		end																													_iss_custom_clear_perf
 	    ,case
-	    		when _del is null
-	    			then null 
-	    		else _full_eta - _po_need_by_date
+	    		when coalesce(_arrival_date_full,_full_eta) is null
+	    			then null
+	    		else coalesce(_arrival_date_full,_full_eta) - _po_need_by_date
 	    end																													_rdd_eta
 	    ,case 
 	-- if revised ETD <> null => REV ETD - CRD actual 
-	    		when _revised_etd is not null 
-	    			then _revised_etd - _crd
-			else _full_etd - _crd
+	    		when coalesce(_departure_date_full, _full_etd) is not null
+	    			then coalesce(_departure_date_full, _full_etd) - _crd
+			else null
 	    end																													_crd_2_etd
 	    ,case 
 	    		when _crd is not null
@@ -1139,8 +1149,8 @@ end																													_health_check
 		,case 
 			when z._status in ('Cancelled', 'Pending', 'Pending Quotation', 'Pending Quotation Approval', 'Pending Booking','Not Due')
     				then null
-	    		when z._full_eta is not null
-	    			then z._full_eta - z._po_need_by_date
+	    		when (coalesce(_arrival_date_full,_full_eta)) is not null
+	    			then (coalesce(_arrival_date_full,_full_eta)) - z._po_need_by_date
 	    		else null
 			end																																_nbd_2_eta
 		,case 
@@ -1165,18 +1175,18 @@ select
 	,max(_response_shipment_id) filter(where _sort = 1)									_response_shipment_id
 	,max(_inbound_iss_job_no) 	filter(where _sort = 1)									_inbound_iss_job_no
 	,max(_outbound_iss_job_no) 	filter(where _sort = 1)									_outbound_iss_job_no
-	,max(_branch_bu)																		_branch_bu
-	,max(_fe_id)																			_fe_id
+	,max(_branch_bu)																	_branch_bu
+	,max(_fe_id)																		_fe_id
 	,max(_pid)																			_pid
 	,null																				_po_qty_ordered
 	,0																					_remaining_quantity
 	,max(m._supplier_code) filter(where _sort = 1)										_supplier_code
 	,max(m._supplier_name) filter(where _sort = 1)										_supplier_name
-	,max(_po_no_EKPOREF) filter(where _sort = 1)											_po_no_ekporef
+	,max(_po_no_EKPOREF) filter(where _sort = 1)										_po_no_ekporef
 	,max(_po_uom) filter(where _sort = 1)												_po_uom
 	,null																				_item_code
 	,string_agg(distinct(_po_no_EKPOREF), ' | ') 
-		filter(where _sort <> 1 and _po_no_EKPOREF is distinct from _primary_po)			_secondary_po
+		filter(where _sort <> 1 and _po_no_EKPOREF is distinct from _primary_po)		_secondary_po
 	,string_agg(distinct(m._po_remarks), ' | ')											_po_remarks
 	,string_agg(distinct(m._commodity), ' | ')											_commodity
 	,max(_iss_ref)																		_iss_ref
@@ -1193,32 +1203,32 @@ select
 	,max(_container_no)																	_container_no
 	,max(_origin_port_pol)																_origin_port_pol
 	,max(_origin_port_name)																_origin_port_name
-	,max(_origin_country) filter(where _sort = 1)											_origin_country
+	,max(_origin_country) filter(where _sort = 1)										_origin_country
 	,max(_origin_country_code) filter(where _sort = 1)									_origin_country_code
-	,max(_origin_region_org_reg)															_origin_region_org_reg
+	,max(_origin_region_org_reg)														_origin_region_org_reg
 	,max(_destination_port_code_dest)													_destination_port_code_dest
 	,max(_destination_port_name_dest)													_destination_port_name_dest
-	,max(_destination_country_code_dest)													_destination_country_code_dest
+	,max(_destination_country_code_dest)												_destination_country_code_dest
 	,max(_destination_country_dest)														_destination_country_dest
 	,max(_destination_region_reg)														_destination_region_reg
-	,max(replace(_eqpt_type,'"',''))														_eqpt_type
-	,max(_20_ft)																			_20_ft
-	,max(_40_ft)																			_40_ft
-	,max(_count_of_cont)																	_count_of_cont
+	,max(replace(_eqpt_type,'"',''))													_eqpt_type
+	,max(_20_ft)																		_20_ft
+	,max(_40_ft)																		_40_ft
+	,max(_count_of_cont)																_count_of_cont
 	,max(_teus)																			_teus
 	,max(_carrier)																		_carrier
 	,max(_arrival_date)	filter(where _sort = 1)											_arrival_date
 	,max(_arrival_date_actual) filter(where _sort = 1)									_arrival_date_actual
-	,max(_arrival_date_full) filter(where _sort = 1)										_arrival_date_full
+	,max(_arrival_date_full) filter(where _sort = 1)									_arrival_date_full
 	,coalesce(
 		max(_arrival_date_actual) filter(where _sort = 1)
-		,max(_arrival_date)	filter(where _sort = 1))										_arrival_date_fallback	
+		,max(_arrival_date)	filter(where _sort = 1))									_arrival_date_fallback	
 	,max(_departure_date)	filter(where _sort = 1)										_departure_date
-	,max(_departure_date_actual) filter(where _sort = 1)									_departure_date_actual
+	,max(_departure_date_actual) filter(where _sort = 1)								_departure_date_actual
 	,max(_departure_date_full) filter(where _sort = 1)									_departure_date_full
 	,coalesce(
 		max(_departure_date_actual) filter(where _sort = 1)
-		,max(_departure_date)	filter(where _sort = 1))									_departure_date_fallback
+		,max(_departure_date)	filter(where _sort = 1))								_departure_date_fallback
 	,max(_pr_appr_date)	filter(where _sort = 1)											_pr_appr_date
 	,max(_po_app_date)	filter(where _sort = 1)											_po_app_date
 	,max(_po_creation_date)	filter(where _sort = 1)										_po_creation_date
@@ -1226,20 +1236,20 @@ select
 -- should be the closest NeedbyDate
 	,max(_po_need_by_date) filter(where _sort = 1)										_po_need_by_date
 	,max(_crd) filter(where _sort = 1)													_crd
-	,max(_crd_estimated)	filter(where _sort = 1)											_est_cargo_ready_date
+	,max(_crd_estimated)	filter(where _sort = 1)										_est_cargo_ready_date
 	,max(_goods_cleared_origin)															_goods_cleared_origin
-	,max(_goods_cleared_destination)														_goods_cleared_destination
+	,max(_goods_cleared_destination)													_goods_cleared_destination
 	,max(_pickup_date)																	_pickup_date
 	,max(_cargo_ho)																		_cargo_ho
 	,max(_etd_iss) filter(where _sort = 1)												_etd_iss
 	,max(_etd) filter(where _sort = 1)													_etd
 	,max(_revised_etd) filter(where _sort = 1)											_revised_etd
-	,max(_etd_wakeo)	filter(where _sort = 1)												_etd_wakeo
+	,max(_etd_wakeo)	filter(where _sort = 1)											_etd_wakeo
 	,max(_full_etd)	filter(where _sort = 1)												_full_etd
 	,max(_eta_iss) filter(where _sort = 1)												_eta_iss
 	,max(_eta)	filter(where _sort = 1)													_eta
 	,max(_revised_eta) filter(where _sort = 1)											_revised_eta
-	,max(_eta_wakeo)	filter(where _sort = 1)												_eta_wakeo
+	,max(_eta_wakeo)	filter(where _sort = 1)											_eta_wakeo
 	,max(_full_eta)	filter(where _sort = 1)												_full_eta
 	,max(_pta)	filter(where _sort = 1)													_pta
 	,max(_ptd)	filter(where _sort = 1)													_ptd
@@ -1247,15 +1257,15 @@ select
 	,max(_do_date)																		_do_date
 	,max(_do_exp)																		_do_exp
 	,max(_del)																			_del
-	,max(_pr_number)																		_pr_number
+	,max(_pr_number)																	_pr_number
 	,max(_pr_date)																		_pr_date	
 	,max(_req_status)																	_req_status
 	,max(_spo_number)																	_spo_number
-	,max(_po_status)																		_po_status
+	,max(_po_status)																	_po_status
 -- copied from [_p2p_value_aed] 
-	,max(_org_charges_aed + _frt_charges_aed + _dest_charges_aed)							_spo_invoice_val_aed
+	,max(_org_charges_aed + _frt_charges_aed + _dest_charges_aed)						_spo_invoice_val_aed
 	,max(_invoice_no) filter(where _sort = 1)											_invoice_no
-	,max(_invoice_issue_date) filter(where _sort = 1)										_invoice_issue_date
+	,max(_invoice_issue_date) filter(where _sort = 1)									_invoice_issue_date
 	,max(_billing_status)																_billing_status
 	,max(_grn_no)																		_grn_no
 	,max(_grn_status)																	_grn_status
@@ -1266,22 +1276,22 @@ select
 	,max(_days_delayed_eta)																_days_delayed_eta
 	,max(_days_delayed_etd)																_days_delayed_etd
 	,max(_rdd_eta)	filter(where _sort = 1)												_rdd_eta
-	,max(_nbd_2_crd)	filter(where _sort = 1)												_nbd_2_crd
+	,max(_nbd_2_crd)	filter(where _sort = 1)											_nbd_2_crd
 	,max(_po_2_crd)	filter(where _sort = 1)												_po_2_crd
-	,max(_port_of_discharge) filter(where _sort = 1)										_port_of_discharge
-	,max(_port_of_discharge_name) filter(where _sort = 1)									_port_of_discharge_name
-	,max(_crd_2_etd)	 filter(where _sort = 1)												_crd_2_etd
-	,max(_etd_2_eta)	 filter(where _sort = 1)												_etd_2_eta
-	,max(_eta_2_del)	 filter(where _sort = 1)												_eta_2_del
-	,max(_nbd_2_eta)	 filter(where _sort = 1)												_nbd_2_eta
-	,max(_ptd_discrepancy_days) filter(where _sort = 1)											_ptd_discrepancy_days
-	,max(_pta_discrepancy_days) filter(where _sort = 1)											_pta_discrepancy_days
-	,max(_nbd_2_del)	 filter(where _sort = 1)												_nbd_2_del
+	,max(_port_of_discharge) filter(where _sort = 1)									_port_of_discharge
+	,max(_port_of_discharge_name) filter(where _sort = 1)								_port_of_discharge_name
+	,max(_crd_2_etd)	 filter(where _sort = 1)										_crd_2_etd
+	,max(_etd_2_eta)	 filter(where _sort = 1)										_etd_2_eta
+	,max(_eta_2_del)	 filter(where _sort = 1)										_eta_2_del
+	,max(_nbd_2_eta)	 filter(where _sort = 1)										_nbd_2_eta
+	,max(_ptd_discrepancy_days) filter(where _sort = 1)									_ptd_discrepancy_days
+	,max(_pta_discrepancy_days) filter(where _sort = 1)									_pta_discrepancy_days
+	,max(_nbd_2_del)	 filter(where _sort = 1)										_nbd_2_del
 	,max(_crd_2_etd)	 filter(where _sort = 1)
 		+ max(_etd_2_eta)	 filter(where _sort = 1)
 		+ max(_eta_2_del)	 filter(where _sort = 1)
 		+ max(_nbd_2_eta)	 filter(where _sort = 1)
-		+ max(_nbd_2_del)	 filter(where _sort = 1)										_avg_lt
+		+ max(_nbd_2_del)	 filter(where _sort = 1)									_avg_lt
 	,max(_customs_invoice_aed) filter(where _sort = 1)									_customs_invoice_aed
 	,max(_customs_invoice_usd) filter(where _sort = 1)									_customs_invoice_usd
 	,max(_customs_declared_currency) filter(where _sort = 1) 							_customs_declared_currency
