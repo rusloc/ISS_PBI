@@ -6,3 +6,6 @@
 # Everything else under .pbi/ is JSON and IS tracked.
 **/.pbi/cache.abf
 **/cache.abf
+
+# Pre-edit copies written under Rule #1 (see CLAUDE.md) — local safety net, not history.
+__backup__/

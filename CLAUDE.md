@@ -3,6 +3,31 @@
 > For AI assistants working on the ISS-GF Power BI report stack.
 > Pointers, communication rules, conventions. Keep it lean.
 
+## 🛑 Rule #1 — Safety: no edits without consent
+
+> **This rule outranks every other instruction in this file.** When anything below appears to
+> license an edit, this rule decides. Read it before touching the disk.
+
+- **No edit without a clear, explicit command.** Consent is per-task and does not carry over: "yes,
+  do it" on one file is not permission for the next one, and a question — "why is this broken?",
+  "what does this measure do?", "can you check X?" — is a request to *look*, never to *change*.
+  If the instruction could be read as either, it is not consent. Ask.
+- **Default action is to suggest, not apply.** Show the proposed diff and stop. Reading, searching,
+  diffing, and running `validate.py` are always free — they cost nothing and break nothing.
+  Anything that writes to disk is not free and waits for a go-ahead.
+- **Copy before editing.** Once an edit is approved, snapshot every file it touches *before* the
+  first write, to `<CODE>/__backup__/` mirroring the file's path under the report project, suffixed
+  `.<yyyy-MM-dd-HHmm>.bak`:
+  `__COMS/__backup__/Coms report.SemanticModel/definition/tables/__FX__.tmdl.2026-08-12-1430.bak`
+  A restore should be one `copy` away, not a git archaeology session.
+- **Match the target's bytes.** A rewrite must reproduce the existing encoding, BOM state and line
+  endings exactly. **TMDL and PBIR are UTF-8 *without* BOM, CRLF** — Desktop refuses to open a
+  project when a single file deviates.
+- **Why this is Rule #1**: on 2026-08-12 an in-place rewrite of `__FX__.tmdl` prepended a 3-byte
+  UTF-8 BOM. The edit's logic was correct in every other respect, no pre-edit copy existed, and
+  `validate.py` reported green — it reads with `utf-8-sig` and strips the BOM before checking.
+  The whole COMS report stopped opening. Three bytes, no backup, no warning.
+
 ## Project identity
 
 - **Project**: Power BI report stack for **ISS-GF** — one client, one workspace, one repo.
@@ -26,7 +51,7 @@
   <Name>.Report/          → PBIR report definition
   <Name>.SemanticModel/   → TMDL model definition
   <Name>.pbip
-  __backup__/             → *.pbix exports (backup only, gitignored)
+  __backup__/             → *.pbix exports + pre-edit copies (backup only, gitignored)
 context/
   business-logic.md       → KPI definitions, calculation rules, fiscal calendar, naming
   reports/                → one file per report project (avs.md, coms.md, …)
@@ -79,6 +104,7 @@ These two are the only skills in this workspace; don't reference others.
 *.pbix
 **/.pbi/cache.abf
 **/cache.abf
+__backup__/
 ```
 
 ### Editing rules
@@ -117,6 +143,9 @@ git push
 - **A session that crosses midnight logs each entry to its own date, and does not close the new day.** Closing a day that is 20 minutes old leaves the calendar day with a closed daily and no plan.
 
 ## Core coding rules
+
+> [Rule #1 — Safety](#-rule-1--safety-no-edits-without-consent) outranks all five. None of these
+> authorise an edit; they only shape one that has already been approved.
 
 1. **Think before editing** — state assumptions, surface tradeoffs, ask when genuinely unclear (which report, which visual, model-scope vs visual-scope fix). Don't pick silently between real alternatives.
 2. **Business truth from `context/`** — a measure is wrong if it contradicts `business-logic.md`, even if the DAX is elegant. Schema questions resolve in `datasources/sql/`, not by guessing.
