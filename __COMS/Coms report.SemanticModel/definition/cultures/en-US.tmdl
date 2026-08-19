@@ -2167,42 +2167,6 @@ cultureInfo en-US
 			      ],
 			      "SemanticType": "Time"
 			    },
-			    "ek_view.revised_etd": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "_EK_VIEW_",
-			          "ConceptualProperty": "_revised_etd"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "revised etd": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "_revised_etd": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "date": {
-			            "State": "Generated",
-			            "Weight": 0.7
-			          }
-			        },
-			        {
-			          "etd": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        }
-			      ],
-			      "SemanticType": "Time"
-			    },
 			    "ek_view.entity__eta": {
 			      "Definition": {
 			        "Binding": {
@@ -3944,42 +3908,6 @@ cultureInfo en-US
 			          }
 			        }
 			      ]
-			    },
-			    "ek_view.revised_eta": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "_EK_VIEW_",
-			          "ConceptualProperty": "_revised_eta"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "revised eta": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "_revised_eta": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "date": {
-			            "State": "Generated",
-			            "Weight": 0.7
-			          }
-			        },
-			        {
-			          "eta": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        }
-			      ],
-			      "SemanticType": "Time"
 			    },
 			    "ek_view.row_type": {
 			      "Definition": {
@@ -10723,6 +10651,16 @@ cultureInfo en-US
 			            },
 			            "Weight": 0.5
 			          }
+			        },
+			        {
+			          "Carrier": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ]
 			    },
@@ -11403,42 +11341,6 @@ cultureInfo en-US
 			      ],
 			      "SemanticType": "Time"
 			    },
-			    "po_view.revised_eta": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "_PO_VIEW_",
-			          "ConceptualProperty": "_revised_eta"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "revised eta": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "_revised_eta": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "date": {
-			            "State": "Generated",
-			            "Weight": 0.7
-			          }
-			        },
-			        {
-			          "eta": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        }
-			      ],
-			      "SemanticType": "Time"
-			    },
 			    "po_view.eta_wakeo": {
 			      "Definition": {
 			        "Binding": {
@@ -11553,42 +11455,6 @@ cultureInfo en-US
 			          "date": {
 			            "State": "Generated",
 			            "Weight": 0.7
-			          }
-			        }
-			      ],
-			      "SemanticType": "Time"
-			    },
-			    "po_view.revised_etd": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "_PO_VIEW_",
-			          "ConceptualProperty": "_revised_etd"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "revised etd": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "_revised_etd": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "date": {
-			            "State": "Generated",
-			            "Weight": 0.7
-			          }
-			        },
-			        {
-			          "etd": {
-			            "State": "Generated",
-			            "Weight": 0.97
 			          }
 			        }
 			      ],
@@ -19548,99 +19414,6 @@ cultureInfo en-US
 			      ],
 			      "SemanticType": "Time"
 			    },
-			    "po_view.sla_map": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "_PO_VIEW_",
-			          "ConceptualProperty": "_sla_map"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "sla map": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "_sla_map": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "sla atlas": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.5
-			          }
-			        },
-			        {
-			          "sla chart": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.485
-			          }
-			        },
-			        {
-			          "sla plot": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.485
-			          }
-			        },
-			        {
-			          "sla plan": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.485
-			          }
-			        },
-			        {
-			          "sla record": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.485
-			          }
-			        },
-			        {
-			          "sla drawing": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.485
-			          }
-			        },
-			        {
-			          "sla diagram": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.485
-			          }
-			        }
-			      ]
-			    },
 			    "ek_view.etd_iss": {
 			      "Definition": {
 			        "Binding": {
@@ -20779,6 +20552,27 @@ cultureInfo en-US
 			        }
 			      },
 			      "State": "Generated"
+			    },
+			    "table_po_view_.column_transport_mode": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_PO_VIEW_",
+			          "ConceptualProperty": "_transport_mode"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Transport Mode": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    }
 			  },
 			  "Relationships": {

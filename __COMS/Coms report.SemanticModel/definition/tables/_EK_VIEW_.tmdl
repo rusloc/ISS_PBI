@@ -439,19 +439,6 @@ table _EK_VIEW_
 
 		annotation PBI_FormatHint = {"isCustom":true}
 
-	column _revised_etd
-		dataType: dateTime
-		formatString: dd-mmm-yyyy
-		lineageTag: b7202ba0-9f4b-4aa1-9f06-1f7ba3301ff3
-		summarizeBy: none
-		sourceColumn: _revised_etd
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation UnderlyingDateTimeDataType = Date
-
-		annotation PBI_FormatHint = {"isCustom":true}
-
 	column _eta
 		dataType: dateTime
 		formatString: dd-mmm-yyyy
@@ -612,19 +599,6 @@ table _EK_VIEW_
 		sourceColumn: _client_id
 
 		annotation SummarizationSetBy = Automatic
-
-	column _revised_eta
-		dataType: dateTime
-		formatString: dd-mmm-yyyy
-		lineageTag: 2eb9f1c1-df4e-487e-be3d-af0babb53ff6
-		summarizeBy: none
-		sourceColumn: _revised_eta
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation UnderlyingDateTimeDataType = Date
-
-		annotation PBI_FormatHint = {"isCustom":true}
 
 	column _row_type
 		dataType: string
@@ -1615,6 +1589,22 @@ table _EK_VIEW_
 
 		annotation SummarizationSetBy = Automatic
 
+	column _etd_source
+		dataType: string
+		lineageTag: 26f6d620-6ee0-4ad0-8ea2-fa24442d58fe
+		summarizeBy: none
+		sourceColumn: _etd_source
+
+		annotation SummarizationSetBy = Automatic
+
+	column _eta_source
+		dataType: string
+		lineageTag: 34c32035-8b34-40af-9709-ebc31d400970
+		summarizeBy: none
+		sourceColumn: _eta_source
+
+		annotation SummarizationSetBy = Automatic
+
 	partition _EK_VIEW_ = m
 		mode: import
 		queryGroup: TABLES
@@ -1626,8 +1616,7 @@ table _EK_VIEW_
 				        
 				    colTypes = Table.TransformColumnTypes(Source,{
 				                                        {"_pickup_date", type date}, {"_cargo_ho", type date}
-				                                        , {"_etd", type date}, {"_revised_etd", type date}
-				                                        , {"_eta", type date}, {"_revised_eta", type date}
+				                                        , {"_etd", type date}, {"_eta", type date}
 				                                        , {"_do_exp", type date}, {"_del", type date}
 				                                        , {"_crd", type date}, {"_po_need_by_date", type date}
 				                                        , {"_po_recd_date", type date}, {"_po_creation_date", type date}
@@ -1643,5 +1632,5 @@ table _EK_VIEW_
 
 	annotation PBI_NavigationStepName = Navigation
 
-	annotation PBI_ResultType = Table
+	annotation PBI_ResultType = Exception
 

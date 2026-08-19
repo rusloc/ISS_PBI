@@ -149,6 +149,36 @@
               "queryRef": "_PO_VIEW_._status",
               "nativeQueryRef": "Status",
               "displayName": "Status"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_PO_VIEW_"
+                    }
+                  },
+                  "Property": "_transport_mode"
+                }
+              },
+              "queryRef": "_PO_VIEW_._transport_mode",
+              "nativeQueryRef": "Transport Mode",
+              "displayName": "Transport Mode"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_PO_VIEW_"
+                    }
+                  },
+                  "Property": "_carrier"
+                }
+              },
+              "queryRef": "_PO_VIEW_._carrier",
+              "nativeQueryRef": "Carrier",
+              "displayName": "Carrier"
             }
           ],
           "fieldParameters": [
@@ -164,8 +194,8 @@
                 }
               },
               "index": 8,
-              "length": 1,
-              "sortDirection": "Descending"
+              "length": 3,
+              "sortDirection": "Ascending"
             }
           ]
         }
@@ -183,7 +213,7 @@
                 "Property": "_status"
               }
             },
-            "direction": "Descending"
+            "direction": "Ascending"
           }
         ]
       }

@@ -1,0 +1,30 @@
+No. of Days Supplier Production Lead Time (sql col: _days_supplier_production_lt) 	-
+
+No. of Days ISS Cont. Booking LT (sql col: _days_iss_cont_booking_lt) 	-
+
+No. of Days Transit LT (sql col: _days_transit_lt) 			- 
+
+Supplier Comm. Prod. Readiness Perf % (sql col: _supplier_committed_prod_rdy_perf) 	-
+
+ISS Cont. Booking Perf % (sql col: _iss_cont_booking_perf) 		- 
+
+ISS Transit Lead Time Perf % (sql col: _iss_transit_lead_time_perf) 	-
+
+ISS Customs Clearance Perf % (sql col: _iss_custom_clear_perf)		- 
+
+DEP Discrepancy (Days) (sql col: _dep_discrepancy_days)			- SKIPPED (dont exist in EK)
+
+ARR Discrepancy (Days) (sql col: _arr_discrepancy_days) 		- SKIPPED (dont exist in EK)
+
+-------------------------------------------------------
+
+RDD TO ARR (sql col: _rdd_eta)			- ok
+
+CRD TO DEP (sql col: _crd_2_etd)		- ok
+	
+DEP TO ARR (sql col: _etd_2_eta)		- ok
+
+ARR TO DEL (sql col: _eta_2_del)		- ok
+
+NBD TO ARR (sql column: _nbd_2_eta)		- ok
+

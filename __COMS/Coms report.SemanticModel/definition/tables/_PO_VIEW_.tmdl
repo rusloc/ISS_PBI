@@ -457,19 +457,6 @@ table _PO_VIEW_
 
 		annotation UnderlyingDateTimeDataType = Date
 
-	column _revised_eta
-		dataType: dateTime
-		formatString: dd-mmm-yyyy
-		lineageTag: 1d49048b-e110-4e57-8ae4-445e7bbabc1f
-		summarizeBy: none
-		sourceColumn: _revised_eta
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isCustom":true}
-
-		annotation UnderlyingDateTimeDataType = Date
-
 	column _eta_wakeo
 		dataType: dateTime
 		formatString: dd-mmm-yyyy
@@ -502,19 +489,6 @@ table _PO_VIEW_
 		lineageTag: eb1a1253-d9c8-4c72-99f6-6e7dc0bf9f66
 		summarizeBy: none
 		sourceColumn: _etd
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isCustom":true}
-
-		annotation UnderlyingDateTimeDataType = Date
-
-	column _revised_etd
-		dataType: dateTime
-		formatString: dd-mmm-yyyy
-		lineageTag: 021000ba-5b62-46ff-b46e-d28e4579998a
-		summarizeBy: none
-		sourceColumn: _revised_etd
 
 		annotation SummarizationSetBy = Automatic
 
@@ -1589,14 +1563,6 @@ table _PO_VIEW_
 
 		annotation SummarizationSetBy = Automatic
 
-	column _sla_map
-		dataType: string
-		lineageTag: b8570c97-4e71-406b-84ff-03bd2ce7425c
-		summarizeBy: none
-		sourceColumn: _sla_map
-
-		annotation SummarizationSetBy = Automatic
-
 	column _eta_iss
 		dataType: dateTime
 		formatString: dd-mmm-yyyy
@@ -1767,6 +1733,22 @@ table _PO_VIEW_
 
 		annotation SummarizationSetBy = Automatic
 
+	column _eta_source
+		dataType: string
+		lineageTag: 86323dbc-228a-45c7-8f9f-d80f5219fcb2
+		summarizeBy: none
+		sourceColumn: _eta_source
+
+		annotation SummarizationSetBy = Automatic
+
+	column _etd_source
+		dataType: string
+		lineageTag: db7d96ce-ef6e-4764-9719-766f5cc05cab
+		summarizeBy: none
+		sourceColumn: _etd_source
+
+		annotation SummarizationSetBy = Automatic
+
 	partition _PO_VIEW_ = m
 		mode: import
 		queryGroup: TABLES
@@ -1781,14 +1763,16 @@ table _PO_VIEW_
 				                                                , {"_po_need_by_date", type date}, {"_arrival_date", type date}, {"_del", type date}, {"_departure_date", type date}
 				                                                , {"_departure_date_actual", type date}, {"_crd_actual", type date}, {"_crd_estimated", type date}, {"_crd", type date}
 				                                                , {"_goods_cleared_origin", type date}, {"_goods_cleared_destination", type date}, {"_pickup_date", type date}
-				                                                , {"_cargo_ho", type date}, {"_eta", type date}, {"_revised_eta", type date}, {"_eta_wakeo", type date}
-				                                                , {"_full_eta", type date}, {"_etd", type date}, {"_revised_etd", type date}, {"_etd_wakeo", type date}
-				                                                , {"_full_etd", type date}, {"_pod_date", type date}, {"_do_date", type date}, {"_do_exp", type date}, {"_pr_date", type date}})
+				                                                , {"_cargo_ho", type date}, {"_eta", type date}, {"_eta_wakeo", type date}
+				                                                , {"_full_eta", type date}, {"_etd", type date}, {"_etd_wakeo", type date}
+				                                                , {"_full_etd", type date}, {"_pod_date", type date}, {"_do_date", type date}, {"_do_exp", type date}, {"_pr_date", type date}}),
+				
+				    dropCols = Table.RemoveColumns(colType, {"_sla_map"})
 				in
-				    colType
+				    dropCols
 				```
 
 	annotation PBI_NavigationStepName = Navigation
 
-	annotation PBI_ResultType = Exception
+	annotation PBI_ResultType = Table
 
