@@ -1,0 +1,77 @@
+Service,Charge,Category,Status
+air_outbound,PICK-UP CHARGES,Origin Charge,Active
+air_outbound,DOCUMENTATION CHARGE,Origin Charge,Active
+air_outbound,DESTINATION HANDLING,Destination Charge,Active
+air_outbound,DESTINATION HAULAGE CHARGES,Destination Charge,Active
+air_outbound,CLEARANCE CHARGES (DEST.),Destination Charge,Active
+air_outbound,DOCUMENTATION FEE - DEST,Destination Charge,Active
+air_inbound,HANDLING CHARGES,Destination Charge,Active
+air_inbound,DOCUMENTATION CHARGE,Destination Charge,Active
+air_inbound,TRANSPORT CHARGES,Destination Charge,Active
+air_inbound,HANDLING CHARGES,Origin Charge,Active
+air_inbound,CUSTOMS CLEARANCE CHARGES,Origin Charge,Active
+air_inbound,DOCUMENTATION CHARGE,Origin Charge,Active
+air_inbound,PICK-UP CHARGES,Origin Charge,Active
+sea_outbound,FOB CHARGES,Origin Charge,Active
+sea_outbound,OCEAN FREIGHT,Freight Charge,Active
+sea_outbound,DESTINATION CHARGES,Destination Charge,Active
+sea_inbound,OCEAN FREIGHT,Freight Charge,Active
+sea_inbound,DESTINATION CHARGES,Destination Charge,Active
+air_inbound,DCAA CHARGE,Ancillary Charge,Active
+air_inbound,SANITARY FEE,Ancillary Charge,Active
+air_inbound,FDA PERMIT,Ancillary Charge,Active
+air_inbound,HEALTH CERT,Ancillary Charge,Active
+air_inbound,MPI CHARGE,Ancillary Charge,Active
+air_inbound,QUARANTINE CHARGE,Ancillary Charge,Active
+air_inbound,XRAY FEE,Ancillary Charge,Active
+air_inbound,LABOUR CHARGE,Ancillary Charge,Active
+air_inbound,STORAGE CHARGE,Ancillary Charge,Active
+air_inbound,CUSTOMS DUTY,Ancillary Charge,Active
+air_inbound,IMPORT VAT CHARGES,Ancillary Charge,Active
+air_inbound,DELIVERY ORDER FEE,Ancillary Charge,Active
+air_inbound,NATIONAL MEDIA COUNCIL,Ancillary Charge,Active
+air_inbound,DUBAI MUNICIPALITY FEE,Ancillary Charge,Active
+air_inbound,MOFA FEES,Ancillary Charge,Active
+air_inbound,MOFA SERVICE CHARGES,Ancillary Charge,Active
+air_inbound,Air Freight Charges,Ancillary Charge,Active
+air_inbound,INSPECTION CHARGES,Ancillary Charge,Active
+air_cross_trade,DCAA CHARGE,Ancillary Charge,Active
+air_cross_trade,SANITARY FEE,Ancillary Charge,Active
+air_cross_trade,FDA PERMIT,Ancillary Charge,Active
+air_cross_trade,HEALTH CERT,Ancillary Charge,Active
+air_cross_trade,MPI CHARGE,Ancillary Charge,Active
+air_cross_trade,QUARANTINE CHARGE,Ancillary Charge,Active
+air_cross_trade,XRAY FEE,Ancillary Charge,Active
+air_cross_trade,LABOUR CHARGE,Ancillary Charge,Active
+air_cross_trade,STORAGE CHARGE,Ancillary Charge,Active
+air_cross_trade,CUSTOMS DUTY,Ancillary Charge,Active
+air_cross_trade,IMPORT VAT CHARGES,Ancillary Charge,Active
+air_cross_trade,DELIVERY ORDER FEE,Ancillary Charge,Active
+air_cross_trade,NATIONAL MEDIA COUNCIL,Ancillary Charge,Active
+air_cross_trade,DUBAI MUNICIPALITY FEE,Ancillary Charge,Active
+air_cross_trade,MOFA FEES,Ancillary Charge,Active
+air_cross_trade,MOFA SERVICE CHARGES,Ancillary Charge,Active
+air_cross_trade,Air Freight Charges,Ancillary Charge,Active
+air_cross_trade,INSPECTION CHARGES,Ancillary Charge,Active
+sea_inbound,LABOUR CHARGE,Ancillary Charge,Active
+sea_inbound,STORAGE CHARGE,Ancillary Charge,Active
+sea_inbound,CUSTOMS DUTY,Ancillary Charge,Active
+sea_inbound,IMPORT VAT CHARGES,Ancillary Charge,Active
+sea_inbound,DELIVERY ORDER FEE,Ancillary Charge,Active
+sea_inbound,NATIONAL MEDIA COUNCIL,Ancillary Charge,Active
+sea_inbound,DUBAI MUNICIPALITY FEE,Ancillary Charge,Active
+sea_inbound,LINE DEMURRAGE CHARGES,Ancillary Charge,Active
+sea_inbound,MOFA FEES,Ancillary Charge,Active
+sea_inbound,MOFA SERVICE CHARGES,Ancillary Charge,Active
+sea_inbound,INSPECTION CHARGES,Ancillary Charge,Active
+sea_cross_trade,LABOUR CHARGE,Ancillary Charge,Active
+sea_cross_trade,STORAGE CHARGE,Ancillary Charge,Active
+sea_cross_trade,CUSTOMS DUTY,Ancillary Charge,Active
+sea_cross_trade,IMPORT VAT CHARGES,Ancillary Charge,Active
+sea_cross_trade,DELIVERY ORDER FEE,Ancillary Charge,Active
+sea_cross_trade,NATIONAL MEDIA COUNCIL,Ancillary Charge,Active
+sea_cross_trade,DUBAI MUNICIPALITY FEE,Ancillary Charge,Active
+sea_cross_trade,LINE DEMURRAGE CHARGES,Ancillary Charge,Active
+sea_cross_trade,MOFA FEES,Ancillary Charge,Active
+sea_cross_trade,MOFA SERVICE CHARGES,Ancillary Charge,Active
+sea_cross_trade,INSPECTION CHARGES,Ancillary Charge,Active

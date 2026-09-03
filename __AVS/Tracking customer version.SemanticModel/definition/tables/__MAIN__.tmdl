@@ -2200,6 +2200,100 @@ table __MAIN__
 
 		annotation SummarizationSetBy = Automatic
 
+	column port_of_discharge2
+		dataType: string
+		lineageTag: 00277776-7f50-404c-9da3-340949a415cd
+		summarizeBy: none
+		sourceColumn: port_of_discharge2
+
+		annotation SummarizationSetBy = Automatic
+
+	column port_of_discharge_name2
+		dataType: string
+		lineageTag: 59bad893-2819-458a-a6c7-6c8b3d0cefc6
+		summarizeBy: none
+		sourceColumn: port_of_discharge_name2
+
+		annotation SummarizationSetBy = Automatic
+
+	column _shipment_serial_iss_job
+		dataType: string
+		lineageTag: c7b4b09b-9ea5-42ac-9c3b-04a864f85613
+		summarizeBy: none
+		sourceColumn: _shipment_serial_iss_job
+
+		annotation SummarizationSetBy = Automatic
+
+	column _pta
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: af306495-6f5f-4956-b8b1-adcb910de137
+		summarizeBy: none
+		sourceColumn: _pta
+
+		annotation SummarizationSetBy = Automatic
+
+	column _ptd
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a2c8872c-8f7c-4831-9ec0-3795763a035b
+		summarizeBy: none
+		sourceColumn: _ptd
+
+		annotation SummarizationSetBy = Automatic
+
+	column _eta_iss
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a3672796-665a-4441-a4d1-3a9e3fd3a894
+		summarizeBy: none
+		sourceColumn: _eta_iss
+
+		annotation SummarizationSetBy = Automatic
+
+	column _eta_source
+		dataType: string
+		lineageTag: 19e84dff-9159-435f-8484-3aec770a0f13
+		summarizeBy: none
+		sourceColumn: _eta_source
+
+		annotation SummarizationSetBy = Automatic
+
+	column _etd_iss
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f5cf1ca2-10bc-45bd-afed-7262f5984f13
+		summarizeBy: none
+		sourceColumn: _etd_iss
+
+		annotation SummarizationSetBy = Automatic
+
+	column _etd_source
+		dataType: string
+		lineageTag: 943cc04e-85d6-4c0b-88f1-c6d708123188
+		summarizeBy: none
+		sourceColumn: _etd_source
+
+		annotation SummarizationSetBy = Automatic
+
+	column _arrival_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 0aed214a-035a-4eba-853e-3f7100caa7ce
+		summarizeBy: none
+		sourceColumn: _arrival_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column _departure_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 267f66d9-a43f-4e7c-a789-7c629f1d3820
+		summarizeBy: none
+		sourceColumn: _departure_date
+
+		annotation SummarizationSetBy = Automatic
+
 	partition __MAIN__ = m
 		mode: import
 		queryGroup: MAIN

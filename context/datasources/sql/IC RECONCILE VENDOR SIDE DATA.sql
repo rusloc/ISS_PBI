@@ -145,7 +145,7 @@ left join (
 										,case 
 											when fa."ID" is not null then 'https://' || fa.iss_domain || '.logistaas.com/attachments/' || fa."ID"
 											else null
-										end 																									_url
+										end 																											_url
 										,'http://iss-track-trace.uaenorth.azurecontainer.io:50052/invoice/' || 'icn' || i."ID"							_url_vault
 									from public.focus__issued_credit_notes i
 									left join (

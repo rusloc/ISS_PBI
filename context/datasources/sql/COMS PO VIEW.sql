@@ -169,10 +169,11 @@ from (
 					,(pol.po_app_dt + interval '2 days')::date 																		_po_recd_date 
 					,pol.current_po_promised_dt																						_po_need_by_date
 		-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> FO LINES
-					,coalesce(feic._ship_response ->> 'service',fe.service)															_mode
-					,upper(split_part(coalesce(feic._ship_response ->> 'service',fe.service),'_',1))								_transport_mode
-					,upper(split_part(coalesce(feic._ship_response ->> 'service',fe.service),'_',2))								_direction
-					,fe.routed_by																									_routed_by
+					,feic._ship_response ->> 'service'																				_mode
+					,initcap(split_part((feic._ship_response ->> 'service'),'_',1))													_transport_mode
+					,feic._ship_response ->> 'shipment_type'																		_ship_type
+					,initcap(split_part((feic._ship_response ->> 'service'),'_',2))													_direction
+					,initcap(fe.routed_by)																							_routed_by
 					,fe.shipment_remarks																							_ship_remarks_updates
   					,fe.billing_notes																								_ship_billing_remarks	
 					,case 
@@ -185,55 +186,91 @@ from (
 					,fe.remote_shipment_response ->> 'serial_no'																	_outbound_iss_job_no
 					,feic._ship_response ->>  'house_no'::text																		_hbl_hawb
 					,feic._ship_response ->>  'master_no'::text																		_mbl_mawb
-					,(select string_agg(el ->> 'equipment_no', ' | ')
-						from jsonb_array_elements( feic._ship_response -> 'equipment_details') el)									_container_no
+					,case 
+						when initcap(split_part((feic._ship_response ->> 'service'),'_',1)) = 'Air'
+							then null
+						when feic._ship_response ->> 'shipment_type' = 'LCL'
+							then null
+						else (select string_agg(el ->> 'equipment_no', ' | ')
+							from jsonb_array_elements( feic._ship_response -> 'equipment_details') el) end							_container_no
 					,(feic._ship_response ->> 'gross_volume')::numeric																_cbm
 					,(feic._ship_response ->> 'gross_weight')::numeric																_gw
 					,(feic._ship_response ->> 'chargeable_weight')::numeric															_chw
 					,(feic._ship_response ->> 'package_count')::numeric																_qnty
-					,replace(
-						replace(
-							replace( (feic._ship_response ->> 'equipment'),'[','')
-							,']','')
-						,', ',' + ')																								_eqpt_type
-					,(select string_agg(distinct i ->> 'package_type', ', ')
+					,case 
+						when initcap(split_part((feic._ship_response ->> 'service'),'_',1)) = 'Air'
+							then 'Air'
+						when feic._ship_response ->> 'shipment_type' = 'LCL'
+							then 'LCL'
+					else 
+							replace(
+								replace(
+									replace( (feic._ship_response ->> 'equipment'),'[','')
+									,']','')
+								,', ',' + ') end																					_eqpt_type
+							,(select string_agg(distinct i ->> 'package_type', ', ')
   						from jsonb_array_elements(feic._ship_response -> 'cargo') i)												_pack_type
 					,pkl.name 																										_pack_type_name
 				-- count all 20ft cointainers Stnd dry, Dry bulk etc
-					,(select
-					      sum(substring(item from '^\d+')::int)
-					    from
-					      jsonb_array_elements_text((feic._ship_response ->> 'equipment')::jsonb) as item
-					    where item like '% x 20 ft%')																				_20_ft	
+					,case 
+						when initcap(split_part((feic._ship_response ->> 'service'),'_',1)) = 'Air'
+							then null
+						when feic._ship_response ->> 'shipment_type' = 'LCL'
+							then null
+						else 
+							(select
+						      sum(substring(item from '^\d+')::int)
+						    from
+						      jsonb_array_elements_text((feic._ship_response ->> 'equipment')::jsonb) as item
+						    where item like '% x 20 ft%') end																		_20_ft	
 				-- count all 40ft cointainers Stnd dry, Dry bulk etc
-					,(select
-					      sum(substring(item from '^\d+')::int)
-					    from
-					      jsonb_array_elements_text((feic._ship_response ->> 'equipment')::jsonb) as item
-					    where item like '% x 40 ft%')																				_40_ft
+					,case 
+						when initcap(split_part((feic._ship_response ->> 'service'),'_',1)) = 'Air'
+							then null
+						when feic._ship_response ->> 'shipment_type' = 'LCL'
+							then null
+						else 
+							(select
+						      sum(substring(item from '^\d+')::int)
+						    from
+						      jsonb_array_elements_text((feic._ship_response ->> 'equipment')::jsonb) as item
+						    where item like '% x 40 ft%') end																		_40_ft
 				-- sum 20ft + 40ft
-					,(select
-					      coalesce(sum(substring(item from '^\d+')::int),0)
-					    from
-					      jsonb_array_elements_text((feic._ship_response ->> 'equipment')::jsonb) as item
-					    where item like '% x 20 ft%')
-					    + (select
+					,case 
+						when initcap(split_part((feic._ship_response ->> 'service'),'_',1)) = 'Air'
+							then null
+						when feic._ship_response ->> 'shipment_type' = 'LCL'
+							then null
+						else 
+							(select
 						      coalesce(sum(substring(item from '^\d+')::int),0)
 						    from
 						      jsonb_array_elements_text((feic._ship_response ->> 'equipment')::jsonb) as item
-						    where item like '% x 40 ft%')																			_count_of_cont
+						    where item like '% x 20 ft%')
+						    + (select
+							      coalesce(sum(substring(item from '^\d+')::int),0)
+							    from
+							      jsonb_array_elements_text((feic._ship_response ->> 'equipment')::jsonb) as item
+							    where item like '% x 40 ft%') end																	_count_of_cont
 				-- TEUs = 40ft x2 + 20ft x1 (multiplication)
-					,(select
-					      coalesce(sum(substring(item from '^\d+')::int),0)
-					    from
-					      jsonb_array_elements_text((feic._ship_response ->> 'equipment')::jsonb) as item
-					    where item like '% x 20 ft%') * 1
-					+ (select
-					      coalesce(sum(substring(item from '^\d+')::int),0)
-					    from
-					      jsonb_array_elements_text((feic._ship_response ->> 'equipment')::jsonb) as item
-					    where item like '% x 40 ft%')* 2																			_teus
+					,case 
+						when initcap(split_part((feic._ship_response ->> 'service'),'_',1)) = 'Air'
+							then null
+						when feic._ship_response ->> 'shipment_type' = 'LCL'
+							then null
+						else 
+							(select
+						      coalesce(sum(substring(item from '^\d+')::int),0)
+						    from
+						      jsonb_array_elements_text((feic._ship_response ->> 'equipment')::jsonb) as item
+						    where item like '% x 20 ft%') * 1
+						+ (select
+						      coalesce(sum(substring(item from '^\d+')::int),0)
+						    from
+						      jsonb_array_elements_text((feic._ship_response ->> 'equipment')::jsonb) as item
+						    where item like '% x 40 ft%')* 2 end																	_teus
 					,car._name																										_carrier
+					,feic._ship_response ->> 'carrier'																				_carrier_code
 					,(feic._ship_response ->> 'arrival_date'::text)::date															_arrival_date
 					,(select min(item ->> 'date')
 						from jsonb_array_elements(feic._ship_response::jsonb -> 'status_updates') item
@@ -284,10 +321,34 @@ from (
             								,feic._ship_response::jsonb -> 'custom_dates')) el
 				      where el ->> 'name' = 'Goods Cleared at Destination Customs')::date											_goods_cleared_destination
 				   	,(feic._ship_response ->> 'pickup_date'::text)::date															_pickup_date
-					,(feic._ship_response ->> 'pickup_date'::text)::date															_cargo_ho
+					,case 
+						when (feic._ship_response ->> 'etd_preference') = 'etd_tracking'
+						and upper(split_part(coalesce(feic._ship_response ->> 'service',fe.service),'_',1)) = 'AIR'
+							then (jsonb_path_query_first(
+							          fe.shipment_response
+							         ,'$.wakeo_updates[*].locations[*].milestones[*]
+							               ? (@.type like_regex "\\(RCS\\)")'
+							      ) ->> 'actual_time')::date 
+						when (feic._ship_response ->> 'etd_preference') = 'etd_tracking'
+						and upper(split_part(coalesce(feic._ship_response ->> 'service',fe.service),'_',1)) = 'SEA'
+							then (jsonb_path_query_first(
+							          fe.shipment_response
+							         ,'$.wakeo_updates[*].locations[*].milestones[*]
+							               ? (@.type like_regex "gate\\s*in.*departure" flag "i")'
+							      ) ->> 'actual_time')::date
+						when (feic._ship_response ->> 'etd_preference') = 'etd_tracking'
+						and upper(split_part(coalesce(feic._ship_response ->> 'service',fe.service),'_',1)) <> 'SEA'
+						and upper(split_part(coalesce(feic._ship_response ->> 'service',fe.service),'_',1)) <> 'AIR'
+							then (feic._ship_response ->> 'pickup_date'::text)::date
+						else null
+					end																												_cargo_ho
 		-- eta date group
 					,(feic._ship_response ->> 'eta_date'::text)::date																_eta_iss
 					,case 
+						when (feic._ship_response ->> 'eta_preference') = 'eta_tracking'
+						and (feic._ship_response ->> 'eta_wakeo_date'::text)::date is null
+						and (feic._ship_response ->> 'eta_date'::text)::date is not null
+							then 'Manual'
 						when (feic._ship_response ->> 'eta_preference') = 'eta_tracking'
 						and (feic._ship_response ->> 'eta_date'::text)::date is not null
 							then 'Tracking'
@@ -296,16 +357,23 @@ from (
 							then 'Manual'
 						else null end 																								_eta_source
 					,coalesce(
-						(feic._ship_response ->> 'pta_date'::text)::date
+						coalesce(
+							(feic._ship_response ->> 'pta_date__manual_'::text)::date
+							,(feic._ship_response ->> 'pta_date'::text)::date)
 						,(feic._ship_response ->> 'eta_date'::text)::date)															_eta
 					,(feic._ship_response ->> 'eta_wakeo_date'::text)::date															_eta_wakeo
 					,coalesce(
-						(feic._ship_response ->> 'eta_wakeo_date'::text)::date
-						,(feic._ship_response ->> 'eta_date'::text)::date
-						,(feic._ship_response ->> 'pta_date'::text)::date)															_full_eta
+						(feic._ship_response ->> 'eta_date'::text)::date
+						,coalesce(
+						(feic._ship_response ->> 'pta_date__manual_'::text)::date
+						,(feic._ship_response ->> 'pta_date'::text)::date)::date)													_full_eta
 		-- etd date group
 					,(feic._ship_response ->> 'etd_date'::text)::date																_etd_iss
 					,case 
+						when (feic._ship_response ->> 'etd_preference') = 'etd_tracking'
+						and (feic._ship_response ->> 'etd_wakeo_date'::text)::date is null
+						and (feic._ship_response ->> 'etd_date'::text)::date is not null
+							then 'Manual'
 						when (feic._ship_response ->> 'etd_preference') = 'etd_tracking'
 						and (feic._ship_response ->> 'etd_date'::text)::date is not null
 							then 'Tracking'
@@ -314,15 +382,22 @@ from (
 							then 'Manual'
 						else null end 																								_etd_source
 					,coalesce(
-						(feic._ship_response ->> 'ptd_date'::text)::date
+						coalesce(
+							(feic._ship_response ->> 'ptd_date__manual_'::text)::date
+							,(feic._ship_response ->> 'ptd_date'::text)::date)
 						,(feic._ship_response ->> 'etd_date'::text)::date)															_etd
 					,(feic._ship_response ->> 'etd_wakeo_date'::text)::date															_etd_wakeo
 					,coalesce(
-						(feic._ship_response ->> 'etd_wakeo_date'::text)::date
-						,(feic._ship_response ->> 'etd_date'::text)::date
-						,(feic._ship_response ->> 'ptd_date'::text)::date)															_full_etd
-					,(feic._ship_response ->> 'pta_date'::text)::date																_pta
-					,(feic._ship_response ->> 'ptd_date'::text)::date																_ptd
+						(feic._ship_response ->> 'etd_date'::text)::date
+						,coalesce(
+							(feic._ship_response ->> 'ptd_date__manual_'::text)::date
+							,(feic._ship_response ->> 'ptd_date'::text)::date)::date)												_full_etd
+					,coalesce(
+						(feic._ship_response ->> 'pta_date__manual_'::text)::date
+						,(feic._ship_response ->> 'pta_date'::text)::date)															_pta
+					,coalesce(
+						(feic._ship_response ->> 'ptd_date__manual_'::text)::date
+						,(feic._ship_response ->> 'ptd_date'::text)::date)															_ptd
 /*
 		EDD dates:
 				1. PO line level
@@ -333,22 +408,29 @@ from (
 					> _current_edd_fo (moved to _calc block)
 */
 -- PO LEVEL EDD DATES
-					,min(coalesce(
-						(feic._ship_response ->> 'pta_date'::text)::date
-						,(feic._ship_response ->> 'eta_date'::text)::date	))
+					,min(
+						coalesce(
+						-- _pta
+							coalesce(
+								(feic._ship_response ->> 'pta_date__manual_'::text)::date
+								,(feic._ship_response ->> 'pta_date'::text)::date)
+							,(feic._ship_response ->> 'eta_date'::text)::date	))
 						over(partition by pol.po_no) + interval '3 days'																_first_edd_po
-					,max(coalesce(
+					,max(
+						coalesce(
 			-- ATA must be less then today
 						(case 
 							when (feic._ship_response ->> 'arrival_date'::text)::date < now()::date
 								then (feic._ship_response ->> 'arrival_date'::text)::date
 							else null end)
-						,(feic._ship_response ->> 'eta_wakeo_date'::text)::date
 						,(feic._ship_response ->> 'eta_date'::text)::date	))
 						over(partition by pol.po_no) + interval '3 days'																_current_edd_po
 -- FO LEVEL EDD DATES
-					,min(coalesce(
-						(feic._ship_response ->> 'pta_date'::text)::date
+					,min(
+						coalesce(
+							coalesce(
+							(feic._ship_response ->> 'pta_date__manual_'::text)::date
+							,(feic._ship_response ->> 'pta_date'::text)::date)
 						,(feic._ship_response ->> 'eta_date'::text)::date	))
 						over(partition by fu.id) + interval '3 days'																	_first_edd_fo
 -- other dates
@@ -391,21 +473,20 @@ from (
 				    		when (feic._ship_response ->> 'delivery_date'::text)::date is null
 				    			then null 
 				    		else coalesce(
-				    				(feic._ship_response ->> 'eta_wakeo_date'::text)::date 
+				    				(feic._ship_response ->> 'eta_date'::text)::date
 				    				- coalesce(
-				    						(feic._ship_response ->> 'pta_date'::text)
-				    						,(feic._ship_response ->> 'eta_date'::text)
-				    						)::date, 0)
+			    						coalesce(
+											(feic._ship_response ->> 'pta_date__manual_'::text)::date
+											,(feic._ship_response ->> 'pta_date'::text)::date))::date, 0)
 				    end																												_days_delayed_eta
 				    ,case
 				    		when (feic._ship_response ->> 'delivery_date'::text)::date is null
 				    			then null 
 				    		else coalesce(
-				    				(feic._ship_response ->> 'etd_wakeo_date'::text)::date 
+				    				(feic._ship_response ->> 'etd_date'::text)::date 
 				    				- coalesce(
-				    						(feic._ship_response ->> 'ptd_date'::text)
-				    						,(feic._ship_response ->> 'etd_date'::text)
-				    						)::date,0)
+										(feic._ship_response ->> 'ptd_date__manual_'::text)::date
+										,(feic._ship_response ->> 'ptd_date'::text)::date)::date,0)
 				    end																												_days_delayed_etd
     				,pol.current_po_promised_dt - (feic._ship_response ->> 'delivery_date'::text)::date								_nbd_2_del
 					,case 
@@ -474,7 +555,7 @@ from (
 								when fe.service = 'land_inbound'::text 
 									then 'Jebel Ali'::character varying
 								else 'TBA'::character varying end) 																	_origin_country
-					,coalesce(fe.origin_country, feic._ship_response ->> 'origin_country','NA')										_origin_country_code
+					,coalesce(feic._ship_response ->> 'origin_country','NA')														_origin_country_code
 					,upper(case
 						when split_part(coalesce(feic._ship_response ->> 'service',fe.service),'_',1) in ('sea','air') and feic._ship_response ->> 'serial_no' is null
 							then (
@@ -633,7 +714,7 @@ from (
 				    ,costs._issue_date																								_invoice_issue_date
 				    ,costs._addl_issued_invoices::text																				_addl_issued_invoices
 				    ,costs._addl_issue_date::text																					_addl_invoice_issue_date
-				    	,cv._amount_aed																								_customs_invoice_aed
+				    ,cv._amount_aed																									_customs_invoice_aed
 					,cv._amount_usd																									_customs_invoice_usd
 					,cv._currency_native																							_customs_declared_currency
 				    ,case 
@@ -686,17 +767,19 @@ from (
 									(feic._ship_response ->> 'loading_date'::text)::date	
 					-- full_etd
 								,coalesce(
-									(feic._ship_response ->> 'etd_wakeo_date'::text)::date
-									,(feic._ship_response ->> 'etd_date'::text)::date
-									,(feic._ship_response ->> 'ptd_date'::text)::date)) is not null  
+									(feic._ship_response ->> 'etd_date'::text)::date
+									,coalesce(
+										(feic._ship_response ->> 'ptd_date__manual_'::text)::date
+										,(feic._ship_response ->> 'ptd_date'::text)::date)::date)) is not null  
 				-- full_etd - _crd
 						then coalesce(
 									(feic._ship_response ->> 'loading_date'::text)::date	
 					-- full_etd
 								,coalesce(
-									(feic._ship_response ->> 'etd_wakeo_date'::text)::date
-									,(feic._ship_response ->> 'etd_date'::text)::date
-									,(feic._ship_response ->> 'ptd_date'::text)::date))
+									(feic._ship_response ->> 'etd_date'::text)::date
+									,coalesce(
+										(feic._ship_response ->> 'ptd_date__manual_'::text)::date
+										,(feic._ship_response ->> 'ptd_date'::text)::date)::date))
 								 - coalesce(
 										(select el ->> 'value'
 										      from jsonb_array_elements(coalesce(feic._ship_response::jsonb -> 'date_templates'
@@ -711,20 +794,23 @@ from (
 						when 
 							coalesce(
 								(feic._ship_response ->> 'arrival_date'::text)::date
-										,(feic._ship_response ->> 'eta_wakeo_date'::text)::date
 										,(feic._ship_response ->> 'eta_date'::text)::date
-										,(feic._ship_response ->> 'pta_date'::text)::date) is not null
+										,coalesce(
+										(feic._ship_response ->> 'pta_date__manual_'::text)::date
+										,(feic._ship_response ->> 'pta_date'::text)::date)::date) is not null
 							then 
 								coalesce(
 									(feic._ship_response ->> 'arrival_date'::text)::date
-										,(feic._ship_response ->> 'eta_wakeo_date'::text)::date
 										,(feic._ship_response ->> 'eta_date'::text)::date
-										,(feic._ship_response ->> 'pta_date'::text)::date)
+										,coalesce(
+											(feic._ship_response ->> 'pta_date__manual_'::text)::date
+											,(feic._ship_response ->> 'pta_date'::text)::date)::date)
 													- coalesce(
 														(feic._ship_response ->> 'loading_date'::text)::date
-														,(feic._ship_response ->> 'etd_wakeo_date'::text)::date
 														,(feic._ship_response ->> 'etd_date'::text)::date
-														,(feic._ship_response ->> 'ptd_date'::text)::date)
+														,coalesce(
+															(feic._ship_response ->> 'ptd_date__manual_'::text)::date
+															,(feic._ship_response ->> 'ptd_date'::text)::date)::date)
 						else null
 					end																												_days_transit_lt
 					,case
@@ -734,7 +820,7 @@ from (
 					end																												_e2e_total_lt
 		-- additional fields
 					,slt.avg_lead_time																								_supplier_lead_time
-					,slt.category																									_slt_category
+					,initcap(slt.category)																							_slt_category
   					,ctt.average_transit_time																						_country_lead_time
 		-- PERF
 					,case 
@@ -1468,6 +1554,8 @@ from (
 					then _eta_iss - _pta
 				else null end 																													_arr_discrepancy_days
 		from _main m
+where 1=1
+--	and 
 		union all
 	-- ############################################################### PO pending block ###############################################################
 				select 
@@ -1567,6 +1655,7 @@ from (
 					-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> FO LINES
 								,null::text 																						_mode
 								,null::text																						_transport_mode
+								,null::text 																					_shipment_type
 								,null::text 																					_direction
 								,null::text 																						_routed_by
 								,null::text 																						_ship_remarks_updates
@@ -1591,6 +1680,7 @@ from (
 								,null::int																						_count_of_cont
 								,null::int																						_teus
 								,null::text																						_carrier
+								,null::text 																					_carrier_code
 								,null::date																						_arrival_date
 								,null::date 																					_arrival_date_actual
 								,null::date 																					_arrival_date_full
@@ -1773,18 +1863,21 @@ from (
 							where 1=1
 --								and pol.id in (6420, 6421)
 								) rem 
-				where 1=1
---					and rem._qnty_shipped_remaning > 0 
 	) m 
 where 1=1
 --	and _po_no_ekporef = 'DXBSI26006050'
---	and _fo_serial= 'EKTR0023'
+--	and _fo_serial= 'EMA000298'
+--	and _shipment_serial_iss_job = 'DXBSI26013386'
 --	and _shipment_serial_iss_job in ('DXBSI26013404-4', 'DXBSI26012839', 'DXBAI26010593', 'DXBSI26012679', 'DXBSI25032886', 'DXBSI26012878', 'DXBAI26014600', 'DXBAI26016898', 'DXBAI26007216')
 --	and _mbl_mawb = 'DXBAI26014069'
 --	and _transport_mode = 'AIR'
+--	and (_carrier is null and _carrier_code is not null)
 	
 
 $sql$;
+
+
+
 
 
 

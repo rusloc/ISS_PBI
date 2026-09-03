@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "c71efa53614500c8d34b",
   "position": {
-    "x": 243.47196444018437,
-    "y": 148.17776432169165,
+    "x": 257.97616751187064,
+    "y": 152.29309342327471,
     "z": 1000,
-    "height": 545.59383066186547,
-    "width": 1012.8727574009752,
+    "height": 544.75602564585131,
+    "width": 998.03415264551256,
     "tabOrder": 9000
   },
   "visual": {
@@ -61,21 +61,6 @@
             },
             {
               "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "__MAIN__"
-                    }
-                  },
-                  "Property": "_direction"
-                }
-              },
-              "queryRef": "__MAIN__._direction",
-              "nativeQueryRef": "Direction",
-              "displayName": "Direction"
-            },
-            {
-              "field": {
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
@@ -103,28 +88,11 @@
                 }
               },
               "index": 3,
-              "length": 1,
+              "length": 0,
               "sortDirection": "Descending"
             }
           ]
         }
-      },
-      "sortDefinition": {
-        "sort": [
-          {
-            "field": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "__MAIN__"
-                  }
-                },
-                "Property": "_direction"
-              }
-            },
-            "direction": "Descending"
-          }
-        ]
       }
     },
     "objects": {
@@ -435,12 +403,6 @@
           },
           "selector": {
             "metadata": "__MAIN__._client"
-          }
-        },
-        {
-          "properties": {},
-          "selector": {
-            "metadata": "__MAIN__._service_type_short"
           }
         },
         {
@@ -1029,12 +991,6 @@
           },
           "selector": {
             "metadata": "__MAIN__._FIN STATUS (COL)"
-          }
-        },
-        {
-          "properties": {},
-          "selector": {
-            "metadata": "__MAIN__._direction"
           }
         },
         {
@@ -1812,6 +1768,20 @@
       "title": [
         {
           "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'MATRIX (shipment)'"
+                }
+              }
+            },
+            "heading": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Normal'"
+                }
+              }
+            },
             "titleWrap": {
               "expr": {
                 "Literal": {
@@ -1819,10 +1789,47 @@
                 }
               }
             },
-            "text": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "background": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#F46900'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "'MATRIX (shipment)'"
+                  "Value": "10D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'''Segoe UI'', wf_segoe-ui_normal, helvetica, arial, sans-serif'"
                 }
               }
             }
@@ -1852,6 +1859,32 @@
       "border": [
         {
           "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.2
+                    }
+                  }
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            },
             "width": {
               "expr": {
                 "Literal": {
@@ -1869,6 +1902,63 @@
               "expr": {
                 "Literal": {
                   "Value": "'None'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "divider": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "width": {
+              "expr": {
+                "Literal": {
+                  "Value": "7D"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#F46900'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "spacing": [
+        {
+          "properties": {
+            "verticalSpacing": {
+              "expr": {
+                "Literal": {
+                  "Value": "2D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualHeader": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }

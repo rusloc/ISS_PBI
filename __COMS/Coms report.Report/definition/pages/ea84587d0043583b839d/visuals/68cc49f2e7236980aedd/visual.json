@@ -342,27 +342,6 @@
                                 "Value": "'No Attribution Selected'"
                               }
                             }
-                          ],
-                          [
-                            {
-                              "Literal": {
-                                "Value": "'''_PO_VIEW_''[_status]'"
-                              }
-                            }
-                          ],
-                          [
-                            {
-                              "Literal": {
-                                "Value": "'''_PO_VIEW_''[_transport_mode]'"
-                              }
-                            }
-                          ],
-                          [
-                            {
-                              "Literal": {
-                                "Value": "'''_PO_VIEW_''[_carrier]'"
-                              }
-                            }
                           ]
                         ]
                       }

@@ -3,7 +3,7 @@
 
 -- MAIN (Tracker customer version: EMBEDDING PROD)
 set dev.tracker_prod_main = 
-$sql$ 
+--$sql$ 
 
 
 
@@ -49,7 +49,7 @@ $sql$
 	,t.origin_port_locode																								_origin_port
 	,coalesce(t.origin_port_name, o."name", t.origin_port)																_origin_port_name
 	,t.destination_port_locode																							_destination_port
-	,coalesce(t.destination_port_name, d."name")																			_destination_port_name 
+	,coalesce(t.destination_port_name, d."name")																		_destination_port_name 
 	,coalesce(oc._name, t.origin_country )																				_origin_country_name
 	,coalesce(dc._name, t.destination_country )																			_destination_country_name
 	,coalesce(upper(c."Name"), 'NA') 	
@@ -59,36 +59,36 @@ $sql$
 	,t.co2_emission_details ->> 'co2e_gptkm'																			_co2e_gptkm
 	,t.co2_emission_details ->> 'co2e'																					_co2e
 	,coalesce(sd._change_date, 'Initialized')																			_change_date
-	,coalesce(calculated_eta, eta_date)::date																					_eta_auto_date
-	,coalesce(etd_wakeo_date, etd_date)::date																					_etd_auto_date
+	,coalesce(calculated_eta, eta_date)::date																			_eta_auto_date
+	,coalesce(etd_wakeo_date, etd_date)::date																			_etd_auto_date
 	,max(coalesce(t.calculated_arrival::date, t.arrival_date::date))	 
 		over(partition by t.serial_no, t.creation_date::date, t.contact_id)												_arrival_date_auto
-	,t.empty_container_returned_date																						_empty_cont_returned
+	,t.empty_container_returned_date																					_empty_cont_returned
 	,t.gate_out_date::date																								_gate_out
 	,s._LOB																												_LOB
-	,coalesce(s._carrier, a."Carrier Name",'NA')																			_analytical_carrier 
-	,s._coloader																											_analytical_coloader												
+	,coalesce(s._carrier, a."Carrier Name",'NA')																		_analytical_carrier 
+	,s._coloader																										_analytical_coloader												
 	,b._booking_no																										_booking_no
 	,s._offer_serial																									_offer_serial
 	,s._fin_status																										_fin_status
 	,case when t.loading_date is null then 'Initialized'
 		else null
 	end 																												_initialized
-	,tl._public_tracking_link																						_public_tracking_link
-	,min(tl._public_tracking_link) over(partition by 	t.serial_no)														_public_tracking_link_shipment
+	,tl._public_tracking_link																							_public_tracking_link
+	,min(tl._public_tracking_link) over(partition by 	t.serial_no)													_public_tracking_link_shipment
 	,1::int																												_all		
 	,hbl._web_url																										_web_url_hbl
 	,mbl._web_url																										_web_url_mbl		
 	,string_agg(t.container_equipment_no, ' | ') 
-		over(partition by t.serial_no, t.creation_date::date, t.contact_id)											_containers_agg_ship_level
+		over(partition by t.serial_no, t.creation_date::date, t.contact_id)												_containers_agg_ship_level
 	,string_agg(t.container_type, ' | ') 
-		over(partition by t.serial_no, t.creation_date::date, t.contact_id)											_containers_type_agg_ship_level	
+		over(partition by t.serial_no, t.creation_date::date, t.contact_id)												_containers_type_agg_ship_level	
 	,coalesce(string_agg(t.vessel, ' | ') 
 		over(partition by t.serial_no, t.creation_date::date, t.contact_id),'NA')										_vessel_agg_ship_level	
 	,_fields																											_wakeo_error_fields
-	,_reasons																										_wakeo_error_reasons	
+	,_reasons																											_wakeo_error_reasons	
 	,t.port_of_discharge																								_port_of_discharge
-	,coalesce(t.port_of_discharge_name, ps.name, pa.name )															_port_of_discharge_name	
+	,coalesce(t.port_of_discharge_name, ps.name, pa.name )																_port_of_discharge_name	
 	,case 
 		when t.extra_local_handling = '0' then 'No'																						
 		when t.extra_local_handling = '1' then 'Yes'
@@ -96,6 +96,7 @@ $sql$
 	end 																												_extra_local_handling
 	,t.port_of_discharge
 	,t.port_of_discharge_name
+--	,fe.*
 from portal.materialized_view_shipments_tracker t
 left join public.focus__contacts c 
 	on c."ID" = t.contact_id 
@@ -300,6 +301,65 @@ left join (
 			) mbl 
 	on mbl._id = t."id"
 	and mbl._iss_dom = t.iss_domain
+--left join (
+--				select 
+--		-- dedup rows: 'pofu' table is has many rows per order line > need one shipment == one line
+--					distinct on (feic._ship_response ->> 'serial_no')
+--					feic._ship_response ->> 'serial_no'																				_shipment_serial_iss_job
+--					,coalesce(
+--						(feic._ship_response ->> 'pta_date__manual_'::text)::date
+--						,(feic._ship_response ->> 'pta_date'::text)::date)															_pta
+--					,coalesce(
+--						(feic._ship_response ->> 'ptd_date__manual_'::text)::date
+--						,(feic._ship_response ->> 'ptd_date'::text)::date)															_ptd
+--					,(feic._ship_response ->> 'eta_date'::text)::date																_eta_iss
+--					,case 
+--						when (feic._ship_response ->> 'eta_preference') = 'eta_tracking'
+--						and (feic._ship_response ->> 'eta_date'::text)::date is not null
+--							then 'Tracking'
+--						when (feic._ship_response ->> 'eta_preference') = 'eta_standard'
+--						and (feic._ship_response ->> 'eta_date'::text)::date is not null
+--							then 'Manual'
+--						else null end 																								_eta_source
+--					,(feic._ship_response ->> 'etd_date'::text)::date																_etd_iss
+--					,case 
+--						when (feic._ship_response ->> 'etd_preference') = 'etd_tracking'
+--						and (feic._ship_response ->> 'etd_date'::text)::date is not null
+--							then 'Tracking'
+--						when (feic._ship_response ->> 'etd_preference') = 'etd_standard'
+--						and (feic._ship_response ->> 'etd_date'::text)::date is not null
+--							then 'Manual'
+--						else null end 																								_etd_source
+--					,(feic._ship_response ->> 'arrival_date'::text)::date															_arrival_date
+--					,(feic._ship_response ->> 'loading_date'::text)::date															_departure_date
+--				from portal.purchase_order_on_freight_unit pofu
+--				inner join portal.purchase_order_company poc 
+--					on poc.id = pofu.purchase_order_company_id 
+--				left join portal.freight_unit fu 
+--					on fu.id = pofu.freight_unit_id 
+--		-- join on condition: shipment_response || remote_shipment_response (if ISS DOM = ordering comp ISS DOM)
+--				left join lateral (
+--									select 
+--										*
+--										,fem.shipment_response 						_ship_response
+--									from portal.freight_unit_enrich fem
+--									where 1=1
+--										and fem.unit_no = fu.unit_no 
+--										and fem.iss_domain = poc.iss_domain 
+--									union all
+--									select 
+--										*
+--										,fer.remote_shipment_response				_ship_response
+--									from portal.freight_unit_enrich fer
+--									where 1=1
+--										and fer.unit_no = fu.unit_no 
+--										and fer.remote_iss_domain = poc.iss_domain
+--					) feic
+--					on true
+--				where 1=1
+--				order by feic._ship_response ->> 'serial_no'
+--			) fe 
+--	on fe._shipment_serial_iss_job = t.serial_no
 where 1=1
 	and t.creation_date >= '2025-05-01'
 	and (t.serial_no is not null and t.serial_no <> '')
@@ -307,9 +367,6 @@ where 1=1
     and coalesce(t.line_of_business,s._LOB) <> ''
 	and coalesce(t.line_of_business,s._LOB) is not null
 	and split_part(upper(coalesce(t.line_of_business, s._LOB)),' ',1) <> 'CONTRACT'
-	
-	
-	
 	
 	
 	
@@ -324,8 +381,8 @@ $sql$
 -- update var and code
 update sql_source 
 set _code = current_setting('dev.tracker_prod_main') 
-	,_updated = now() 
-where 1=1	
+	,_updated = now() 	
+where 1=1		
 	and _report = 'TRACKER CLIENT PRODUCTION'
 	and _page = 'MAIN'
 	

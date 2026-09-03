@@ -1,0 +1,151 @@
+{
+  "id": 2260946,
+  "cargo": [
+    {
+      "hs_code": "",
+      "net_weight": 543,
+      "gross_volume": 23.12,
+      "gross_weight": 543.66,
+      "package_type": "PK",
+      "package_count": 30,
+      "commodity_type": "",
+      "cargo_allocations": null,
+      "chargeable_weight": 23.12,
+      "short_description": "BABY WEARS"
+    },
+    {
+      "hs_code": "",
+      "net_weight": 342,
+      "gross_volume": 55.67,
+      "gross_weight": 342.45,
+      "package_type": "PK",
+      "package_count": 50,
+      "commodity_type": "",
+      "cargo_allocations": null,
+      "chargeable_weight": 55.67,
+      "short_description": "vegetable"
+    }
+  ],
+  "carrier": "HLCU",
+  "contact": "EMIRATES AIRLINE",
+  "service": "sea_inbound",
+  "shipper": "House Shipper",
+  "eta_date": "2025-12-09",
+  "etd_date": "2025-11-21",
+  "house_no": "HBL78464533",
+  "pta_date": null,
+  "ptd_date": null,
+  "consignee": "House Consignee",
+  "equipment": [
+    "1 x 40 ft Standard Dry",
+    "1 x 20 ft Dry Bulk",
+    "1 x 20 ft Standard Dry"
+  ],
+  "master_no": "MBL3456723",
+  "serial_no": "SHPDXBSI25000180",
+  "contact_id": 126078,
+  "origin_port": "CNSHA",
+  "pickup_date": "2025-11-19",
+  "arrival_date": null,
+  "custom_dates": [
+    {
+      "name": "Cargo Ready Date Actual",
+      "value": "2025-11-17"
+    }
+  ],
+  "gross_volume": 78.79,
+  "gross_weight": 886.11,
+  "house_spo_no": "",
+  "loading_date": null,
+  "receipt_date": "2025-11-19",
+  "bill_of_entry": "",
+  "creation_date": "2025-11-22",
+  "delivery_date": "2025-12-18",
+  "house_remarks": "",
+  "master_spo_no": "786354426281",
+  "package_count": 80,
+  "shipment_type": "LCL",
+  "wakeo_updates": [],
+  "contact_branch": "EMIRATES AIRLINE - DEPARTMENT - INFLIGHT SERVICES – 63014",
+  "declared_value": null,
+  "eta_wakeo_date": null,
+  "etd_wakeo_date": null,
+  "master_remarks": "",
+  "origin_country": "CN",
+  "shipping_terms": "FCA",
+  "status_updates": [
+    {
+      "date": "2025-12-09",
+      "time": "04:00:52",
+      "source": "other",
+      "status": "Milestone Estimated Time of Arrival has been achieved",
+      "comments": null,
+      "location": null
+    },
+    {
+      "date": "2025-11-22",
+      "time": "15:29:08",
+      "source": "other",
+      "status": "Milestone Shipment Picked-up has been achieved",
+      "comments": null,
+      "location": null
+    }
+  ],
+  "destination_port": "AEJEA",
+  "financial_status": "uninvoiced",
+  "house_booking_no": "",
+  "line_of_business": "Aerospace and Aviation",
+  "chargeable_weight": 78.79,
+  "equipment_details": [
+    {
+      "volume": 12.45,
+      "weight": 345.56,
+      "packages": 10,
+      "equipment_no": "CNTX89746352",
+      "container_type": "40 ft Standard Dry",
+      "wakeo_gross_volume": null,
+      "wakeo_gross_weight": null,
+      "container_type_code": "42G0"
+    },
+    {
+      "volume": 20.78,
+      "weight": 122.34,
+      "packages": 10,
+      "equipment_no": "CETU4522311",
+      "container_type": "20 ft Dry Bulk",
+      "wakeo_gross_volume": null,
+      "wakeo_gross_weight": null,
+      "container_type_code": "22B0"
+    },
+    {
+      "volume": 13.45,
+      "weight": 100.32,
+      "packages": 12,
+      "equipment_no": "UTX9874635",
+      "container_type": "20 ft Standard Dry",
+      "wakeo_gross_volume": null,
+      "wakeo_gross_weight": null,
+      "container_type_code": "22G0"
+    }
+  ],
+  "master_booking_no": "",
+  "bill_of_entry_date": null,
+  "operational_status": "operationally_open",
+  "wakeo_missing_data": [
+    {
+      "field": "Co-Loader",
+      "reason": "required field is missing"
+    }
+  ],
+  "destination_country": "AE",
+  "master_shipment_name": null,
+  "was_tracked_by_wakeo": false,
+  "wakeo_tracking_active": false,
+  "cargo_ready_date_actual": "2025-11-17",
+  "declared_value_currency": "",
+  "house_delivery_location": "",
+  "house_purchase_order_no": "",
+  "master_delivery_location": "",
+  "master_purchase_order_no": "",
+  "secondary_line_of_business": ""
+}

@@ -5060,16 +5060,6 @@ cultureInfo en-US
 			            },
 			            "Weight": 0.727
 			          }
-			        },
-			        {
-			          "ATD (Actual Time of Departure)": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
 			        }
 			      ],
 			      "SemanticType": "Time"
@@ -6397,16 +6387,6 @@ cultureInfo en-US
 			        },
 			        {
 			          "Service": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        },
-			        {
-			          "Transport Mode": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -13202,16 +13182,6 @@ cultureInfo en-US
 			            },
 			            "Weight": 0.461
 			          }
-			        },
-			        {
-			          "Direction": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
 			        }
 			      ]
 			    },
@@ -17744,16 +17714,6 @@ cultureInfo en-US
 			            },
 			            "Weight": 0.748
 			          }
-			        },
-			        {
-			          "Container No": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
 			        }
 			      ]
 			    },
@@ -17883,16 +17843,6 @@ cultureInfo en-US
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.624
-			          }
-			        },
-			        {
-			          "Container type": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
 			          }
 			        }
 			      ]
@@ -22569,6 +22519,780 @@ cultureInfo en-US
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.739
+			          }
+			        }
+			      ]
+			    },
+			    "entity___main__.port_of_discharge_2": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "__MAIN__",
+			          "ConceptualProperty": "port_of_discharge2"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "port of discharge 2": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "port_of_discharge2": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "seaport of discharge 2": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "anchorage of discharge 2": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "harbor of discharge 2": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        },
+			        {
+			          "haven of discharge 2": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        }
+			      ]
+			    },
+			    "entity___main__.port_of_discharge_name_2": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "__MAIN__",
+			          "ConceptualProperty": "port_of_discharge_name2"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "port of discharge name 2": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "port_of_discharge_name2": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "port of discharge nickname 2": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.605
+			          }
+			        },
+			        {
+			          "port of discharge title 2": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.605
+			          }
+			        },
+			        {
+			          "port of discharge label 2": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.605
+			          }
+			        },
+			        {
+			          "port of discharge tag 2": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.605
+			          }
+			        },
+			        {
+			          "seaport of discharge name 2": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.52
+			          }
+			        },
+			        {
+			          "anchorage of discharge name 2": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.52
+			          }
+			        },
+			        {
+			          "harbor of discharge name 2": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.504
+			          }
+			        },
+			        {
+			          "haven of discharge name 2": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.504
+			          }
+			        }
+			      ]
+			    },
+			    "entity___main__.shipment_serial_iss_job": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "__MAIN__",
+			          "ConceptualProperty": "_shipment_serial_iss_job"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "shipment serial iss job": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "_shipment_serial_iss_job": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "shipment serial iss occupation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "shipment serial iss profession": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "shipment serial iss work": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        },
+			        {
+			          "shipment serial iss trade": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        },
+			        {
+			          "shipment serial iss career": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        },
+			        {
+			          "shipment serial iss employment": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        },
+			        {
+			          "shipment serial iss contract": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        },
+			        {
+			          "shipment serial iss business": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        },
+			        {
+			          "shipment serial iss appointment": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.489
+			          }
+			        },
+			        {
+			          "shipment serial iss vacancy": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.489
+			          }
+			        }
+			      ]
+			    },
+			    "entity___main__.entity__pta": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "__MAIN__",
+			          "ConceptualProperty": "_pta"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "_pta": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "entity___main__.entity__ptd": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "__MAIN__",
+			          "ConceptualProperty": "_ptd"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "_ptd": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "entity___main__.eta_iss": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "__MAIN__",
+			          "ConceptualProperty": "_eta_iss"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "eta iss": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "_eta_iss": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "entity___main__.eta_source": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "__MAIN__",
+			          "ConceptualProperty": "_eta_source"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "eta source": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "_eta_source": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "source": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "eta basis": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "eta font": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "eta birthplace": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "basis": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "font": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "birthplace": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "eta foundation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "eta cause": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "eta spring": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "eta cradle": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        }
+			      ]
+			    },
+			    "entity___main__.etd_iss": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "__MAIN__",
+			          "ConceptualProperty": "_etd_iss"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "etd iss": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "_etd_iss": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "entity___main__.etd_source": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "__MAIN__",
+			          "ConceptualProperty": "_etd_source"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "etd source": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "_etd_source": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "source": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "etd basis": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "etd font": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "etd birthplace": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "basis": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "font": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "birthplace": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "etd foundation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "etd cause": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "etd spring": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "etd cradle": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        }
+			      ]
+			    },
+			    "entity___main__.arrival_date1": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "__MAIN__",
+			          "ConceptualProperty": "_arrival_date"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "arrival date": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "_arrival_date": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        },
+			        {
+			          "arrival moment": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "arrival period": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "entity___main__.departure_date": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "__MAIN__",
+			          "ConceptualProperty": "_departure_date"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "departure date": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "_departure_date": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        },
+			        {
+			          "departure moment": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "departure period": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "po_view_param.perameter": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PO_VIEW_PARAM",
+			          "ConceptualProperty": "Perameter"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Additional columns": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
 			          }
 			        }
 			      ]
@@ -33487,6 +34211,369 @@ cultureInfo en-US
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "Phrasing__main___have_po_lines_items"
+			        }
+			      ]
+			    },
+			    "entity___main___has_port_of_discharge_2": {
+			      "Binding": {
+			        "ConceptualEntity": "__MAIN__"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "entity___main__": {
+			          "Target": {
+			            "Entity": "entity___main__"
+			          }
+			        },
+			        "entity___main__.port_of_discharge_2": {
+			          "Target": {
+			            "Entity": "entity___main__.port_of_discharge_2"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "entity___main__"
+			            },
+			            "Object": {
+			              "Role": "entity___main__.port_of_discharge_2"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "Phrasing__main___have_port_of_discharge_2"
+			        }
+			      ]
+			    },
+			    "entity___main___has_port_of_discharge_name_2": {
+			      "Binding": {
+			        "ConceptualEntity": "__MAIN__"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "entity___main__": {
+			          "Target": {
+			            "Entity": "entity___main__"
+			          }
+			        },
+			        "entity___main__.port_of_discharge_name_2": {
+			          "Target": {
+			            "Entity": "entity___main__.port_of_discharge_name_2"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "entity___main__"
+			            },
+			            "Object": {
+			              "Role": "entity___main__.port_of_discharge_name_2"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "Phrasing__main___have_port_of_discharge_name_2"
+			        }
+			      ]
+			    },
+			    "entity___main___has_shipment_serial_iss_job": {
+			      "Binding": {
+			        "ConceptualEntity": "__MAIN__"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "entity___main__": {
+			          "Target": {
+			            "Entity": "entity___main__"
+			          }
+			        },
+			        "entity___main__.shipment_serial_iss_job": {
+			          "Target": {
+			            "Entity": "entity___main__.shipment_serial_iss_job"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "entity___main__"
+			            },
+			            "Object": {
+			              "Role": "entity___main__.shipment_serial_iss_job"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "Phrasing__main___have_shipment_serial_iss_jobs"
+			        }
+			      ]
+			    },
+			    "entity___main___has_entity__pta": {
+			      "Binding": {
+			        "ConceptualEntity": "__MAIN__"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "entity___main__": {
+			          "Target": {
+			            "Entity": "entity___main__"
+			          }
+			        },
+			        "entity___main__.entity__pta": {
+			          "Target": {
+			            "Entity": "entity___main__.entity__pta"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "entity___main__"
+			            },
+			            "Object": {
+			              "Role": "entity___main__.entity__pta"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "Phrasing__main___have__pta"
+			        }
+			      ]
+			    },
+			    "entity___main___has_entity__ptd": {
+			      "Binding": {
+			        "ConceptualEntity": "__MAIN__"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "entity___main__": {
+			          "Target": {
+			            "Entity": "entity___main__"
+			          }
+			        },
+			        "entity___main__.entity__ptd": {
+			          "Target": {
+			            "Entity": "entity___main__.entity__ptd"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "entity___main__"
+			            },
+			            "Object": {
+			              "Role": "entity___main__.entity__ptd"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "Phrasing__main___have__ptds"
+			        }
+			      ]
+			    },
+			    "entity___main___has_eta_iss": {
+			      "Binding": {
+			        "ConceptualEntity": "__MAIN__"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "entity___main__": {
+			          "Target": {
+			            "Entity": "entity___main__"
+			          }
+			        },
+			        "entity___main__.eta_iss": {
+			          "Target": {
+			            "Entity": "entity___main__.eta_iss"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "entity___main__"
+			            },
+			            "Object": {
+			              "Role": "entity___main__.eta_iss"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "Phrasing__main___have_eta_isses"
+			        }
+			      ]
+			    },
+			    "entity___main___has_eta_source": {
+			      "Binding": {
+			        "ConceptualEntity": "__MAIN__"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "entity___main__": {
+			          "Target": {
+			            "Entity": "entity___main__"
+			          }
+			        },
+			        "entity___main__.eta_source": {
+			          "Target": {
+			            "Entity": "entity___main__.eta_source"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "entity___main__"
+			            },
+			            "Object": {
+			              "Role": "entity___main__.eta_source"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "Phrasing__main___have_eta_sources"
+			        }
+			      ]
+			    },
+			    "entity___main___has_etd_iss": {
+			      "Binding": {
+			        "ConceptualEntity": "__MAIN__"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "entity___main__": {
+			          "Target": {
+			            "Entity": "entity___main__"
+			          }
+			        },
+			        "entity___main__.etd_iss": {
+			          "Target": {
+			            "Entity": "entity___main__.etd_iss"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "entity___main__"
+			            },
+			            "Object": {
+			              "Role": "entity___main__.etd_iss"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "Phrasing__main___have_etd_isses"
+			        }
+			      ]
+			    },
+			    "entity___main___has_etd_source": {
+			      "Binding": {
+			        "ConceptualEntity": "__MAIN__"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "entity___main__": {
+			          "Target": {
+			            "Entity": "entity___main__"
+			          }
+			        },
+			        "entity___main__.etd_source": {
+			          "Target": {
+			            "Entity": "entity___main__.etd_source"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "entity___main__"
+			            },
+			            "Object": {
+			              "Role": "entity___main__.etd_source"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "Phrasing__main___have_etd_sources"
+			        }
+			      ]
+			    },
+			    "entity___main___has_arrival_date1": {
+			      "Binding": {
+			        "ConceptualEntity": "__MAIN__"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "entity___main__": {
+			          "Target": {
+			            "Entity": "entity___main__"
+			          }
+			        },
+			        "entity___main__.arrival_date1": {
+			          "Target": {
+			            "Entity": "entity___main__.arrival_date1"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "entity___main__"
+			            },
+			            "Object": {
+			              "Role": "entity___main__.arrival_date1"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "Phrasing__main___have_arrival_dates1"
+			        }
+			      ]
+			    },
+			    "entity___main___has_departure_date": {
+			      "Binding": {
+			        "ConceptualEntity": "__MAIN__"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "entity___main__": {
+			          "Target": {
+			            "Entity": "entity___main__"
+			          }
+			        },
+			        "entity___main__.departure_date": {
+			          "Target": {
+			            "Entity": "entity___main__.departure_date"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "entity___main__"
+			            },
+			            "Object": {
+			              "Role": "entity___main__.departure_date"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "Phrasing__main___have_departure_dates"
 			        }
 			      ]
 			    },

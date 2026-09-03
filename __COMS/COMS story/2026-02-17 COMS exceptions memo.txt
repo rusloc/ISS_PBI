@@ -1,0 +1,70 @@
+Current EDD:
+* ATA must be current or less (not future)
+logic: ATA (with condition) -> Wakeo ETA -> ETA
+
+PO line:
+* same two cols but at PO line level
+
+Alerts:
+* PO Acknowledgement Exception:
+	> check if FO exists -> nothing happens
+	> FO partially covers PO line -> yellow
+	> NO FO at all -> red
+	* ONLY for Pending line!!!
+		> green for FO line (if it exists)
+		> PO creation date (see screen in chat) + 3 days 
+
+* PO Line Item Delivery Risk Exception:
+	> for PO LINE (second condition '================PO Line Level'	: 
+	> If PO line EDD > Current Promised Date → Flag as Exception
+	> only for ENRICHED lines
+
+
+* Booking performance Exception
+	> only for ENRICHED lines (FO level)
+	> ATDeparture -> Wakeo ETD -> PTD -> ETD
+	> (Cargo Ready Date Actual -> Estimated ) + 7 days (for now manual 7 days)
+	(removed condition: ATDeparture -> Wakeo ETD -> PTD -> ETD >= Cur date)
+	then flag shipment (FO / shipment)
+
+* Shipment Transit Delay Exception (do not show exception when line is delivered):
+	> 1st: ATDeparture -> Wakeo ETD -> PTD
+	&& Delivery Date is empty || Delivery Date> Current Date
+
+	> 2nd: ETD not null && ATDeparture not null && ETD >= Cur date
+	&& DElivery date is null or Delivery date > Cur date
+
+	> 3d: see email (copy logic)
+
+	> 4th: ETA not null && Arrival date is null && ETA >= cur date 
+	&& (delivery date is null || delivery date > Current date)
+
+	> SHOW SYMBOL TO ALERT CLIENT
+
+* Clearance & Delivery Delay Exception:
+	>  Shipment Arrival Date is not null && Delivery Date is empty && Current Date > Arrival Date + 3 days
+
+OUTPUT: layout /  columns
+
+* PO line no EDDs
+
+* First EDD (FO line) as is, current EDD (FO line) as is, Current EDD (PO line)
+* Current EDD (PO line): rename PO LINE EDD -> Final Expected Delivery Date (values only for fully covered ordered qty in PO; if enriched qty total < ordered then do not show)
+
+
+-------------- 2026-02-24 update
+
+PO acknowledgement exception:
+
+* Pending; has no corresponding Enriched: RED
+* Pending; has at least FO (enriched line) with qty < ordered: YELLOW
+* Pending/Complete/Closed: enriched line(s) cover fully ordered qty.: GREEN
+* Enriched; partially covers ordered qty -> YELLOW
+* Enriched; completely covers ordered qty -> GREEN
+
+
+
+
+
+
+

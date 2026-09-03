@@ -1,0 +1,574 @@
+table _CAL
+	lineageTag: 530d4404-1014-4f2b-9311-5d91706f9829
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 78227625-d84a-416d-8cd7-d0300d13d9df
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column DateKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 5153adea-dc91-4d04-abd0-1042e067b18d
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: f90f16c2-203c-4641-8b0d-0c1aa4c06618
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column StartOfYear
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 717b5b84-438c-4d1a-9b5f-13b8e7d173d6
+		summarizeBy: none
+		sourceColumn: StartOfYear
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column EndOfYear
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 50479516-fc8a-4852-a5d0-4e145937a224
+		summarizeBy: none
+		sourceColumn: EndOfYear
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 37832d81-eb1b-4000-b99e-e37448d7290e
+		summarizeBy: none
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column QuarterName
+		dataType: string
+		lineageTag: fe73f7eb-9df1-49de-8804-bcc1ebe5ae0a
+		summarizeBy: none
+		sourceColumn: QuarterName
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearQuarter
+		dataType: string
+		lineageTag: b9f757e2-dab6-42de-99eb-1621b9995794
+		summarizeBy: none
+		sourceColumn: YearQuarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearQuarterSort
+		dataType: int64
+		formatString: 0
+		lineageTag: c3ada675-ca6a-46ec-9dd6-d78506e5971f
+		summarizeBy: none
+		sourceColumn: YearQuarterSort
+
+		annotation SummarizationSetBy = Automatic
+
+	column QuarterYear
+		dataType: string
+		lineageTag: 6ae10d3f-dc67-41f7-b9d5-f7b6128308c1
+		summarizeBy: none
+		sourceColumn: QuarterYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column QuarterYearSort
+		dataType: int64
+		formatString: 0
+		lineageTag: 2544f12b-6e41-40ad-9b93-cc5872077e4d
+		summarizeBy: none
+		sourceColumn: QuarterYearSort
+
+		annotation SummarizationSetBy = Automatic
+
+	column StartOfQuarter
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 3082ca1c-ba1e-4abb-be13-25edee4702dd
+		summarizeBy: none
+		sourceColumn: StartOfQuarter
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column EndOfQuarter
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: fc9e3cce-521d-4f0d-80b4-784a71f333f4
+		summarizeBy: none
+		sourceColumn: EndOfQuarter
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Month
+		dataType: int64
+		formatString: 0
+		lineageTag: d298f087-016c-4b67-9ad9-43c401ceba74
+		summarizeBy: none
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthName
+		dataType: string
+		lineageTag: a25721fa-9064-4fe6-b743-be2fc142a1db
+		summarizeBy: none
+		sourceColumn: MonthName
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthShort
+		dataType: string
+		lineageTag: ca9ba5b2-ecfb-41c0-a8ac-0a1f8286ba2a
+		summarizeBy: none
+		sourceColumn: MonthShort
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearMonth
+		dataType: string
+		lineageTag: c09e05bd-ec6d-457c-8837-0eeb14681ce4
+		summarizeBy: none
+		sourceColumn: YearMonth
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearMonthSort
+		dataType: int64
+		formatString: 0
+		lineageTag: 3c971135-f415-4134-af2a-b90b015ddb4f
+		summarizeBy: none
+		sourceColumn: YearMonthSort
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthYearName
+		dataType: string
+		lineageTag: f171c910-64f6-46de-9c3a-30bb5e65dac3
+		summarizeBy: none
+		sourceColumn: MonthYearName
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthYearNumber
+		dataType: string
+		lineageTag: 326bb94d-36c0-4590-9b5a-fc070add9bf9
+		summarizeBy: none
+		sourceColumn: MonthYearNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthYearSort
+		dataType: int64
+		formatString: 0
+		lineageTag: 32324f0c-a888-4d90-b40d-e57489c5392a
+		summarizeBy: none
+		sourceColumn: MonthYearSort
+
+		annotation SummarizationSetBy = Automatic
+
+	column StartOfMonth
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 7cf5cc7b-e6a5-4282-ba41-6311e31aea67
+		summarizeBy: none
+		sourceColumn: StartOfMonth
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column EndOfMonth
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 104e9462-6daf-4b59-915c-603bbaf98458
+		summarizeBy: none
+		sourceColumn: EndOfMonth
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column DaysInMonth
+		dataType: int64
+		formatString: 0
+		lineageTag: 87179b99-0afa-4323-bfac-f1c970ec2bf2
+		summarizeBy: none
+		sourceColumn: DaysInMonth
+
+		annotation SummarizationSetBy = Automatic
+
+	column WeekOfYear
+		dataType: int64
+		formatString: 0
+		lineageTag: e15dadc9-60e2-46e9-aa6a-d7b638ef2992
+		summarizeBy: none
+		sourceColumn: WeekOfYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column StartOfWeek
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 5dba3c52-d2ec-401d-9b34-9a3060726980
+		summarizeBy: none
+		sourceColumn: StartOfWeek
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column EndOfWeek
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 15bb89ff-7c06-48a1-bc02-ebfa8bc85f5c
+		summarizeBy: none
+		sourceColumn: EndOfWeek
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ISOYear
+		dataType: int64
+		formatString: 0
+		lineageTag: 4fec7e27-9e47-4f7f-bad3-f9eda2aa19da
+		summarizeBy: none
+		sourceColumn: ISOYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column ISOWeek
+		dataType: int64
+		formatString: 0
+		lineageTag: 903efca2-af1b-4a2c-bcdb-e7ab915dfd7b
+		summarizeBy: none
+		sourceColumn: ISOWeek
+
+		annotation SummarizationSetBy = Automatic
+
+	column ISOYearWeek
+		dataType: string
+		lineageTag: 6f7e5168-9b30-4942-8cd0-5fe3458d3742
+		summarizeBy: none
+		sourceColumn: ISOYearWeek
+
+		annotation SummarizationSetBy = Automatic
+
+	column ISOYearWeekSort
+		dataType: int64
+		formatString: 0
+		lineageTag: 9479317a-be30-4613-b0ee-8f5321f66576
+		summarizeBy: none
+		sourceColumn: ISOYearWeekSort
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day
+		dataType: int64
+		formatString: 0
+		lineageTag: 4c4efe5f-5c0d-4841-9f46-f82c2ada0090
+		summarizeBy: none
+		sourceColumn: Day
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayOfWeek
+		dataType: int64
+		formatString: 0
+		lineageTag: 3eeaed0b-968d-468a-9d83-fc39280160d4
+		summarizeBy: none
+		sourceColumn: DayOfWeek
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayName
+		dataType: string
+		lineageTag: 63e6c4d0-2e00-4068-9d82-5324c348dedc
+		summarizeBy: none
+		sourceColumn: DayName
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayShort
+		dataType: string
+		lineageTag: 263bd259-ed59-4c45-b4f1-08b7d05f062d
+		summarizeBy: none
+		sourceColumn: DayShort
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayOfYear
+		dataType: int64
+		formatString: 0
+		lineageTag: 3d0948bd-31fc-462c-bc0d-66176f126cf1
+		summarizeBy: none
+		sourceColumn: DayOfYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsWeekend
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 8cdb6642-9481-4c37-b68a-7730d2b9d723
+		summarizeBy: none
+		sourceColumn: IsWeekend
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsWorkday
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: f9409217-429e-40cc-892f-5c1b75155f8e
+		summarizeBy: none
+		sourceColumn: IsWorkday
+
+		annotation SummarizationSetBy = Automatic
+
+	column FiscalYear
+		dataType: int64
+		formatString: 0
+		lineageTag: 90fe1cbc-f500-4ec1-972b-74dff5560b74
+		summarizeBy: none
+		sourceColumn: FiscalYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column FiscalMonth
+		dataType: int64
+		formatString: 0
+		lineageTag: 93a48a8e-548d-409e-867b-5dab59e406c9
+		summarizeBy: none
+		sourceColumn: FiscalMonth
+
+		annotation SummarizationSetBy = Automatic
+
+	column FiscalQuarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 22fa0d33-dc31-4887-8601-f90c4c8da70e
+		summarizeBy: none
+		sourceColumn: FiscalQuarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column FiscalYearQuarter
+		dataType: string
+		lineageTag: 397650e4-d7ec-43b9-847a-2709cda37036
+		summarizeBy: none
+		sourceColumn: FiscalYearQuarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column FiscalYearQuarterSort
+		dataType: int64
+		formatString: 0
+		lineageTag: c5620ec3-eaa0-4367-b001-6efba504889f
+		summarizeBy: none
+		sourceColumn: FiscalYearQuarterSort
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayOffset
+		dataType: int64
+		formatString: 0
+		lineageTag: 8768cd72-3bba-4829-b37a-d9a46324ca73
+		summarizeBy: none
+		sourceColumn: DayOffset
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthOffset
+		dataType: int64
+		formatString: 0
+		lineageTag: fccdcaa4-e738-4e3e-ae29-d4029c69b187
+		summarizeBy: none
+		sourceColumn: MonthOffset
+
+		annotation SummarizationSetBy = Automatic
+
+	column QuarterOffset
+		dataType: int64
+		formatString: 0
+		lineageTag: 7db4d7d5-4623-4237-9ea2-f9cc9ae8d77a
+		summarizeBy: none
+		sourceColumn: QuarterOffset
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearOffset
+		dataType: int64
+		formatString: 0
+		lineageTag: 8d47ea7e-6534-42e5-a806-34bfd6824b23
+		summarizeBy: none
+		sourceColumn: YearOffset
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsToday
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 1146e94d-4cf5-4135-848b-23e5e3b76a3a
+		summarizeBy: none
+		sourceColumn: IsToday
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsPast
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 840756a0-c56b-4c89-811b-4a8ef2c4dffa
+		summarizeBy: none
+		sourceColumn: IsPast
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _CAL = m
+		mode: import
+		source =
+				let
+				    // ───────────────────────────── CONFIG ─────────────────────────────
+				    // Each entry: the query (table) and the name of its date/datetime column
+				    Sources = {
+				        [Table = _FOCUS_VIEW_,    Column = "_creation_date"]
+				        // ,[Table = Invoices, Column = "InvoiceDate"]
+				        // ,[Table = Budget,   Column = "PeriodStart"]
+				    },
+				
+				   WeekStart            = Day.Monday,   // first day of week
+				    FiscalYearStartMonth = 1,            // 1 = calendar year, 7 = FY starts in July, etc.
+				    Culture              = "en-US",      // for month / day names
+				    Today                = Date.From(DateTime.LocalNow()),
+				
+				    // ───────────────── 1. MIN / MAX ACROSS ALL SOURCES ─────────────────
+				    Bounds = List.Transform(Sources, each
+				        let
+				            values = List.RemoveNulls(Table.Column([Table], [Column]))
+				        in
+				            [Min = Date.From(List.Min(values)), Max = Date.From(List.Max(values))]),
+				
+				    RawMin = List.Min(List.Transform(Bounds, each [Min])),
+				    RawMax = List.Max(List.Transform(Bounds, each [Max])),
+				
+				    // fall back to today if every source is empty; pad to full calendar years
+				    RangeMin = Date.StartOfYear(if RawMin = null then Today else RawMin),
+				    RangeMax = Date.EndOfYear  (if RawMax = null then Today else RawMax),
+				
+				    // ───────────────────── 2. BASE DATE COLUMN ─────────────────────
+				    DayCount = Duration.Days(RangeMax - RangeMin) + 1,
+				    Dates    = List.Dates(RangeMin, DayCount, #duration(1, 0, 0, 0)),
+				    Base     = #table(type table [Date = date], List.Transform(Dates, each {_})),
+				
+				    // ───────────────────────── helpers ─────────────────────────
+				    FiscalYear  = (d as date) as number =>
+				        Date.Year(d) + (if FiscalYearStartMonth > 1 and Date.Month(d) >= FiscalYearStartMonth then 1 else 0),
+				    FiscalMonth = (d as date) as number =>
+				        Number.Mod(Date.Month(d) - FiscalYearStartMonth + 12, 12) + 1,
+				    IsoThursday = (d as date) as date =>
+				        Date.AddDays(d, 3 - Date.DayOfWeek(d, Day.Monday)),   // Thursday of the ISO week
+				    IsoYear     = (d as date) as number => Date.Year(IsoThursday(d)),
+				    IsoWeek     = (d as date) as number => Number.RoundDown((Date.DayOfYear(IsoThursday(d)) - 1) / 7) + 1,
+				
+				    // ───────────────────── 3. COLUMN DEFINITIONS ─────────────────────
+				    // {Name, Expression, Type}  — sort columns sit next to their text counterparts
+				    Columns = {
+				        {"DateKey",           each Date.Year([Date]) * 10000 + Date.Month([Date]) * 100 + Date.Day([Date]), Int64.Type},
+				
+				        // Year
+				        {"Year",              each Date.Year([Date]),                                        Int64.Type},
+				        {"StartOfYear",       each Date.StartOfYear([Date]),                                 type date},
+				        {"EndOfYear",         each Date.EndOfYear([Date]),                                   type date},
+				
+				        // Quarter
+				        {"Quarter",           each Date.QuarterOfYear([Date]),                               Int64.Type},
+				        {"QuarterName",       each "Q" & Text.From([Quarter]),                               type text},
+				        {"YearQuarter",       each Text.From([Year]) & " " & [QuarterName],                  type text},
+				        {"YearQuarterSort",   each [Year] * 10 + [Quarter],                                  Int64.Type},
+				        {"QuarterYear",       each [QuarterName] & "-" & Text.From([Year]),                  type text},   // Q1-2025
+				        {"QuarterYearSort",   each [Year] * 10 + [Quarter],                                  Int64.Type},
+				        {"StartOfQuarter",    each Date.StartOfQuarter([Date]),                              type date},
+				        {"EndOfQuarter",      each Date.EndOfQuarter([Date]),                                type date},
+				
+				        // Month
+				        {"Month",             each Date.Month([Date]),                                       Int64.Type},
+				        {"MonthName",         each Date.ToText([Date], "MMMM", Culture),                     type text},
+				        {"MonthShort",        each Date.ToText([Date], "MMM",  Culture),                     type text},
+				        {"YearMonth",         each Date.ToText([Date], "MMM yyyy", Culture),                 type text},
+				        {"YearMonthSort",     each [Year] * 100 + [Month],                                   Int64.Type},
+				        {"MonthYearName",     each Date.ToText([Date], "MMM-yyyy", Culture),                 type text},   // Jan-2026
+				        {"MonthYearNumber",   each Date.ToText([Date], "yyyy-MM"),                           type text},   // 2026-01
+				        {"MonthYearSort",     each [Year] * 100 + [Month],                                   Int64.Type},  // sorts both of the above
+				        {"StartOfMonth",      each Date.StartOfMonth([Date]),                                type date},
+				        {"EndOfMonth",        each Date.EndOfMonth([Date]),                                  type date},
+				        {"DaysInMonth",       each Date.DaysInMonth([Date]),                                 Int64.Type},
+				
+				        // Week (calendar, per WeekStart)
+				        {"WeekOfYear",        each Date.WeekOfYear([Date], WeekStart),                       Int64.Type},
+				        {"StartOfWeek",       each Date.StartOfWeek([Date], WeekStart),                      type date},
+				        {"EndOfWeek",         each Date.EndOfWeek([Date], WeekStart),                        type date},
+				
+				        // Week (ISO 8601)
+				        {"ISOYear",           each IsoYear([Date]),                                          Int64.Type},
+				        {"ISOWeek",           each IsoWeek([Date]),                                          Int64.Type},
+				        {"ISOYearWeek",       each Text.From([ISOYear]) & "-W" & Text.PadStart(Text.From([ISOWeek]), 2, "0"), type text},
+				        {"ISOYearWeekSort",   each [ISOYear] * 100 + [ISOWeek],                              Int64.Type},
+				
+				        // Day
+				        {"Day",               each Date.Day([Date]),                                         Int64.Type},
+				        {"DayOfWeek",         each Date.DayOfWeek([Date], WeekStart) + 1,                    Int64.Type},
+				        {"DayName",           each Date.ToText([Date], "dddd", Culture),                     type text},
+				        {"DayShort",          each Date.ToText([Date], "ddd",  Culture),                     type text},
+				        {"DayOfYear",         each Date.DayOfYear([Date]),                                   Int64.Type},
+				        {"IsWeekend",         each Date.DayOfWeek([Date], Day.Monday) >= 5,                  type logical},
+				        {"IsWorkday",         each not [IsWeekend],                                          type logical},
+				
+				        // Fiscal
+				        {"FiscalYear",        each FiscalYear([Date]),                                       Int64.Type},
+				        {"FiscalMonth",       each FiscalMonth([Date]),                                      Int64.Type},
+				        {"FiscalQuarter",     each Number.RoundUp([FiscalMonth] / 3),                        Int64.Type},
+				        {"FiscalYearQuarter", each "FY" & Text.From([FiscalYear]) & " Q" & Text.From([FiscalQuarter]), type text},
+				        {"FiscalYearQuarterSort", each [FiscalYear] * 10 + [FiscalQuarter],                  Int64.Type},
+				
+				        // Relative to today (handy for "current month / last 30 days" logic)
+				        {"DayOffset",         each Duration.Days([Date] - Today),                            Int64.Type},
+				        {"MonthOffset",       each ([Year] - Date.Year(Today)) * 12 + [Month] - Date.Month(Today), Int64.Type},
+				        {"QuarterOffset",     each ([Year] - Date.Year(Today)) * 4 + [Quarter] - Date.QuarterOfYear(Today), Int64.Type},
+				        {"YearOffset",        each [Year] - Date.Year(Today),                                Int64.Type},
+				        {"IsToday",           each [Date] = Today,                                           type logical},
+				        {"IsPast",            each [Date] < Today,                                           type logical}
+				    },
+				
+				    // ───────────────────── 4. BUILD THE TABLE ─────────────────────
+				    Result = List.Accumulate(Columns, Base, (t, c) => Table.AddColumn(t, c{0}, c{1}, c{2}))
+				in
+				    Result
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

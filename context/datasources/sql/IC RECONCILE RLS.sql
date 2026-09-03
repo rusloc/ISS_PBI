@@ -84,7 +84,8 @@ left join (
 										,'MOHAMMAD.ABBAS@ISS-GF.COM'	
 										,'MERIYA.SAJU@ISS-GF.COM'
 										,'NIKHIL.VISWANATHAN@ISS-GF.COM'		
-										,'AZHARUDEEN.FAROOK@ISS-GF.COM'				
+										,'AZHARUDEEN.FAROOK@ISS-GF.COM'	
+										,'KORNCHAYAWEE.SAKUNLOR@ISS-GF.COM'
 								]
 					) a	
 			) g 	
@@ -471,7 +472,6 @@ inner join (
 									,('SANOJ.G@ISS-GF.COM','BHO1')
 									,('KIET.BUI@ISS-GF.COM','VNO1')
 									,('GANAGESWARY.C@ISS-GF.COM','MYO1')
-									,('KORNCHAYAWEE.SAKUNLOR@ISS-GF.COM','INO1')
 									,('JOSHUA.ARPUTHASAMY@ISS-GF.COM','MYO1')
 									,('GIRISH.CG@ISS-GF.COM','INO1')
 									,('SYLVAIN.BREHIN@ISS-GF.COM','GHO1')

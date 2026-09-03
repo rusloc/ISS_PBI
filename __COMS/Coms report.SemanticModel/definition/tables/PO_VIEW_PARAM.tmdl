@@ -38,7 +38,7 @@ table PO_VIEW_PARAM
 
 	partition PO_VIEW_PARAM = calculated
 		mode: import
-		source =
+		source = ```
 				{
 				
 				    ("Hide all optional columns", "No Attribution Selected", 0),
@@ -46,20 +46,20 @@ table PO_VIEW_PARAM
 				    ("40'", NAMEOF('_PO_VIEW_'[_40_ft]), 20),
 				    ("ACRD (Actual Cargo Ready Date)", NAMEOF('_PO_VIEW_'[_crd]), 24),
 				    ("Actual lead (PO to Date)", NAMEOF('_PO_VIEW_'[_actual_lead]), 25),
-				    ("Addl Invoice Billing Month", NAMEOF('_PO_VIEW_'[_addl_invoice_issue_date]), 30),
-				    ("Addl Invoice No", NAMEOF('_PO_VIEW_'[_addl_issued_invoices]), 40),
+				    // ("Addl Invoice Billing Month", NAMEOF('_PO_VIEW_'[_addl_invoice_issue_date]), 30),
+				    // ("Addl Invoice No", NAMEOF('_PO_VIEW_'[_addl_issued_invoices]), 40),
 				    ("Addl PO", NAMEOF('_PO_VIEW_'[_addl_po]), 50),
 				    ("Addl PO GRN", NAMEOF('_PO_VIEW_'[_addl_po_grn]), 60),
 				    ("Ancillary Charges Form No", NAMEOF('_PO_VIEW_'[_aux_charge_form_no]), 70),
-				    ("Ancillary Charges Local Cur.", NAMEOF('_PO_VIEW_'[_aux_charges_aed]), 80),
-				    ("Ancillary Charges Type", NAMEOF('_PO_VIEW_'[_aux_charge_type]), 100),
-				    ("Ancillary Charges USD", NAMEOF('_PO_VIEW_'[_aux_charges_usd]), 110),
+				    // ("Ancillary Charges Local Cur.", NAMEOF('_PO_VIEW_'[_aux_charges_aed]), 80),
+				    // ("Ancillary Charges Type", NAMEOF('_PO_VIEW_'[_aux_charge_type]), 100),
+				    // ("Ancillary Charges USD", NAMEOF('_PO_VIEW_'[_aux_charges_usd]), 110),
 				    ("ARR TO DEL", NAMEOF('_PO_VIEW_'[_eta_2_del]), 114),
 				    ("ARR Discrepancy (Days)", NAMEOF('_PO_VIEW_'[_arr_discrepancy_days]), 116),
 				    ("ATA (Actual Time of Arrival)", NAMEOF('_PO_VIEW_'[_arrival_date_fallback]), 118),
 				    ("ATD (Actual Time of Departure)", NAMEOF('_PO_VIEW_'[_departure_date_fallback]), 120),
 				    ("Average LT", NAMEOF('_PO_VIEW_'[_avg_lt]), 125),
-				    ("Billing Status", NAMEOF('_PO_VIEW_'[_billing_status]), 130),
+				    // ("Billing Status", NAMEOF('_PO_VIEW_'[_billing_status]), 130),
 				    ("Cargo H/O", NAMEOF('_PO_VIEW_'[_cargo_ho]), 150),
 				    ("Carrier", NAMEOF('_PO_VIEW_'[_carrier]), 160),
 				    ("Category", NAMEOF('_PO_VIEW_'[_slt_category]), 170),
@@ -83,8 +83,8 @@ table PO_VIEW_PARAM
 				    ("Delivery Location", NAMEOF('_PO_VIEW_'[_delivery_location]), 360),
 				    ("DEP Discrepancy (Days)", NAMEOF('_PO_VIEW_'[_dep_discrepancy_days]), 365),
 				    ("DEP TO ARR", NAMEOF('_PO_VIEW_'[_etd_2_eta]), 370),
-				    ("Destination Charges Local Cur.", NAMEOF('_PO_VIEW_'[_dest_charges_aed]), 380),
-				    ("Destination Charges USD", NAMEOF('_PO_VIEW_'[_dest_charges_usd]), 390),
+				    // ("Destination Charges Local Cur.", NAMEOF('_PO_VIEW_'[_dest_charges_aed]), 380),
+				    // ("Destination Charges USD", NAMEOF('_PO_VIEW_'[_dest_charges_usd]), 390),
 				    ("Destination Country Code", NAMEOF('_PO_VIEW_'[_destination_country_code_dest]), 400),
 				    ("Destination Country Name", NAMEOF('_PO_VIEW_'[_destination_country_dest]), 410),
 				    ("Destination Port Code", NAMEOF('_PO_VIEW_'[_destination_port_code_dest]), 420),
@@ -102,8 +102,8 @@ table PO_VIEW_PARAM
 				    ("ETD Source", NAMEOF('_PO_VIEW_'[_etd_source]), 540),
 				    // ("ETD Variance (Days)", NAMEOF('_PO_VIEW_'[_days_delayed_etd]), 545),
 				    ("Export Customs Cleared", NAMEOF('_PO_VIEW_'[_goods_cleared_origin]), 548),
-				    ("Freight Charges Local Cur.", NAMEOF('_PO_VIEW_'[_frt_charges_aed]), 550),
-				    ("Freight Charges USD", NAMEOF('_PO_VIEW_'[_frt_charges_usd]), 560),
+				    // ("Freight Charges Local Cur.", NAMEOF('_PO_VIEW_'[_frt_charges_aed]), 550),
+				    // ("Freight Charges USD", NAMEOF('_PO_VIEW_'[_frt_charges_usd]), 560),
 				    ("Freight Order Comments", NAMEOF('_PO_VIEW_'[_comment]), 565),
 				    ("Freight Order No", NAMEOF('_PO_VIEW_'[_fo_serial]), 570),
 				    ("GRN No", NAMEOF('_PO_VIEW_'[_grn_no]), 590),
@@ -118,8 +118,8 @@ table PO_VIEW_PARAM
 				    ("Inner Qty (Balance)", NAMEOF('_PO_VIEW_'[_balance_inner_qnty]), 645),
 				    ("Inner Qty (Enriched)", NAMEOF('_PO_VIEW_'[_inner_qnty_shipped]), 650),
 				    ("Inner Qty (PO)", NAMEOF('_PO_VIEW_'[_po_inner_qnty]), 655),
-				    ("Invoice Billing Month", NAMEOF('_PO_VIEW_'[_invoice_issue_date]), 660),
-				    ("Invoice No", NAMEOF('_PO_VIEW_'[_invoice_no]), 670),
+				    // ("Invoice Billing Month", NAMEOF('_PO_VIEW_'[_invoice_issue_date]), 660),
+				    // ("Invoice No", NAMEOF('_PO_VIEW_'[_invoice_no]), 670),
 				    ("ISS Cont. Booking Perf %", NAMEOF('_PO_VIEW_'[_iss_cont_booking_perf]), 680),
 				    ("ISS Customs Clearance Perf %", NAMEOF('_PO_VIEW_'[_iss_custom_clear_perf]), 684),
 				    ("ISS Transit Lead Time Perf %", NAMEOF('_PO_VIEW_'[_iss_transit_lead_time_perf]), 695),
@@ -130,8 +130,8 @@ table PO_VIEW_PARAM
 				    ("NBD TO CRD", NAMEOF('_PO_VIEW_'[_nbd_2_crd]), 740),
 				    ("NBD TO DEL", NAMEOF('_PO_VIEW_'[_nbd_2_del]), 745),
 				    ("Ontime Order Placement Perf %", NAMEOF('_PO_VIEW_'[_ontime_order_placement_perf]), 750),
-				    ("Origin Charges Local Cur.", NAMEOF('_PO_VIEW_'[_org_charges_aed]), 760),
-				    ("Origin Charges USD", NAMEOF('_PO_VIEW_'[_org_charges_usd]), 770),
+				    // ("Origin Charges Local Cur.", NAMEOF('_PO_VIEW_'[_org_charges_aed]), 760),
+				    // ("Origin Charges USD", NAMEOF('_PO_VIEW_'[_org_charges_usd]), 770),
 				    ("Origin Country Code", NAMEOF('_PO_VIEW_'[_origin_country_code]), 775),
 				    ("Origin Country Name", NAMEOF('_PO_VIEW_'[_origin_country]), 780),
 				    ("Origin Port Code", NAMEOF('_PO_VIEW_'[_origin_port_pol]), 800),
@@ -140,7 +140,7 @@ table PO_VIEW_PARAM
 				    ("Outer Qty (Balance)", NAMEOF('_PO_VIEW_'[_balance_outer_qnty]), 812),
 				    ("Outer Qty (Enriched)", NAMEOF('_PO_VIEW_'[_shipped]), 815),
 				    ("Outer Qty (PO)", NAMEOF('_PO_VIEW_'[_po_outer_qty]), 900),
-				    ("P2P Value Local Cur.", NAMEOF('_PO_VIEW_'[_p2p_value_aed]), 910),
+				    // ("P2P Value Local Cur.", NAMEOF('_PO_VIEW_'[_p2p_value_aed]), 910),
 				    ("P2P Value USD", NAMEOF('_PO_VIEW_'[_p2p_value_usd]), 912),
 				    ("Package Type", NAMEOF('_PO_VIEW_'[_pack_type_name]), 914),
 				    ("PCF (Pickup Date)", NAMEOF('_PO_VIEW_'[_pickup_date]), 916),
@@ -171,18 +171,20 @@ table PO_VIEW_PARAM
 				    ("Ship. Remarks Updates", NAMEOF('_PO_VIEW_'[_ship_remarks_updates]), 1060),
 				    ("Shipment ID", NAMEOF('_PO_VIEW_'[_response_shipment_id]), 1070),
 				    ("Shipment No", NAMEOF('_PO_VIEW_'[_shipment_serial_iss_job]), 1090),
-				    ("SPO Invoice Value Local Cur.", NAMEOF('_PO_VIEW_'[_spo_invoice_val_aed]), 1100),
+				    // ("SPO Invoice Value Local Cur.", NAMEOF('_PO_VIEW_'[_spo_invoice_val_aed]), 1100),
 				    ("SPO Number", NAMEOF('_PO_VIEW_'[_spo_number]), 1110),
 				    ("Status", NAMEOF('_PO_VIEW_'[_status]), 1120),
 				    ("Supplier Code", NAMEOF('_PO_VIEW_'[_supplier_code]), 1130),
 				    ("Supplier Comm. Prod. Readiness Perf %", NAMEOF('_PO_VIEW_'[_supplier_committed_prod_rdy_perf]), 1140),
-				    ("Total Charges Local Cur.", NAMEOF('_PO_VIEW_'[_total_charges_aed]), 1150),
+				    // ("Total Charges Local Cur.", NAMEOF('_PO_VIEW_'[_total_charges_aed]), 1150),
 				    ("Total Charges USD", NAMEOF('_PO_VIEW_'[_total_charges_usd]), 1170),
 				    ("Total No of Containers", NAMEOF('_PO_VIEW_'[_count_of_cont]), 1190),
 				    ("Total No of TEUs", NAMEOF('_PO_VIEW_'[_teus]), 1200),
 				    ("Transport Mode", NAMEOF('_PO_VIEW_'[_transport_mode]), 1210),
 				    ("Units per UOM", NAMEOF('_PO_VIEW_'[_units_po_uom]), 1220)
 				}
+				
+				```
 
 	annotation PBI_Id = 612da605546249eb996694bb9d01e4df
 

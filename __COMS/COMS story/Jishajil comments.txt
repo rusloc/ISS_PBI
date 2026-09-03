@@ -1,0 +1,19 @@
+PO line -> {union} freight order
+
+EKPOREF - earliest date (if multi line)
+secondary - others
+
+if no ship serial # => no info from focus
+
+take AVS data from AVSS (where port full names exist)
+
+details API 
+
+------ 2025-12-18
+
+* ETA Wakeo -> ETA (same for ETD)
+* Financial part
+	> if shipment serial is empty -> fin values are NULL
+	> take charge type from Charge service mapping file -> use ship serial and service type to get the charge type and then sum up from the table using formula
+	> mappings (from three files sent in teams) are for EMIRATES AIRLINE
+	> create tables with mappings in DB + add client ID = 4 (EMIRATES AIRLINE)
