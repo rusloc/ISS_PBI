@@ -18,14 +18,6 @@ table _FOCUS_VIEW_
 
 		annotation SummarizationSetBy = Automatic
 
-	column _fo_id_coms
-		dataType: string
-		lineageTag: 4dfa0752-0316-4403-9d02-7d66c728ec91
-		summarizeBy: none
-		sourceColumn: _fo_id_coms
-
-		annotation SummarizationSetBy = Automatic
-
 	column _fo_no
 		dataType: string
 		lineageTag: cf7dbfd7-6b41-40fa-b2f7-dbafad33bc0f
@@ -491,7 +483,8 @@ table _FOCUS_VIEW_
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column _cargo_ho
-		dataType: string
+		dataType: dateTime
+		formatString: General Date
 		lineageTag: 29fdd761-3ee7-4163-b8a3-8d4f4943be42
 		summarizeBy: none
 		sourceColumn: _cargo_ho
@@ -653,20 +646,24 @@ table _FOCUS_VIEW_
 		annotation SummarizationSetBy = Automatic
 
 	column _iss_transit_lead_time_perf
-		dataType: string
+		dataType: double
 		lineageTag: 80c6f2d0-3f74-4683-9386-bd83e805fb93
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: _iss_transit_lead_time_perf
 
 		annotation SummarizationSetBy = Automatic
 
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	column _iss_custom_clear_perf
-		dataType: string
+		dataType: double
 		lineageTag: 5d2444d7-a0b7-4685-b1fe-776139ff4908
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: _iss_custom_clear_perf
 
 		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column _e2e_total_lead_time_perf
 		dataType: string
@@ -725,28 +722,33 @@ table _FOCUS_VIEW_
 		annotation SummarizationSetBy = Automatic
 
 	column _days_custom_clearance_lt
-		dataType: string
+		dataType: int64
+		formatString: 0
 		lineageTag: 886037d1-2485-412f-9326-70a766785289
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: _days_custom_clearance_lt
 
 		annotation SummarizationSetBy = Automatic
 
 	column _days_iss_cont_booking_lt
-		dataType: string
+		dataType: int64
+		formatString: 0
 		lineageTag: 0e22e99d-1291-453f-8bbc-377df7f493d9
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: _days_iss_cont_booking_lt
 
 		annotation SummarizationSetBy = Automatic
 
 	column _days_transit_lt
-		dataType: string
+		dataType: dateTime
+		formatString: Long Time
 		lineageTag: 2baca59a-d756-4be0-b3b1-5afcb150fa66
 		summarizeBy: none
 		sourceColumn: _days_transit_lt
 
 		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
 
 	column _e2e_total_lt
 		dataType: string
@@ -781,17 +783,19 @@ table _FOCUS_VIEW_
 		annotation SummarizationSetBy = Automatic
 
 	column _dep_discrepancy_days
-		dataType: string
+		dataType: int64
+		formatString: 0
 		lineageTag: 9b5d0c87-d714-4099-a49b-ae47f8c833c1
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: _dep_discrepancy_days
 
 		annotation SummarizationSetBy = Automatic
 
 	column _arr_discrepancy_days
-		dataType: string
+		dataType: int64
+		formatString: 0
 		lineageTag: 545436dd-8eaf-4202-9a60-522019ec152a
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: _arr_discrepancy_days
 
 		annotation SummarizationSetBy = Automatic
@@ -821,25 +825,28 @@ table _FOCUS_VIEW_
 		annotation SummarizationSetBy = Automatic
 
 	column _crd_2_etd
-		dataType: string
+		dataType: int64
+		formatString: 0
 		lineageTag: f8458a2b-a12e-413c-9fcd-8c8d0737349e
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: _crd_2_etd
 
 		annotation SummarizationSetBy = Automatic
 
 	column _etd_2_eta
-		dataType: string
+		dataType: int64
+		formatString: 0
 		lineageTag: d5976e2f-9870-4710-abc3-ed2289b15261
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: _etd_2_eta
 
 		annotation SummarizationSetBy = Automatic
 
 	column _eta_2_del
-		dataType: string
+		dataType: int64
+		formatString: 0
 		lineageTag: eb220d96-9df4-44cd-b6d0-68dca4d949b2
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: _eta_2_del
 
 		annotation SummarizationSetBy = Automatic
@@ -876,6 +883,42 @@ table _FOCUS_VIEW_
 
 		annotation SummarizationSetBy = Automatic
 
+	column _dn
+		dataType: string
+		lineageTag: 371ce604-c783-4de6-8dc3-6cf77191ecdf
+		summarizeBy: none
+		sourceColumn: _dn
+
+		annotation SummarizationSetBy = Automatic
+
+	column _crd
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e16aaae9-9961-446b-89bd-b9e3e4b609d1
+		summarizeBy: none
+		sourceColumn: _crd
+
+		annotation SummarizationSetBy = Automatic
+
+	column _focus_link
+		dataType: string
+		lineageTag: 96d9daf1-a1af-4ec0-bcbd-f88550557e22
+		dataCategory: WebUrl
+		summarizeBy: none
+		sourceColumn: _focus_link
+
+		annotation SummarizationSetBy = Automatic
+
+	column _iss_cont_booking_perf2
+		dataType: double
+		lineageTag: 55f27144-63c4-4c6b-9ce0-ea329c45190e
+		summarizeBy: sum
+		sourceColumn: _iss_cont_booking_perf2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	partition _FOCUS_VIEW_ = m
 		mode: import
 		queryGroup: TABLES
@@ -895,7 +938,11 @@ table _FOCUS_VIEW_
 				    
 				    _filter_branch = Table.SelectRows(#"Changed Type", each [_crm_client_branch] = "EMIRATES AIRLINE - DEPARTMENT - INFLIGHT SERVICES"),
 				
-				    _filter_date = Table.SelectRows(_filter_branch, (x) => x[_creation_date] >= #date(2026,8,1) or x[_arrival_date] >= #date(2026,8,1))
+				    _filter_date = Table.SelectRows(_filter_branch, (x) => 
+				                                                            x[_creation_date] >= #date(2026,9,1) 
+				                                                            or x[_arrival_date] >= #date(2026,9,1) 
+				                                                            or x[_arrival_date] = null
+				                                                            )
 				
 				in
 				    _filter_date

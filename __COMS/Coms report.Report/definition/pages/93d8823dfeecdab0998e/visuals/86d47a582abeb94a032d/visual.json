@@ -53,12 +53,27 @@
                       "Entity": "_FOCUS_VIEW_"
                     }
                   },
-                  "Property": "_status"
+                  "Property": "_creation_date"
                 }
               },
-              "queryRef": "_FOCUS_VIEW_._status",
-              "nativeQueryRef": "Status",
-              "displayName": "Status"
+              "queryRef": "_FOCUS_VIEW_._creation_date",
+              "nativeQueryRef": "Creation Date",
+              "displayName": "Creation Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_FOCUS_VIEW_"
+                    }
+                  },
+                  "Property": "_delivery_date"
+                }
+              },
+              "queryRef": "_FOCUS_VIEW_._delivery_date",
+              "nativeQueryRef": "DCF (Delivery Date)",
+              "displayName": "DCF (Delivery Date)"
             }
           ],
           "fieldParameters": [
@@ -74,7 +89,7 @@
                 }
               },
               "index": 2,
-              "length": 1
+              "length": 2
             }
           ]
         }

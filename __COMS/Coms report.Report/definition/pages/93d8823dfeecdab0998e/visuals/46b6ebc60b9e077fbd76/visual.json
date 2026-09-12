@@ -4,7 +4,7 @@
   "position": {
     "x": 60,
     "y": 151,
-    "z": 3000,
+    "z": 4000,
     "height": 550,
     "width": 220.98593493180763,
     "tabOrder": 3000
@@ -345,7 +345,14 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'''_FOCUS_VIEW_''[_status]'"
+                                "Value": "'''_FOCUS_VIEW_''[_creation_date]'"
+                              }
+                            }
+                          ],
+                          [
+                            {
+                              "Literal": {
+                                "Value": "'''_FOCUS_VIEW_''[_delivery_date]'"
                               }
                             }
                           ]

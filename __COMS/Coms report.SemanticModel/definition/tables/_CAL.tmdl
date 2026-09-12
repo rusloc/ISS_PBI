@@ -3,7 +3,7 @@ table _CAL
 
 	column Date
 		dataType: dateTime
-		formatString: Long Date
+		formatString: yyyy-mmm-dd
 		lineageTag: 78227625-d84a-416d-8cd7-d0300d13d9df
 		summarizeBy: none
 		sourceColumn: Date

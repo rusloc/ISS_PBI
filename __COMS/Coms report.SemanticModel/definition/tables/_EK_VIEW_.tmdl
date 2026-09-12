@@ -337,7 +337,7 @@ table _EK_VIEW_
 
 	column _pr_appr_date
 		dataType: dateTime
-		formatString: dd-mmm-yyyy
+		formatString: yyyy-mmm-dd
 		lineageTag: 238d0309-45a3-4937-bb51-5ea8044d2dcd
 		summarizeBy: none
 		sourceColumn: _pr_appr_date
@@ -350,7 +350,7 @@ table _EK_VIEW_
 
 	column _po_creation_date
 		dataType: dateTime
-		formatString: dd-mmm-yyyy
+		formatString: yyyy-mmm-dd
 		lineageTag: cfdcb6a0-bf58-4731-8cce-749e648814db
 		summarizeBy: none
 		sourceColumn: _po_creation_date
@@ -363,7 +363,7 @@ table _EK_VIEW_
 
 	column _po_recd_date
 		dataType: dateTime
-		formatString: dd-mmm-yyyy
+		formatString: yyyy-mmm-dd
 		lineageTag: ca89d2e9-4ce4-49a5-84b7-fbcdf4cd9e3f
 		summarizeBy: none
 		sourceColumn: _po_recd_date
@@ -376,7 +376,7 @@ table _EK_VIEW_
 
 	column _po_need_by_date
 		dataType: dateTime
-		formatString: dd-mmm-yyyy
+		formatString: yyyy-mmm-dd
 		lineageTag: 8c33a11e-31f2-4746-ae90-fbdd827a4af7
 		summarizeBy: none
 		sourceColumn: _po_need_by_date
@@ -402,7 +402,7 @@ table _EK_VIEW_
 
 	column _pickup_date
 		dataType: dateTime
-		formatString: dd-mmm-yyyy
+		formatString: yyyy-mmm-dd
 		lineageTag: 415407f5-fc1c-44e9-8664-36bc310df5d7
 		summarizeBy: none
 		sourceColumn: _pickup_date
@@ -650,7 +650,7 @@ table _EK_VIEW_
 
 	column _arrival_date
 		dataType: dateTime
-		formatString: dd-mmm-yyyy
+		formatString: yyyy-mmm-dd
 		lineageTag: 7294a534-866d-44fe-9238-c0ce984005aa
 		summarizeBy: none
 		sourceColumn: _arrival_date
@@ -663,7 +663,7 @@ table _EK_VIEW_
 
 	column _departure_date
 		dataType: dateTime
-		formatString: dd-mmm-yyyy
+		formatString: yyyy-mmm-dd
 		lineageTag: 15274cce-39f5-4f26-9c5a-308f7146a844
 		summarizeBy: none
 		sourceColumn: _departure_date
@@ -676,7 +676,7 @@ table _EK_VIEW_
 
 	column _est_cargo_ready_date
 		dataType: dateTime
-		formatString: dd-mmm-yyyy
+		formatString: yyyy-mmm-dd
 		lineageTag: f659f53d-1f78-4934-ba26-b3ae6a0a6364
 		summarizeBy: none
 		sourceColumn: _est_cargo_ready_date
@@ -713,7 +713,7 @@ table _EK_VIEW_
 
 	column _pod_date
 		dataType: dateTime
-		formatString: dd-mmm-yyyy
+		formatString: yyyy-mmm-dd
 		lineageTag: 78caaada-5357-47f9-a4e2-a76d711b2859
 		summarizeBy: none
 		sourceColumn: _pod_date
@@ -726,7 +726,7 @@ table _EK_VIEW_
 
 	column _do_date
 		dataType: dateTime
-		formatString: dd-mmm-yyyy
+		formatString: yyyy-mmm-dd
 		lineageTag: b133b141-6ecd-4c25-957d-609a4884bb95
 		summarizeBy: none
 		sourceColumn: _do_date
@@ -840,7 +840,7 @@ table _EK_VIEW_
 
 	column _pr_date
 		dataType: dateTime
-		formatString: General Date
+		formatString: yyyy-mmm-dd
 		lineageTag: 0089338b-5a7b-4191-9717-2a0e8445e53e
 		summarizeBy: none
 		sourceColumn: _pr_date
@@ -1203,7 +1203,7 @@ table _EK_VIEW_
 
 	column _po_app_date
 		dataType: dateTime
-		formatString: dd-mmm-yyyy
+		formatString: yyyy-mmm-dd
 		lineageTag: a1dd7d70-0d70-46ad-aec8-abe5a332f8a6
 		summarizeBy: none
 		sourceColumn: _po_app_date
@@ -1403,7 +1403,7 @@ table _EK_VIEW_
 
 	column _arrival_date_actual
 		dataType: dateTime
-		formatString: dd-mmm-yyyy
+		formatString: yyyy-mmm-dd
 		lineageTag: d9469b0e-566c-4a8b-971d-59db789ee227
 		summarizeBy: none
 		sourceColumn: _arrival_date_actual
@@ -1414,7 +1414,7 @@ table _EK_VIEW_
 
 	column _departure_date_actual
 		dataType: dateTime
-		formatString: dd-mmm-yyyy
+		formatString: yyyy-mmm-dd
 		lineageTag: 67d3de27-03ff-46fe-beec-e0ee679540a0
 		summarizeBy: none
 		sourceColumn: _departure_date_actual
@@ -1469,7 +1469,7 @@ table _EK_VIEW_
 
 	column _arrival_date_full
 		dataType: dateTime
-		formatString: General Date
+		formatString: yyyy-mmm-dd
 		lineageTag: 566fe775-3629-4d3e-acb9-e8cb31b6d99f
 		summarizeBy: none
 		sourceColumn: _arrival_date_full
@@ -1478,7 +1478,7 @@ table _EK_VIEW_
 
 	column _departure_date_full
 		dataType: dateTime
-		formatString: General Date
+		formatString: yyyy-mmm-dd
 		lineageTag: 2ea968da-cc2b-4370-a2df-cba5f7f1bc60
 		summarizeBy: none
 		sourceColumn: _departure_date_full
@@ -1487,7 +1487,7 @@ table _EK_VIEW_
 
 	column _arrival_date_fallback
 		dataType: dateTime
-		formatString: dd-mmm-yyyy
+		formatString: yyyy-mmm-dd
 		lineageTag: ca95d779-abbb-4a52-8876-2ec83721f6d1
 		summarizeBy: none
 		sourceColumn: _arrival_date_fallback
@@ -1498,7 +1498,7 @@ table _EK_VIEW_
 
 	column _departure_date_fallback
 		dataType: dateTime
-		formatString: dd-mmm-yyyy
+		formatString: yyyy-mmm-dd
 		lineageTag: 851f0296-bd2a-4de4-a20e-53174f2b03dd
 		summarizeBy: none
 		sourceColumn: _departure_date_fallback
@@ -1605,6 +1605,377 @@ table _EK_VIEW_
 
 		annotation SummarizationSetBy = Automatic
 
+	column _crd_2_ptd
+		dataType: int64
+		formatString: 0
+		lineageTag: 9a267719-6aec-4649-8e66-661630e27920
+		summarizeBy: sum
+		sourceColumn: _crd_2_ptd
+
+		annotation SummarizationSetBy = Automatic
+
+	column _dep_discrepancy_days
+		dataType: int64
+		formatString: 0
+		lineageTag: 1cb8dbb0-750e-4763-92f7-e3d9ce644566
+		summarizeBy: sum
+		sourceColumn: _dep_discrepancy_days
+
+		annotation SummarizationSetBy = Automatic
+
+	column _arr_discrepancy_days
+		dataType: int64
+		formatString: 0
+		lineageTag: 1b4a5d1c-22e1-41cb-b20c-50ec5d0f1b16
+		summarizeBy: sum
+		sourceColumn: _arr_discrepancy_days
+
+		annotation SummarizationSetBy = Automatic
+
+	column _ptd_2_now_bucket
+		dataType: string
+		lineageTag: 4691eda2-6e3a-4be6-aac9-140d44080fa1
+		summarizeBy: none
+		sourceColumn: _ptd_2_now_bucket
+
+		annotation SummarizationSetBy = Automatic
+
+	column _pickup_2_now
+		dataType: int64
+		formatString: 0
+		lineageTag: 3e276a2f-a256-473f-b146-76c8010fb819
+		summarizeBy: sum
+		sourceColumn: _pickup_2_now
+
+		annotation SummarizationSetBy = Automatic
+
+	column _cur_location
+		dataType: string
+		lineageTag: 0fddcc39-794b-4c18-9007-35af9aaaf1ee
+		summarizeBy: none
+		sourceColumn: _cur_location
+
+		annotation SummarizationSetBy = Automatic
+
+	column _port_water
+		dataType: string
+		lineageTag: 37946aca-5300-4cc0-8263-7cf28fdc7ccc
+		summarizeBy: none
+		sourceColumn: _port_water
+
+		annotation SummarizationSetBy = Automatic
+
+	column _rdd_2_now
+		dataType: int64
+		formatString: 0
+		lineageTag: e5123f75-afbd-4570-8927-a465a2aea81b
+		summarizeBy: sum
+		sourceColumn: _rdd_2_now
+
+		annotation SummarizationSetBy = Automatic
+
+	column _etd_2_crd
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c2501aa-efbb-473d-a783-73c8f0c9bc49
+		summarizeBy: sum
+		sourceColumn: _etd_2_crd
+
+		annotation SummarizationSetBy = Automatic
+
+	column _rdd_2_pta
+		dataType: int64
+		formatString: 0
+		lineageTag: 208a5830-958b-4a9b-881f-2f6bc9aa0b3f
+		summarizeBy: sum
+		sourceColumn: _rdd_2_pta
+
+		annotation SummarizationSetBy = Automatic
+
+	column _air_sea_bucket
+		dataType: string
+		lineageTag: c3db9a8b-8705-497d-960e-809321190a4a
+		summarizeBy: none
+		sourceColumn: _air_sea_bucket
+
+		annotation SummarizationSetBy = Automatic
+
+	column _ptd_2_crd
+		dataType: int64
+		formatString: 0
+		lineageTag: efdc5eeb-a8d5-4443-ac65-58607feede9a
+		summarizeBy: sum
+		sourceColumn: _ptd_2_crd
+
+		annotation SummarizationSetBy = Automatic
+
+	column _del_2_ptd
+		dataType: int64
+		formatString: 0
+		lineageTag: f8b74245-1280-4d83-b36a-93507cae0dda
+		summarizeBy: sum
+		sourceColumn: _del_2_ptd
+
+		annotation SummarizationSetBy = Automatic
+
+	column _del_2_crd
+		dataType: int64
+		formatString: 0
+		lineageTag: 4ebaafc5-4a5e-408b-82c5-4ffd18ce2aca
+		summarizeBy: sum
+		sourceColumn: _del_2_crd
+
+		annotation SummarizationSetBy = Automatic
+
+	column _effective_eta
+		dataType: dateTime
+		formatString: yyyy-mmm-dd
+		lineageTag: c4764a61-14ce-4eea-849d-2c0028cd8c17
+		summarizeBy: none
+		sourceColumn: _effective_eta
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _eta_delay
+		dataType: int64
+		formatString: 0
+		lineageTag: 737ebc47-f52f-4099-9e41-b094f30ba6c8
+		summarizeBy: sum
+		sourceColumn: _eta_delay
+
+		annotation SummarizationSetBy = Automatic
+
+	column _eta_delay_bucket
+		dataType: string
+		lineageTag: 9fc98813-645b-4efc-b224-69e0d8086f35
+		summarizeBy: none
+		sourceColumn: _eta_delay_bucket
+
+		annotation SummarizationSetBy = Automatic
+
+	column _crd_status
+		dataType: string
+		lineageTag: 47774842-43d3-4916-8431-cafd983729a1
+		summarizeBy: none
+		sourceColumn: _crd_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column _pta_2_rdd
+		dataType: int64
+		formatString: 0
+		lineageTag: bfc20649-71d7-4f84-9d3f-8db5c02fd5c7
+		summarizeBy: sum
+		sourceColumn: _pta_2_rdd
+
+		annotation SummarizationSetBy = Automatic
+
+	column _nbd_2_pta_status
+		dataType: int64
+		formatString: 0
+		lineageTag: 74b2e5f9-1f43-4199-8814-982721f357ac
+		summarizeBy: sum
+		sourceColumn: _nbd_2_pta_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column _etd_2_ptd
+		dataType: int64
+		formatString: 0
+		lineageTag: 2aa3fd32-2643-4d62-8333-83cfb7fec1a5
+		summarizeBy: sum
+		sourceColumn: _etd_2_ptd
+
+		annotation SummarizationSetBy = Automatic
+
+	column _del_from_etd
+		dataType: int64
+		formatString: 0
+		lineageTag: 5c913909-b40a-4046-a15d-94f265db5e54
+		summarizeBy: sum
+		sourceColumn: _del_from_etd
+
+		annotation SummarizationSetBy = Automatic
+
+	column _ptd_2_now
+		dataType: int64
+		formatString: 0
+		lineageTag: 49ea330a-2f19-4a16-bdb3-8d0a8651e944
+		summarizeBy: sum
+		sourceColumn: _ptd_2_now
+
+		annotation SummarizationSetBy = Automatic
+
+	column _eta_last_change
+		dataType: dateTime
+		formatString: yyyy-mmm-dd
+		lineageTag: d0e0cbee-e39d-4e68-a7ec-1d5d07701ea3
+		summarizeBy: none
+		sourceColumn: _eta_last_change
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _etd_last_change
+		dataType: dateTime
+		formatString: yyyy-mmm-dd
+		lineageTag: b96d2106-5041-41fa-8156-10a3bf90a893
+		summarizeBy: none
+		sourceColumn: _etd_last_change
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _quote_date
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: 7e744599-0e95-4dc4-be61-f5233ab7678e
+		summarizeBy: none
+		sourceColumn: _quote_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _quote_status
+		dataType: string
+		lineageTag: 6ba4de0c-d30c-433b-bed5-6052842a80f6
+		summarizeBy: none
+		sourceColumn: _quote_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column _quote_amount_usd
+		dataType: string
+		lineageTag: 244358e1-004a-40a7-be0e-4cb038de6a63
+		summarizeBy: none
+		sourceColumn: _quote_amount_usd
+
+		annotation SummarizationSetBy = Automatic
+
+	column _quote_details_usd
+		dataType: string
+		lineageTag: 38a2f564-4653-4f53-a7d0-165134f21b56
+		summarizeBy: none
+		sourceColumn: _quote_details_usd
+
+		annotation SummarizationSetBy = Automatic
+
+	column _quote_approve_date
+		dataType: dateTime
+		formatString: dd-mmm-yyyy
+		lineageTag: 44354ea7-09b5-4e3e-b283-5445effeaebf
+		summarizeBy: none
+		sourceColumn: _quote_approve_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column _quote_approve_details_usd
+		dataType: string
+		lineageTag: a099a0e7-a167-445f-9f45-11ae671c9310
+		summarizeBy: none
+		sourceColumn: _quote_approve_details_usd
+
+		annotation SummarizationSetBy = Automatic
+
+	column _quote_approve_amount_usd
+		dataType: string
+		lineageTag: 0f6ea4c7-e519-4a63-8b3e-588b4eab4716
+		summarizeBy: none
+		sourceColumn: _quote_approve_amount_usd
+
+		annotation SummarizationSetBy = Automatic
+
+	column __nbd_2_arr
+		dataType: int64
+		formatString: 0
+		lineageTag: 99343790-5bda-4760-9859-416856f10791
+		summarizeBy: sum
+		sourceColumn: __nbd_2_arr
+
+		annotation SummarizationSetBy = Automatic
+
+	column _crd_2_rdd
+		dataType: int64
+		formatString: 0
+		lineageTag: 49024696-c6aa-42cc-8bbd-69b31c5079d1
+		summarizeBy: sum
+		sourceColumn: _crd_2_rdd
+
+		annotation SummarizationSetBy = Automatic
+
+	column _ptd_from_crd
+		dataType: int64
+		formatString: 0
+		lineageTag: fb1ae45d-ac7f-49a3-9711-0cbd9646b821
+		summarizeBy: sum
+		sourceColumn: _ptd_from_crd
+
+		annotation SummarizationSetBy = Automatic
+
+	column _etd_from_crd
+		dataType: int64
+		formatString: 0
+		lineageTag: ebebc394-b851-4533-92df-bfbb792bd1a4
+		summarizeBy: sum
+		sourceColumn: _etd_from_crd
+
+		annotation SummarizationSetBy = Automatic
+
+	column _eta_2_nbd
+		dataType: int64
+		formatString: 0
+		lineageTag: 4b66868c-8dfa-4039-b921-58e36aff6536
+		summarizeBy: sum
+		sourceColumn: _eta_2_nbd
+
+		annotation SummarizationSetBy = Automatic
+
+	column _freight_order_comment
+		dataType: string
+		lineageTag: 8cada053-e5f5-4ab0-b6ca-bc1f76b1016c
+		summarizeBy: none
+		sourceColumn: _freight_order_comment
+
+		annotation SummarizationSetBy = Automatic
+
+	column _focus_link
+		dataType: string
+		lineageTag: af3907b4-5203-4713-b74d-e8a9acd522f1
+		dataCategory: WebUrl
+		summarizeBy: none
+		sourceColumn: _focus_link
+
+		annotation SummarizationSetBy = Automatic
+
+	column _quote_approve_amount_aed
+		dataType: double
+		lineageTag: a2de8d45-a525-427d-b062-ce3d7f00bffa
+		summarizeBy: sum
+		sourceColumn: _quote_approve_amount_aed
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column _lob
+		dataType: string
+		lineageTag: 23ae37f6-ba71-4e72-8218-35d0bc1235ad
+		summarizeBy: none
+		sourceColumn: _lob
+
+		annotation SummarizationSetBy = Automatic
+
 	partition _EK_VIEW_ = m
 		mode: import
 		queryGroup: TABLES
@@ -1615,16 +1986,11 @@ table _EK_VIEW_
 				    [Query = EK_SQL_SOURCE[_code]{0}]), 
 				        
 				    colTypes = Table.TransformColumnTypes(Source,{
-				                                        {"_pickup_date", type date}, {"_cargo_ho", type date}
-				                                        , {"_etd", type date}, {"_eta", type date}
-				                                        , {"_do_exp", type date}, {"_del", type date}
-				                                        , {"_crd", type date}, {"_po_need_by_date", type date}
-				                                        , {"_po_recd_date", type date}, {"_po_creation_date", type date}
-				                                        , {"_po_app_date", type date}, {"_pr_appr_date", type date}
-				                                        , {"_client_id", type text}, {"_pod_date", type date}
-				                                        , {"_do_date", type date}
-				                                        , {"_arrival_date", type date}, {"_departure_date", type date}
-				                                        , {"_goods_cleared_destination", type date}, {"_goods_cleared_origin", type date}})
+				                                                {"_pickup_date", type date}, {"_cargo_ho", type date}, {"_etd", type date}, {"_eta", type date}, {"_do_exp", type date}, {"_del", type date}
+				                                                , {"_crd", type date}, {"_po_need_by_date", type date}, {"_po_recd_date", type date}, {"_po_creation_date", type date}, {"_po_app_date", type date}
+				                                                , {"_pr_appr_date", type date}, {"_client_id", type text}, {"_pod_date", type date}, {"_do_date", type date}, {"_arrival_date", type date}
+				                                                , {"_departure_date", type date}, {"_goods_cleared_destination", type date}, {"_goods_cleared_origin", type date}
+				                                                , {"_quote_date", type date}, {"_quote_approve_date", type date}})
 				
 				in
 				    colTypes
@@ -1632,5 +1998,5 @@ table _EK_VIEW_
 
 	annotation PBI_NavigationStepName = Navigation
 
-	annotation PBI_ResultType = Exception
+	annotation PBI_ResultType = Table
 
