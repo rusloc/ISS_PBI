@@ -140,7 +140,19 @@ from (
 					,fu.shipment_link 																								_shipment_link
 					,fu.comment																										_freight_order_comment
 					,fu.pnl_quotation ->> 'quotedDate'																				_quote_date
-					,fu.pnl_quotation ->> 'quoteStatus'																				_quote_status
+					,case 
+			-- when "_incoterms_fo" is taken as raw logic -> check below the actual column
+						when (case 
+								when feic._ship_response ->> 'shipping_terms'::text is not null 
+									then feic._ship_response ->> 'shipping_terms'::text
+								else fe."shipping_terms" end) not in ('CIF','DAP','DDP')
+							then coalesce(fu.pnl_quotation ->> 'quoteStatus', 'TBA')
+						when (case 
+								when feic._ship_response ->> 'shipping_terms'::text is not null 
+									then feic._ship_response ->> 'shipping_terms'::text
+								else fe."shipping_terms" end) in ('CIF','DAP','DDP')
+							then coalesce(fu.pnl_quotation ->> 'quoteStatus', 'N/A')
+						else null end																								_quote_status
 					,fu.pnl_quotation ->> 'quotedAmountUsd'																			_quote_amount_usd
 					,fu.pnl_quotation ->> 'quotedDetailsUsd'																		_quote_details_usd
 					,fu.pnl_quotation ->> 'quoteApprovedDate'																		_quote_approve_date
@@ -1178,18 +1190,15 @@ from (
 											and (_del is null or _del > now()::date)
 												then 'Arrived'
 										when (_response_shipment_id <> '' or _response_shipment_id is not null)
-											and (_full_etd is not null or _full_eta is not null)
-											and (_full_etd > now()::date or _full_eta > now()::date)
+											and (_full_etd is not null)
+											and (_full_etd > now()::date)
 											and _quote_status = 'Approved'
 												then 'Booked'
 										when (_response_shipment_id <> '' or _response_shipment_id is not null)
-											and (_full_etd is null or _full_eta is null)
+											and (_full_etd is null)
 											and _pre_alert = 'Yes'
 											and _quote_status = 'Approved'
 												then 'Pending Booking'
-										when (_response_shipment_id <> '' or _response_shipment_id is not null)
-											and _incoterms_fo not in ('CIF','DAP','DDP')
-												then coalesce(_quote_status, 'TBA')
 --										when (_response_shipment_id <> '' or _response_shipment_id is not null)
 --											and (_full_etd is null or _full_eta is null)
 --											and _pre_alert = 'No'
@@ -1197,7 +1206,7 @@ from (
 --										when (_response_shipment_id = '' or _response_shipment_id is null)
 --											and _fo_serial is not null
 --											then 'Pending Quotation'
-										else null
+										else 'Pending Booking'
 									end																											_status
 							,case 
 									when _e2e_total_lt > 0 and _days_total_comm_perf > 0
