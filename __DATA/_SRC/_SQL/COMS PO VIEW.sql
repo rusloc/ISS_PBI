@@ -152,7 +152,7 @@ from (
 									then feic._ship_response ->> 'shipping_terms'::text
 								else fe."shipping_terms" end) in ('CIF','DAP','DDP')
 							then coalesce(fu.pnl_quotation ->> 'quoteStatus', 'N/A')
-						else null end																								_quote_status
+						else 'TBA' end																								_quote_status
 					,fu.pnl_quotation ->> 'quotedAmountUsd'																			_quote_amount_usd
 					,fu.pnl_quotation ->> 'quotedDetailsUsd'																		_quote_details_usd
 					,fu.pnl_quotation ->> 'quoteApprovedDate'																		_quote_approve_date

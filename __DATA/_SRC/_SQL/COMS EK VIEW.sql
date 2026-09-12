@@ -53,7 +53,7 @@ $sql$
 									then feic._ship_response ->> 'shipping_terms'::text
 								else fe."shipping_terms" end) in ('CIF','DAP','DDP')
 							then coalesce(f.pnl_quotation ->> 'quoteStatus', 'N/A')
-						else null end																								_quote_status
+						else 'TBA' end																								_quote_status
 					,f.pnl_quotation ->> 'quotedAmountUsd'																			_quote_amount_usd
 					,f.pnl_quotation ->> 'quotedDetailsUsd'																			_quote_details_usd
 					,f.pnl_quotation ->> 'quoteApprovedDate'																		_quote_approve_date
