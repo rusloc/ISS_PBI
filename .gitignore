@@ -1,19 +1,13 @@
-# PBIX = backup only, never source (see CLAUDE.md)
-*.pbix
-
-# Model data cache — a full local copy of the model (21 MB for AVS).
-# This is the one thing that must never reach GitHub.
-# Everything else under .pbi/ is JSON and IS tracked.
-**/.pbi/cache.abf
-**/cache.abf
-
-# Pre-edit copies written under Rule #1 (see CLAUDE.md) — local safety net, not history.
+# Whitelist mode (2026-09-12): nothing is tracked except the root files below and __DATA/_SRC/_SQL/.
+/*
+!/.gitignore
+!/CLAUDE.md
+!/README.md
+!/__DATA/
+/__DATA/*
+!/__DATA/_SRC/
+/__DATA/_SRC/*
+!/__DATA/_SRC/_SQL/
+# Pre-edit copies under Rule #1 stay local, even inside the tracked folder.
 __backup__/
-
-# Report + model definitions under any __<CODE>/ report project: local only, never pushed (2026-09-12).
-# Already-tracked copies were removed from the index with `git rm --cached`; files stay on disk.
-__*/*.Report/
-__*/*.SemanticModel/
-
-# COMS story: local only, never pushed (2026-09-12)
-__COMS/COMS story/
+*.bak
