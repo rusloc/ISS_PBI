@@ -14,3 +14,6 @@ __backup__/
 # Already-tracked copies were removed from the index with `git rm --cached`; files stay on disk.
 __*/*.Report/
 __*/*.SemanticModel/
+
+# COMS story: local only, never pushed (2026-09-12)
+__COMS/COMS story/
