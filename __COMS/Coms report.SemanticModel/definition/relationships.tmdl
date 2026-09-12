@@ -1,4 +1,0 @@
-relationship 86983c0d-f0a2-c8f2-294a-df96c58a7a5e
-	fromColumn: _FOCUS_VIEW_._creation_date
-	toColumn: _CAL.Date
-
