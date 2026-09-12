@@ -1,0 +1,282 @@
+
+
+
+-- set var
+set dev.tracking_main_app = 
+$sql$
+
+
+select 
+	t.*
+	,coalesce(t.calculated_eta, eta_date) + interval '10 days'															_eta_add_10
+	,((t.cargo)[0] ->> 'gross_weight')::numeric																			_cargo_gross_weight
+	,((t.cargo)[0] ->> 'gross_volume')::numeric																			_cargo_gross_volume
+	,((t.cargo)[0] ->> 'chargeable_weight')::numeric																	_cargo_chargeable_weight
+	,((t.cargo)[0] ->> 'package_count')::numeric																		_package_count
+	,upper(c."Name")																									_client 
+	,t.contact_id																										_client_id
+	,coalesce(s._web_url, 'https://' || t.iss_domain || '.logistaas.com/shipments/' || t.id || '/', '')					_web_url
+	,case
+		when upper(split_part(t.service, '_', 1)) = 'AIR' then t.serial_no || '_' || upper(trim(c."Name"))
+		else t.container_equipment_no
+	end 																												_container_link
+	,s._containers																										_containers
+	,trim(split_part(t.container_type,'ft',2))																			_container_type_short
+	,substring( t.container_type ,'40')::numeric																		_container_length_40
+	,substring( t.container_type ,'20')::numeric																		_container_length_20
+	,upper(split_part(t.service, '_', 1))																				_servive_type_short
+	,upper(split_part(t.service, '_', 1)) || ' ' || upper(split_part(t.service, '_', 2))								_service_type_clean
+	,upper(split_part(t.service, '_', 2))																				_direction													
+	,case 
+		when upper(
+			split_part(t.service, '_', 1)) = 'AIR' then coalesce(t.package_count, t.container_packages)
+		else coalesce(t.container_packages, t.package_count)
+	end																													_packages
+	,case 
+		when upper(
+			split_part(t.service, '_', 1)) = 'AIR' then t.gross_weight
+		else coalesce(container_weight,((t.cargo)[0] ->> 'gross_weight')::numeric, t.container_wakeo_gross_weight)
+	end																													_gross_weight
+	,case 
+		when upper(
+			split_part(t.service, '_', 1)) = 'AIR' then t.gross_weight
+		else null
+	end																													_chargeable_weight
+	,t.origin_port_locode																								_origin_port
+	,coalesce(t.origin_port_name, o."name", t.origin_port)																_origin_port_name
+	,t.destination_port_locode																							_destination_port
+	,coalesce(t.destination_port_name, d."name")																			_destination_port_name 
+	,coalesce(oc._name, t.origin_country )																				_origin_country_name
+	,coalesce(dc._name, t.destination_country )																			_destination_country_name
+	,coalesce(upper(c."Name"), 'NA') 	
+		|| '_' || coalesce(serial_no, 'NA') 
+		|| '_' || coalesce(container_equipment_no,'NA')																	_client_dim_link
+	,n._client_branch_name																								_client_branch_name
+	,t.co2_emission_details ->> 'co2e_gptkm'																				_co2e_gptkm
+	,t.co2_emission_details ->> 'co2e'																					_co2e
+	,coalesce(sd._change_date, 'Initialized')																			_change_date
+	,s._LOB
+	,coalesce(s._analytical_carrier, a."Carrier Name",'NA')																_analytical_carrier 
+	,s._analytical_coloader																								_analytical_coloader												
+	,b._booking_no																										_booking_no
+	,s._offer_serial																										_offer_serial
+	,s._fin_status																										_fin_status
+	,tl._public_tracking_link																							_public_tracking_link
+	,_fields																											_wakeo_error_fields
+	,_reasons																										_wakeo_error_reasons	
+	,s._crm_client_branch																							_crm_client_branch
+	,case
+		when wakeo_id is not null then 'Wakeo traked'
+		else 'Not tracked'
+	end 																												_is_wakeo_tracker
+	,case 
+		when t.loading_date > now()::date or t.arrival_date > now()::date then 'ATA/ATD ahead'
+		else 'ATA/ATD ok'
+	end 																												_ata_atd_ahead
+	,case 
+		when (master_no is not null or master_no <> '') 
+		and (t.eta_date is null or t.etd_date is null )
+			then 'ETD/ETA empty after MBL'
+		else 'ETD/ETA after MBL OK'
+	end 																												_eta_etd_after_mbl
+	,case 
+		when (master_no is not null or master_no <> '') and t.eta_date is null
+			then '1'
+		else '0'
+	end 																												_eta_after_mbl_error
+	,case 
+		when (master_no is not null or master_no <> '') and t.etd_date is null
+			then '1'
+		else '0'
+	end 																												_etd_after_mbl_error
+	,s._sales_user																									_sales_user
+	,s._oper_user																									_oper_user
+	,s._doc_user																										_doc_user
+	,t.port_of_discharge																								_port_of_discharge
+	,coalesce(t.port_of_discharge_name, ps.name, pa.name )															_port_of_discharge_name	
+	,case 
+		when t.extra_local_handling = '0' then 'No'																						
+		when t.extra_local_handling = '1' then 'Yes'
+		else 'NA'
+	end 																												_extra_local_handling
+from portal.materialized_view_shipments_tracker t
+left join public.focus__contacts c 
+	on c."ID" = t.contact_id 
+left join (
+	-- join shipment WEB URL
+			select 
+				upper(trim(s."Serial No"))				_serial 
+				,s."URL to Shipment" 						_web_url
+				,s."CRM Client Branch"					_crm_client_branch
+				,s."Contact Branch ID"					_contact_branch_id
+				,s."Containers"							_containers
+				,s."Line Of Business"						_LOB
+				,s."Carrier / Shipping Line"				_analytical_carrier 
+				,s."Co-Loader"							_analytical_coloader
+				,"Offer Serial No"						_offer_serial
+				,"Financial Status"						_fin_status
+				,s."Sales User"							_sales_user
+				,s."Operations User"						_oper_user
+				,s."Documentation User"					_doc_user
+			from public.analytical__shipments_pbi s
+			) s 
+	on s._serial = upper(trim(t.serial_no ))
+left join (
+			select
+				--  m."ID"																_master_id
+				  fs._serial_no														_serial_no
+				  ,m.iss_domain														_iss_dom
+				  ,string_agg(e->>'field' , ' | ')									_fields
+				  ,string_agg(e->>'reason' , ' | ')									_reasons
+				from focus__master_shipments m
+				cross join lateral jsonb_array_elements(
+				  case jsonb_typeof(m."Wakeo Missing Data")
+				    when 'array'  then m."Wakeo Missing Data"
+				    when 'object' then jsonb_build_array(m."Wakeo Missing Data")
+				    else '[]'::jsonb
+				  end
+				) e
+				left join  (
+					    select distinct on ("ID", iss_domain)
+					    		s."Master ID"											_master_id
+					    		,s."Serial No"											_serial_no
+				    		from public.focus__shipments s
+				    		where 1=1
+				    			and s."Serial No" is not null
+				    		order by "ID", iss_domain
+				    		) fs
+				    	on fs._master_id = m."ID"	
+				where 1=1
+					and e->>'field' is not null
+					and fs._serial_no is not null
+				group by 1,2
+		) w 
+	on w._serial_no = upper(trim(t.serial_no ))
+left join (
+				select 
+					distinct on (b."ID")
+					b."ID"										_contact_branch_id
+					,b."Name" || ' (' || b."Address" || ')'		_client_branch_name 
+				from public.focus__contact_branches b
+				order by "ID"
+		) n
+	on n._contact_branch_id = s._contact_branch_id
+left join public.analytical__air_sea_ports_codes o
+	on upper(trim(origin_port)) = o.code  
+left join public.analytical__air_sea_ports_codes d
+	on upper(trim(destination_port)) = d.code  
+-- DISCHARGE
+left join public.analytical__sea_ports_regions ps
+	on ps.port_code = t.port_of_discharge_name
+left join public.analytical__air_sea_ports_codes pa
+	on pa.code = t.port_of_discharge_name
+left join (
+			select 
+				iso_2_char_code											_code
+				,max(iso_country_name)									_name
+			from public.analytical__iss_country_mapping_codes
+			group by 1
+			) oc
+	on oc._code = t.origin_country 
+left join (
+			select 
+				iso_2_char_code											_code
+				,max(iso_country_name)									_name
+			from public.analytical__iss_country_mapping_codes
+			group by 1
+			) dc
+	on dc._code = t.destination_country  
+left join (
+	select 
+		sd._ship_id
+		,sd._iss_dom
+		,max(sd._change_date)				_change_date
+	from (
+			select 
+				sd."shipmentId" 										_ship_id
+				,sd."issDomain" 										_iss_dom
+				,min(sd."createdAt"::date) over(partition by sd."issDomain", sd."shipmentId")
+				,max(sd."createdAt"::date) over(partition by sd."issDomain", sd."shipmentId")
+				,case 
+					when min(sd."createdAt"::date) over(partition by sd."issDomain", sd."shipmentId") 
+						= max(sd."createdAt"::date) over(partition by sd."issDomain", sd."shipmentId")
+						then 'Initialized'
+					else (max(sd."createdAt"::date) over(partition by sd."issDomain", sd."shipmentId"))::text
+				end														_change_date
+			from portal."ShipmentDates" sd 
+		) sd
+	group by 1,2
+			) sd
+	on sd._ship_id::text = t.id 
+	and sd._iss_dom = sd._iss_dom
+left join public.analytical__scac_codes a
+	on a."SCAC Code" = t.carrier 
+left join (		
+				select 
+					s."Serial No" 											_serial
+					,s."Created At"::date 
+					,s.iss_domain 											_iss_dom
+					,coalesce(s."Booking No" , ms."Booking No")				_booking_no
+				from public.focus__shipments s
+				left join public.focus__master_shipments ms 
+					on ms."ID" = s."Master ID" 
+				where 1=1
+					and coalesce(s."Booking No" , ms."Booking No") is not null
+					and s."Serial No" is not null
+			) b
+	on b._serial = t.serial_no 
+	and b._iss_dom = t.iss_domain
+-- join CONTAINER public tracking link
+left join (
+				select
+					p."shipmentId"																	_ship_id
+					,p."containerNumber"															_container_id
+					,max('https://avs.iss-gf.com/shipment/public/' || p."id")						_public_tracking_link
+				from portal."ShipmentShare" p
+				where 1=1
+					and p."packingList"::int = 1
+--					and p."containerNumber" is not null
+--					and p."shipmentId" = 2185144
+--					and p.id = '75763b7f-b564-468f-aaa4-899a4accd420'
+				group by 1,2
+			) tl
+	on tl._ship_id::int = t.id::int
+	and (
+			(upper(split_part(t.service, '_', 1)) = 'AIR' and tl._container_id = t.serial_no)
+			or (upper(split_part(t.service, '_', 1)) = 'LAND' and tl._container_id = t.serial_no)
+			or (tl._container_id = t.container_equipment_no)
+			)
+where 1=1
+	and t.creation_date >= '2025-05-01'
+	
+	
+	
+$sql$
+
+
+
+
+
+
+
+
+--update repo
+update sql_source 
+set _code = current_setting('dev.tracking_main_app')
+	,_updated = now() 
+where 1=1
+	and _report = 'TRACKER APP'
+	and _page = 'MAIN'
+	
+	
+	
+
+	
+	
+	
+
+	
+
+	
+	
+	
