@@ -52,7 +52,7 @@ $sql$
 								when feic._ship_response ->> 'shipping_terms'::text is not null 
 									then feic._ship_response ->> 'shipping_terms'::text
 								else fe."shipping_terms" end) in ('CIF','DAP','DDP')
-							then coalesce(f.pnl_quotation ->> 'quoteStatus', 'N/A')
+							then coalesce(f.pnl_quotation ->> 'quoteStatus', 'TBA')
 						else 'TBA' end																								_quote_status
 					,f.pnl_quotation ->> 'quotedAmountUsd'																			_quote_amount_usd
 					,f.pnl_quotation ->> 'quotedDetailsUsd'																			_quote_details_usd
@@ -1358,7 +1358,8 @@ select
 -- should be the closest NeedbyDate
 	,max(_po_need_by_date) filter(where _sort = 1)										_po_need_by_date
 	,max(_crd) filter(where _sort = 1)													_crd
-	,max(_crd_estimated)	filter(where _sort = 1)										_est_cargo_ready_date
+	,max(_crd_estimated)	filter(where _sort = 1)										_crd_estimated
+	,max(_crd_actual)	filter(where _sort = 1)											_crd_actual
 	,max(_goods_cleared_origin)															_goods_cleared_origin
 	,max(_goods_cleared_destination)													_goods_cleared_destination
 	,max(_pickup_date)																	_pickup_date
@@ -1591,7 +1592,8 @@ encode(sha256((
 	,a._po_recd_date       									_po_recd_date
 	,a._po_need_by_date    									_po_need_by_date
 	,NULL                  									_crd
-	,null 													_est_cargo_ready_date
+	,null													_crd_estimated
+	,null													_crd_actual
 	,null													_goods_cleared_origin
 	,null													_goods_cleared_destination
 	,NULL                  									_pickup_date
