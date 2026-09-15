@@ -345,7 +345,8 @@ from (
 					      from jsonb_array_elements(
 									coalesce(feic._ship_response::jsonb -> 'custom_dates'
 	            								,feic._ship_response::jsonb -> 'date_templates')) el
-							      where el ->> 'name' = 'Cargo Ready Date Estimated')::date)										_crd
+							      where el ->> 'name' = 'Cargo Ready Date Estimated')::date
+						,fe.cargo_ready_date_estimates::date)																		_crd
 					,(select el ->> 'value'
 				      from jsonb_array_elements(
 								coalesce(feic._ship_response::jsonb -> 'date_templates'
@@ -1172,32 +1173,26 @@ from (
 									or (_days_total_comm_perf is null or _days_total_comm_perf = 0)
 										then null
 							    else null  end																									_health_check
-								,case  
-										when (_response_shipment_id <> '' or _response_shipment_id is not null)
-											and _arrival_date <= now()::date
-											and _del <= now()::date
-												then 'Delivered'
+							,case  
 										when (_response_shipment_id <> '' or _response_shipment_id is not null)
 											and regexp_match(_ship_focus_status,'cancel','i') is not null 
 												then 'Cancelled'
+										when (_response_shipment_id <> '' or _response_shipment_id is not null)
+											and _del <= now()::date
+												then 'Delivered'
+										when (_response_shipment_id <> '' or _response_shipment_id is not null)
+											and _arrival_date <= now()::date
+											and (_del is null or _del > now()::date)
+												then 'Arrived'
 										when (_response_shipment_id <> '' or _response_shipment_id is not null or _response_shipment_id is not null)
 											and (_arrival_date > now()::date or _arrival_date is null)
 											and _departure_date <= now()::date 
 												then 'In transit'
 										when (_response_shipment_id <> '' or _response_shipment_id is not null)
-											and _arrival_date <= now()::date
-											and _departure_date <= now()::date
-											and (_del is null or _del > now()::date)
-												then 'Arrived'
-										when (_response_shipment_id <> '' or _response_shipment_id is not null)
 											and (_full_etd is not null)
-											and (_full_etd > now()::date)
-											and _quote_status = 'Approved'
 												then 'Booked'
 										when (_response_shipment_id <> '' or _response_shipment_id is not null)
 											and (_full_etd is null)
-											and _pre_alert = 'Yes'
-											and _quote_status = 'Approved'
 												then 'Pending Booking'
 --										when (_response_shipment_id <> '' or _response_shipment_id is not null)
 --											and (_full_etd is null or _full_eta is null)
