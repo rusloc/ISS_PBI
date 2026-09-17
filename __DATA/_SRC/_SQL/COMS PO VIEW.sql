@@ -159,6 +159,10 @@ from (
 					,fu.pnl_quotation ->> 'approvedDetailsUsd'																		_quote_approve_details_usd
 					,fu.pnl_quotation ->> 'totalQuoteApprovedAmountUsd'																_quote_approve_amount_usd
 					,(fu.pnl_quotation ->> 'totalQuoteApprovedAmountUsd')::numeric * 3.673											_quote_approve_amount_aed
+					,transshipment_locode																							_tranship_locode
+					,transshipment_port_name																						_tranship_port_name
+					,transshipment_days																								_tranship_days
+					,current_vessel																									_tranship_vessel
 		-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> PURCHASEORDERLINE: fields from EK view (copy logic except one-line agg -> flat out)
 					,pol."ship_to_location" 																						_branch_bu
 					,pol.supplier_no		 																						_supplier_code
@@ -1004,6 +1008,22 @@ from (
 					on (slt.supplier_id) = (pol.supplier_no)::text
 				left join portal.country_average_transit_time ctt
 					on ctt.code = coalesce(feic._ship_response ->> 'origin_country',fe.origin_country)
+				left join (
+									select 
+										t.serial_no 																		_ship_serial
+										,transshipment_locode
+										,transshipment_port_name
+										,transshipment_days
+										,current_vessel
+										,count(*) over()
+									from portal.materialized_view_shipments_tracker t
+									where 1=1
+										and (transshipment_locode is not null
+										or transshipment_port_name is not null
+										or transshipment_days is not null
+										or current_vessel is not null)
+							) mt
+					on mt._ship_serial = feic._ship_response ->> 'serial_no'
 			/*
 				 IMPORTANT: sla limits joined as "flat table packed into single JSON object" 
 							* keeps all data inside JSON object
@@ -1039,13 +1059,13 @@ from (
 											from portal."ContainerChanges" c 
 											where 1=1
 												and c."shipmentId" = y._focus_ship_id
-												and c."effectiveEta"::date = y._eta)
+												and c."effectiveEta"::date = y._eta_iss)
 								when _eta_source = 'Manual'
 									then (select min("createdAt"::date)
 											from portal."ShipmentDates" c 
 											where 1=1
 												and c."shipmentId" = y._focus_ship_id
-												and c."etaDate"::date = y._eta)  
+												and c."etaDate"::date = y._eta_iss)  
 								else null end 																									_eta_last_change
 							,case 
 								when _etd_source = 'Tracking' or _etd_source = 'Tracking (IC)'
@@ -1053,13 +1073,13 @@ from (
 											from portal."ContainerChanges" c 
 											where 1=1
 												and c."shipmentId" = y._focus_ship_id
-												and c."effectiveEtd"::date = y._etd)
+												and c."effectiveEtd"::date = y._etd_iss)
 								when _etd_source = 'Manual'
 									then (select min("createdAt"::date)
 											from portal."ShipmentDates" c 
 											where 1=1
 												and c."shipmentId" = y._focus_ship_id
-												and c."etdDate"::date = y._etd)  
+												and c."etdDate"::date = y._etd_iss)  
 								else null end 																									_etd_last_change
 							,now()::date - _ptd 																								_ptd_2_now
 							,now()::date - _pickup_date																							_pickup_2_now
@@ -1644,8 +1664,12 @@ where 1=1
     							,null    																						_quote_details_usd
     							,null    																						_quote_approve_date
     							,null    																						_quote_approve_details_usd
-    							,null   																						 _quote_approve_amount_usd
+    							,null   																						_quote_approve_amount_usd
     							,null::numeric																					_quote_approve_amount_aed
+								,null																							_tranship_locode
+								,null																							_tranship_port_name
+								,null::int																						_tranship_days
+								,null																							_tranship_vessel
 		-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> PURCHASEORDERLINE: fields from EK view (copy logic except one-line agg -> flat out)
 								,pol."ship_to_location" 																			_branch_bu
 								,pol.supplier_no		 																			_supplier_code
@@ -1929,9 +1953,8 @@ where 1=1
 								) rem 
 	) m 
 where 1=1
---	and _po_no_ekporef = 'DXBSI26015914'
 --	and _fo_serial= 'EMA000591'
---	and _shipment_serial_iss_job = 'DXBSI26015914'
+--	and _shipment_serial_iss_job = 'DXBSI26019582'
 --	and _shipment_serial_iss_job in ('DXBSI26013404-4', 'DXBSI26012839', 'DXBAI26010593', 'DXBSI26012679', 'DXBSI25032886', 'DXBSI26012878', 'DXBAI26014600', 'DXBAI26016898', 'DXBAI26007216')
 --	and _mbl_mawb = 'DXBSI26015914'
 --	and _transport_mode = 'AIR'

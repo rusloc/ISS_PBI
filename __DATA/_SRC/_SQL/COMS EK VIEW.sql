@@ -60,6 +60,10 @@ $sql$
 					,f.pnl_quotation ->> 'approvedDetailsUsd'																		_quote_approve_details_usd
 					,f.pnl_quotation ->> 'totalQuoteApprovedAmountUsd'																_quote_approve_amount_usd
 					,(f.pnl_quotation ->> 'totalQuoteApprovedAmountUsd')::numeric * 3.673											_quote_approve_amount_aed
+					,transshipment_locode																							_tranship_locode
+					,transshipment_port_name																						_tranship_port_name
+					,transshipment_days																								_tranship_days
+					,current_vessel																									_tranship_vessel
 					,feic._ship_response ->> 'service'																				_mode
 					,initcap(split_part((feic._ship_response ->> 'service'),'_',1))													_transport_mode
 					,initcap(split_part((feic._ship_response ->> 'service'),'_',2))													_direction
@@ -882,7 +886,7 @@ $sql$
 				left join (
 								select 
 									replace((s."shipmentDetails" -> 'serial_no')::text,'"','')					_serial
-									,max(elem ->> 'date')::date 													_est_cargo_ready_date
+									,max(elem ->> 'date')::date 												_est_cargo_ready_date
 								from portal."ShipmentDetails" s
 								,jsonb_array_elements(s.statuses) as elem
 								where 1=1
@@ -895,6 +899,22 @@ $sql$
 					on slt.supplier_id = p.supplier_no
 				left join portal.country_average_transit_time ctt
 					on ctt.code = feic._ship_response ->> 'origin_country'
+				left join (
+									select 
+										t.serial_no 																		_ship_serial
+										,transshipment_locode
+										,transshipment_port_name
+										,transshipment_days
+										,current_vessel
+										,count(*) over()
+									from portal.materialized_view_shipments_tracker t
+									where 1=1
+										and (transshipment_locode is not null
+										or transshipment_port_name is not null
+										or transshipment_days is not null
+										or current_vessel is not null)
+							) mt
+					on mt._ship_serial = feic._ship_response ->> 'serial_no'
 				where 1=1
 --					and f.shipment_serial_no	= 'SHPDXBSI25000180'
 --					and poc."company_name" = 'EMIRATES LOGISTICS LLC'
@@ -910,13 +930,13 @@ $sql$
 						from portal."ContainerChanges" c 
 						where 1=1
 							and c."shipmentId" = y._focus_ship_id
-							and c."effectiveEta"::date = y._eta)
+							and c."effectiveEta"::date = y._eta_iss)
 			when _eta_source = 'Manual'
 				then (select min("createdAt"::date)
 						from portal."ShipmentDates" c 
 						where 1=1
 							and c."shipmentId" = y._focus_ship_id
-							and c."etaDate"::date = y._eta)  
+							and c."etaDate"::date = y._eta_iss)  
 			else null end 																							_eta_last_change
 		,case 
 			when _etd_source = 'Tracking' or _etd_source = 'Tracking (IC)'
@@ -924,13 +944,13 @@ $sql$
 						from portal."ContainerChanges" c 
 						where 1=1
 							and c."shipmentId" = y._focus_ship_id
-							and c."effectiveEtd"::date = y._etd)
+							and c."effectiveEtd"::date = y._etd_iss)
 			when _etd_source = 'Manual'
 				then (select min("createdAt"::date)
 						from portal."ShipmentDates" c 
 						where 1=1
 							and c."shipmentId" = y._focus_ship_id
-							and c."etdDate"::date = y._etd)  
+							and c."etdDate"::date = y._etd_iss)  
 			else null end 																							_etd_last_change
 		,now()::date - _ptd																							_ptd_2_now
 		,now()::date - _pickup_date																					_pickup_2_now
@@ -1309,6 +1329,10 @@ select
     ,max(_quote_approve_details_usd)  filter(where _sort = 1)    						_quote_approve_details_usd
     ,max(_quote_approve_amount_usd)   filter(where _sort = 1)    						_quote_approve_amount_usd
     ,max(_quote_approve_amount_aed)   filter(where _sort = 1)							_quote_approve_amount_aed
+	,max(_tranship_locode) 		  	  filter(where _sort = 1)							_tranship_locode
+	,max(_tranship_port_name)	 	  filter(where _sort = 1)							_tranship_port_name
+	,max(_tranship_days)		  	  filter(where _sort = 1)							_tranship_days
+	,max(_tranship_vessel)			  filter(where _sort = 1)							_tranship_vessel
 	,max(_mode)	filter(where _sort = 1)													_mode
 	,max(_transport_mode) filter(where _sort = 1)										_transport_mode
 	,max(_direction) filter (where _sort = 1)											_direction
@@ -1544,6 +1568,10 @@ encode(sha256((
 	,null 													_quote_approve_details_usd
 	,null 													_quote_approve_amount_usd
 	,null 													_quote_approve_amount_aed
+	,null													_tranship_locode
+	,null													_tranship_port_name
+	,null													_tranship_days
+	,null													_tranship_vessel
 	,NULL                  									_mode
 	,null													_transport_mode
 	,null 													_direction
