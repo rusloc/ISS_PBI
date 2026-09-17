@@ -13,7 +13,7 @@ with latest_dates_ranked as (
 				        "Parent ID",
 				        "Date Type",
 				        "New Date",
-				        ROW_NUMBER() over(
+				        row_number() over(
 				            partition by "Parent ID", "Date Type"
 				            order by "Changed At" desc
 				        ) rn
@@ -25,12 +25,12 @@ with latest_dates_ranked as (
 ,latest_dates AS (
 				    select
 				        "Parent ID"
-				        ,MAX(
+				        ,max(
 				        	case
 				            	when "Date Type" = 'Cargo Ready Date Actual'
 				            		then "New Date"
 				        	end) 																		"Cargo Ready Date Actual"
-				        ,MAX(
+				        ,max(
 				        	case
 				            	when "Date Type" = 'Cargo Ready Date Estimated'
 				            		then "New Date"
@@ -402,7 +402,10 @@ with latest_dates_ranked as (
 										select 1
 										from portal.freight_unit_enrich fu
 										where 1=1
-											and fu.shipment_id = asp."ID")
+											and (fu.shipment_id = asp."ID"
+												or fu.remote_shipment_response ->> 'serial_no' = asp."Serial No"
+												or fu.shipment_response ->> 'serial_no' = asp."Serial No"
+											))
 			)
 select 
 	c.*
@@ -417,6 +420,8 @@ select
 				end 
 		else 0 end																										_iss_cont_booking_perf
 from calc c
+where 1=1
+--	and _shipment_serial_no = 'DXBAI26020325'
 	
 	
 $sql$	
