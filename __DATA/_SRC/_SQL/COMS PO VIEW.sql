@@ -329,22 +329,25 @@ from (
 								or item ->> 'status' ilike '%Vessel departure%')
 							and item ->> 'comments' ~* 'Transshipment Port: No')::date												_departure_date_actual
 					,(feic._ship_response ->> 'loading_date'::text)::date															_departure_date_full
-					,(select el ->> 'value'
+					,coalesce((select el ->> 'value'
 				      from jsonb_array_elements(
 								coalesce(feic._ship_response::jsonb -> 'date_templates'
             								,feic._ship_response::jsonb -> 'custom_dates')) el
-				      where el ->> 'name' = 'Cargo Ready Date Actual')::date														_crd_actual
-				    ,(select el ->> 'value'
+				      where el ->> 'name' = 'Cargo Ready Date Actual')::date
+								,fe.cargo_ready_date_actual::date)																	_crd_actual
+				    ,coalesce((select el ->> 'value'
 				      from jsonb_array_elements(
 								coalesce(feic._ship_response::jsonb -> 'custom_dates'
             								,feic._ship_response::jsonb -> 'date_templates')) el
-				      where el ->> 'name' = 'Cargo Ready Date Estimated')::date														_crd_estimated
+				      where el ->> 'name' = 'Cargo Ready Date Estimated')::date
+								,fe.cargo_ready_date_estimates::date)																_crd_estimated
 					,coalesce(
 						(select el ->> 'value'
 					      from jsonb_array_elements(
 									coalesce(feic._ship_response::jsonb -> 'custom_dates'
 	            								,feic._ship_response::jsonb -> 'date_templates')) el
 							      where el ->> 'name' = 'Cargo Ready Date Actual')::date
+						,fe.cargo_ready_date_actual::date
 						,(select el ->> 'value'
 					      from jsonb_array_elements(
 									coalesce(feic._ship_response::jsonb -> 'custom_dates'
@@ -445,11 +448,13 @@ from (
 							,(feic._ship_response ->> 'ptd_date'::text)::date)::date)												_full_etd
 					,coalesce(
 						(feic._ship_response ->> 'pta_date__manual_'::text)::date
-						,(feic._ship_response ->> 'pta_date'::text)::date)															_pta
+						,(feic._ship_response ->> 'pta_date'::text)::date
+						,fe.pta_date::date)																							_pta
 					,coalesce(
 						(feic._ship_response ->> 'ptd_date__manual_'::text)::date
-						,(feic._ship_response ->> 'ptd_date'::text)::date)															_ptd
-/*
+						,(feic._ship_response ->> 'ptd_date'::text)::date
+						,fe.ptd_date::date) 																						_ptd
+/*	
 		EDD dates:
 				1. PO line level
 					> _first_edd_po
@@ -1287,8 +1292,12 @@ from (
 								else null
 						    end																													_po_2_crd
 						    ,_crd - _ptd																										_crd_2_ptd
-						    ,ds._port_of_discharge																								_port_of_discharge
-						    ,ds._port_of_discharge_name																							_port_of_discharge_name
+							,case
+								when _eta_source = 'Manual' then null 
+								else ds._port_of_discharge end																					_port_of_discharge
+						    ,case 
+						    	when _eta_source = 'Manual' then null 
+						    	else ds._port_of_discharge_name	end																				_port_of_discharge_name
 						from _pre_calc y
 						left join (
 									select 
