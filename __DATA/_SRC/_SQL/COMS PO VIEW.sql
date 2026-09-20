@@ -318,9 +318,13 @@ from (
 						when (feic._ship_response ->> 'delivery_date'::text)::date > now()::date then null
 						else (feic._ship_response ->> 'delivery_date'::text)::date end												_del
 					,case
-						when (feic._ship_response ->> 'loading_date'::text)::date > now()::date 
+						when coalesce(
+								(fe.shipment_response ->> 'loading_date'::text)::date
+								,(fe.remote_shipment_response ->> 'loading_date'::text)::date) > now()::date 
 							then null
-						else (feic._ship_response ->> 'loading_date'::text)::date end												_departure_date
+						else coalesce(
+								(fe.shipment_response ->> 'loading_date'::text)::date
+								,(fe.remote_shipment_response ->> 'loading_date'::text)::date) end									_departure_date
 			-- >>>
 					,(select min(item ->> 'date')
 						from jsonb_array_elements(feic._ship_response::jsonb -> 'status_updates') item
@@ -329,31 +333,53 @@ from (
 								or item ->> 'status' ilike '%Vessel departure%')
 							and item ->> 'comments' ~* 'Transshipment Port: No')::date												_departure_date_actual
 					,(feic._ship_response ->> 'loading_date'::text)::date															_departure_date_full
-					,coalesce((select el ->> 'value'
-				      from jsonb_array_elements(
-								coalesce(feic._ship_response::jsonb -> 'date_templates'
-            								,feic._ship_response::jsonb -> 'custom_dates')) el
-				      where el ->> 'name' = 'Cargo Ready Date Actual')::date
-								,fe.cargo_ready_date_actual::date)																	_crd_actual
-				    ,coalesce((select el ->> 'value'
-				      from jsonb_array_elements(
-								coalesce(feic._ship_response::jsonb -> 'custom_dates'
-            								,feic._ship_response::jsonb -> 'date_templates')) el
-				      where el ->> 'name' = 'Cargo Ready Date Estimated')::date
-								,fe.cargo_ready_date_estimates::date)																_crd_estimated
 					,coalesce(
 						(select el ->> 'value'
-					      from jsonb_array_elements(
-									coalesce(feic._ship_response::jsonb -> 'custom_dates'
-	            								,feic._ship_response::jsonb -> 'date_templates')) el
-							      where el ->> 'name' = 'Cargo Ready Date Actual')::date
-						,fe.cargo_ready_date_actual::date
+						      from jsonb_array_elements(
+										coalesce(fe.shipment_response::jsonb -> 'date_templates'
+		            								,fe.shipment_response::jsonb -> 'custom_dates')) el
+						      where el ->> 'name' = 'Cargo Ready Date Actual')::date
 						,(select el ->> 'value'
-					      from jsonb_array_elements(
-									coalesce(feic._ship_response::jsonb -> 'custom_dates'
-	            								,feic._ship_response::jsonb -> 'date_templates')) el
-							      where el ->> 'name' = 'Cargo Ready Date Estimated')::date
-						,fe.cargo_ready_date_estimates::date)																		_crd
+						      from jsonb_array_elements(
+										coalesce(fe.remote_shipment_response::jsonb -> 'date_templates'
+		            								,fe.remote_shipment_response::jsonb -> 'custom_dates')) el
+						      where el ->> 'name' = 'Cargo Ready Date Actual')::date
+						,fe.cargo_ready_date_actual::date)																			_crd_actual
+				    ,coalesce(
+				    	(select el ->> 'value'
+						      from jsonb_array_elements(
+										coalesce(fe.shipment_response::jsonb -> 'custom_dates'
+		            								,fe.shipment_response::jsonb -> 'date_templates')) el
+						      where el ->> 'name' = 'Cargo Ready Date Estimated')::date
+				    	,(select el ->> 'value'
+						      from jsonb_array_elements(
+										coalesce(fe.remote_shipment_response::jsonb -> 'custom_dates'
+		            								,fe.remote_shipment_response::jsonb -> 'date_templates')) el
+						      where el ->> 'name' = 'Cargo Ready Date Estimated')::date
+						,fe.cargo_ready_date_estimates::date)																		_crd_estimated
+					,coalesce(
+						(select el ->> 'value'
+						      from jsonb_array_elements(
+										coalesce(fe.shipment_response::jsonb -> 'date_templates'
+		            								,fe.shipment_response::jsonb -> 'custom_dates')) el
+						      where el ->> 'name' = 'Cargo Ready Date Actual')::date
+				    	,(select el ->> 'value'
+						      from jsonb_array_elements(
+										coalesce(fe.shipment_response::jsonb -> 'custom_dates'
+		            								,fe.shipment_response::jsonb -> 'date_templates')) el
+						      where el ->> 'name' = 'Cargo Ready Date Estimated')::date
+						,(select el ->> 'value'
+						      from jsonb_array_elements(
+										coalesce(fe.remote_shipment_response::jsonb -> 'date_templates'
+		            								,fe.remote_shipment_response::jsonb -> 'custom_dates')) el
+						      where el ->> 'name' = 'Cargo Ready Date Actual')::date
+				    	,(select el ->> 'value'
+						      from jsonb_array_elements(
+										coalesce(fe.remote_shipment_response::jsonb -> 'custom_dates'
+		            								,fe.remote_shipment_response::jsonb -> 'date_templates')) el
+						      where el ->> 'name' = 'Cargo Ready Date Estimated')::date
+						,fe.cargo_ready_date_estimates::date
+						,fe.cargo_ready_date_actual::date)																			_crd
 					,(select el ->> 'value'
 				      from jsonb_array_elements(
 								coalesce(feic._ship_response::jsonb -> 'date_templates'
@@ -364,7 +390,9 @@ from (
 								coalesce(feic._ship_response::jsonb -> 'date_templates'
             								,feic._ship_response::jsonb -> 'custom_dates')) el
 				      where el ->> 'name' = 'Goods Cleared at Destination Customs')::date											_goods_cleared_destination
-				   	,(feic._ship_response ->> 'pickup_date'::text)::date															_pickup_date
+				   	,coalesce(
+						(fe.shipment_response ->> 'pickup_date'::text)::date
+						,(fe.remote_shipment_response ->> 'pickup_date'::text)::date)												_pickup_date
 					,case 
 						when (feic._ship_response ->> 'etd_preference') = 'etd_tracking'
 						and upper(split_part(coalesce(feic._ship_response ->> 'service',fe.service),'_',1)) = 'AIR'
@@ -387,7 +415,9 @@ from (
 						else null
 					end																												_cargo_ho
 		-- eta date group
-					,(feic._ship_response ->> 'eta_date'::text)::date																_eta_iss
+					,coalesce(
+						(fe.shipment_response ->> 'eta_date'::text)::date
+						,(fe.remote_shipment_response ->> 'eta_date'::text)::date)													_eta_iss
 					,case 
 						when (feic._ship_response ->> 'eta_preference') = 'eta_tracking'
 						and (feic._ship_response ->> 'eta_wakeo_date'::text)::date is null
@@ -416,8 +446,17 @@ from (
 						,coalesce(
 						(feic._ship_response ->> 'pta_date__manual_'::text)::date
 						,(feic._ship_response ->> 'pta_date'::text)::date)::date)													_full_eta
+					,coalesce(
+						(fe.shipment_response ->> 'eta_date'::text)::date
+						,(fe.shipment_response ->> 'pta_date__manual_'::text)::date
+						,(fe.shipment_response ->> 'pta_date'::text)::date
+						,(fe.remote_shipment_response ->> 'eta_date'::text)::date
+						,(fe.remote_shipment_response ->> 'pta_date__manual_'::text)::date
+						,(fe.remote_shipment_response ->> 'pta_date'::text)::date)													_effective_eta
 		-- etd date group
-					,(feic._ship_response ->> 'etd_date'::text)::date																_etd_iss
+					,coalesce(
+						(fe.shipment_response ->> 'etd_date'::text)::date
+						,(fe.remote_shipment_response ->> 'etd_date'::text)::date)													_etd_iss
 					,case 
 						when (feic._ship_response ->> 'etd_preference') = 'etd_tracking'
 						and (feic._ship_response ->> 'etd_wakeo_date'::text)::date is null
@@ -447,13 +486,15 @@ from (
 							(feic._ship_response ->> 'ptd_date__manual_'::text)::date
 							,(feic._ship_response ->> 'ptd_date'::text)::date)::date)												_full_etd
 					,coalesce(
-						(feic._ship_response ->> 'pta_date__manual_'::text)::date
-						,(feic._ship_response ->> 'pta_date'::text)::date
-						,fe.pta_date::date)																							_pta
+						(fe.shipment_response ->> 'pta_date__manual_'::text)::date
+						,(fe.shipment_response ->> 'pta_date'::text)::date
+						,(fe.remote_shipment_response ->> 'pta_date__manual_'::text)::date
+						,(fe.remote_shipment_response ->> 'pta_date'::text)::date)													_pta
 					,coalesce(
-						(feic._ship_response ->> 'ptd_date__manual_'::text)::date
-						,(feic._ship_response ->> 'ptd_date'::text)::date
-						,fe.ptd_date::date) 																						_ptd
+						(fe.shipment_response ->> 'ptd_date__manual_'::text)::date
+						,(fe.shipment_response ->> 'ptd_date'::text)::date
+						,(fe.remote_shipment_response ->> 'ptd_date__manual_'::text)::date
+						,(fe.remote_shipment_response ->> 'ptd_date'::text)::date)													_ptd
 /*	
 		EDD dates:
 				1. PO line level
@@ -518,6 +559,7 @@ from (
 				    			then 'Pending'
 				    		else 'Received'
 				    end																												_po_status
+					,fe.status																										_status
 				    ,fe.grn_no																										_grn_no
 				    ,case 
 				    		when fe.grn_no is not null then 'Complete'
@@ -1198,27 +1240,27 @@ from (
 									or (_days_total_comm_perf is null or _days_total_comm_perf = 0)
 										then null
 							    else null  end																									_health_check
-							,case  
-										when (_response_shipment_id <> '' or _response_shipment_id is not null)
-											and regexp_match(_ship_focus_status,'cancel','i') is not null 
-												then 'Cancelled'
-										when (_response_shipment_id <> '' or _response_shipment_id is not null)
-											and _del <= now()::date
-												then 'Delivered'
-										when (_response_shipment_id <> '' or _response_shipment_id is not null)
-											and _arrival_date <= now()::date
-											and (_del is null or _del > now()::date)
-												then 'Arrived'
-										when (_response_shipment_id <> '' or _response_shipment_id is not null or _response_shipment_id is not null)
-											and (_arrival_date > now()::date or _arrival_date is null)
-											and _departure_date <= now()::date 
-												then 'In transit'
-										when (_response_shipment_id <> '' or _response_shipment_id is not null)
-											and (_full_etd is not null)
-												then 'Booked'
-										when (_response_shipment_id <> '' or _response_shipment_id is not null)
-											and (_full_etd is null)
-												then 'Pending Booking'
+--							,case  
+--										when (_response_shipment_id <> '' or _response_shipment_id is not null)
+--											and regexp_match(_ship_focus_status,'cancel','i') is not null 
+--												then 'Cancelled'
+--										when (_response_shipment_id <> '' or _response_shipment_id is not null)
+--											and _del <= now()::date
+--												then 'Delivered'
+--										when (_response_shipment_id <> '' or _response_shipment_id is not null)
+--											and _arrival_date <= now()::date
+--											and (_del is null or _del > now()::date)
+--												then 'Arrived'
+--										when (_response_shipment_id <> '' or _response_shipment_id is not null or _response_shipment_id is not null)
+--											and (_arrival_date > now()::date or _arrival_date is null)
+--											and _departure_date <= now()::date 
+--												then 'In transit'
+--										when (_response_shipment_id <> '' or _response_shipment_id is not null)
+--											and (_full_etd is not null)
+--												then 'Booked'
+--										when (_response_shipment_id <> '' or _response_shipment_id is not null)
+--											and (_full_etd is null)
+--												then 'Pending Booking'
 --										when (_response_shipment_id <> '' or _response_shipment_id is not null)
 --											and (_full_etd is null or _full_eta is null)
 --											and _pre_alert = 'No'
@@ -1226,8 +1268,8 @@ from (
 --										when (_response_shipment_id = '' or _response_shipment_id is null)
 --											and _fo_serial is not null
 --											then 'Pending Quotation'
-										else 'Pending Booking'
-									end																											_status
+--										else 'Pending Booking'
+--									end																											_status
 							,case 
 									when _e2e_total_lt > 0 and _days_total_comm_perf > 0
 										then 1 - abs((_e2e_total_lt - _days_total_comm_perf)::numeric
@@ -1379,14 +1421,13 @@ from (
 			,_crd - _ptd																														_ptd_2_crd
 			,_del - _ptd																														_del_2_ptd
 			,_del - _crd																														_del_2_crd
-			,coalesce(_eta_iss,_pta,null)																										_effective_eta
-			,coalesce(_eta_iss,_pta,null) - _po_need_by_date																					_eta_delay
+			,_effective_eta - _po_need_by_date																									_eta_delay
 			,case 
-				when _po_need_by_date is null or coalesce(_eta_iss,_pta,null) is null then null
-				when (coalesce(_eta_iss,_pta,null) - _po_need_by_date) >= 30 then 'Delayed (30+ days)'
-				when (coalesce(_eta_iss,_pta,null) - _po_need_by_date) >= 15 then 'Delayed (15-29 days)'
-				when (coalesce(_eta_iss,_pta,null) - _po_need_by_date) > 0 then 'Delayed (< 15 days)'
-				when (coalesce(_eta_iss,_pta,null) - _po_need_by_date) <= 0 then 'On time / Early'
+				when _po_need_by_date is null or _effective_eta is null then null
+				when (_effective_eta - _po_need_by_date) >= 30 then 'Delayed (30+ days)'
+				when (_effective_eta - _po_need_by_date) >= 15 then 'Delayed (15-29 days)'
+				when (_effective_eta - _po_need_by_date) > 0 then 'Delayed (< 15 days)'
+				when (_effective_eta - _po_need_by_date) <= 0 then 'On time / Early'
 				else null end																													_eta_delay_bucket
 			,case 
 				when _crd is null or _po_need_by_date is null then null
@@ -1768,6 +1809,7 @@ where 1=1
 								,null::date 																					_eta
 								,null::date 																					_eta_wakeo
 								,null::date 																					_full_eta
+								,null::date 																					_effective_eta
 								,null::date 																					_etd_iss
 								,null::text 																					_etd_source
 								,null::date 																					_etd
@@ -1786,6 +1828,29 @@ where 1=1
 								,null::text 																					_req_status
 								,null::text																						_spo_number
 								,null::text																						_po_status
+								,case 
+									when (pol.po_qty_ordered::numeric 
+									- coalesce(sum(pofu.quantity::numeric) over(partition by pofu.purchase_order_id),0)) = 0
+										then 'Completed'
+									when pol.po_qty_ordered::numeric 
+									- coalesce(sum(pofu.quantity::numeric) over(partition by pofu.purchase_order_id),0) > 0
+										and upper(pol.status) <> 'CANCELLED'
+										and current_po_promised_dt <= (now()::date + interval '90 days')
+										and current_po_promised_dt > now()::date
+											then 'Pending'
+									when pol.po_qty_ordered::numeric 
+									- coalesce(sum(pofu.quantity::numeric) over(partition by pofu.purchase_order_id),0) > 0
+										and upper(pol.status) <> 'CANCELLED'
+										and current_po_promised_dt > (now()::date + interval '90 days')
+											then 'Not Due'
+									when pol.po_qty_ordered::numeric 
+									- coalesce(sum(pofu.quantity::numeric) over(partition by pofu.purchase_order_id),0) > 0
+										and upper(pol.status) <> 'CANCELLED'
+										and current_po_promised_dt <= now()::date
+											then 'Due'
+									when upper(pol.status) = 'CANCELLED'
+										then 'Cancelled'
+									else null end																				_status
 								,null::text																						_grn_no
 								,null::text																						_grn_status
 								,null::text																						_addl_po
@@ -1867,29 +1932,6 @@ where 1=1
 								,null::date 																						_departure_date_fallback
 								,null::numeric 																					_actual_lead
 								,null::text 																						_health_check
-								,case 
-									when (pol.po_qty_ordered::numeric 
-									- coalesce(sum(pofu.quantity::numeric) over(partition by pofu.purchase_order_id),0)) = 0
-										then 'Completed'
-									when pol.po_qty_ordered::numeric 
-									- coalesce(sum(pofu.quantity::numeric) over(partition by pofu.purchase_order_id),0) > 0
-										and upper(pol.status) <> 'CANCELLED'
-										and current_po_promised_dt <= (now()::date + interval '90 days')
-										and current_po_promised_dt > now()::date
-											then 'Pending'
-									when pol.po_qty_ordered::numeric 
-									- coalesce(sum(pofu.quantity::numeric) over(partition by pofu.purchase_order_id),0) > 0
-										and upper(pol.status) <> 'CANCELLED'
-										and current_po_promised_dt > (now()::date + interval '90 days')
-											then 'Not Due'
-									when pol.po_qty_ordered::numeric 
-									- coalesce(sum(pofu.quantity::numeric) over(partition by pofu.purchase_order_id),0) > 0
-										and upper(pol.status) <> 'CANCELLED'
-										and current_po_promised_dt <= now()::date
-											then 'Due'
-									when upper(pol.status) = 'CANCELLED'
-										then 'Cancelled'
-									else null end																				_status
 								,0																								_e2e_total_lead_time_perf
 								,0																								_iss_cont_booking_perf
 								,0																								_supplier_committed_prod_rdy_perf
@@ -1915,7 +1957,6 @@ where 1=1
 								,null::int 																						_ptd_2_crd
 								,null::int 																						_del_2_ptd
 								,null::int 																						_del_2_crd
-								,null::date																						_effective_eta
 								,null::numeric 																					_eta_delay
 								,null::text 																					_eta_delay_bucket
 								,null::text 																					_crd_status
@@ -1962,13 +2003,15 @@ where 1=1
 								) rem 
 	) m 
 where 1=1
---	and _fo_serial= 'EMA000591'
+--	and _fo_serial= 'EMA000543'
 --	and _shipment_serial_iss_job = 'DXBSI26019582'
 --	and _shipment_serial_iss_job in ('DXBSI26013404-4', 'DXBSI26012839', 'DXBAI26010593', 'DXBSI26012679', 'DXBSI25032886', 'DXBSI26012878', 'DXBAI26014600', 'DXBAI26016898', 'DXBAI26007216')
 --	and _mbl_mawb = 'DXBSI26015914'
 --	and _transport_mode = 'AIR'
 --	and (_carrier is null and _carrier_code is not null)
 
+	
+	
 $sql$;
 
 
