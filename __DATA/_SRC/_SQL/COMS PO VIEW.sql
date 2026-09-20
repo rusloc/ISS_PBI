@@ -319,12 +319,12 @@ from (
 						else (feic._ship_response ->> 'delivery_date'::text)::date end												_del
 					,case
 						when coalesce(
-								(fe.shipment_response ->> 'loading_date'::text)::date
-								,(fe.remote_shipment_response ->> 'loading_date'::text)::date) > now()::date 
+								(fexd._ship_response ->> 'loading_date'::text)::date
+								,(fexo._ship_response ->> 'loading_date'::text)::date) > now()::date 
 							then null
 						else coalesce(
-								(fe.shipment_response ->> 'loading_date'::text)::date
-								,(fe.remote_shipment_response ->> 'loading_date'::text)::date) end									_departure_date
+								(fexd._ship_response ->> 'loading_date'::text)::date
+								,(fexo._ship_response ->> 'loading_date'::text)::date) end											_departure_date
 			-- >>>
 					,(select min(item ->> 'date')
 						from jsonb_array_elements(feic._ship_response::jsonb -> 'status_updates') item
@@ -336,50 +336,50 @@ from (
 					,coalesce(
 						(select el ->> 'value'
 						      from jsonb_array_elements(
-										coalesce(fe.shipment_response::jsonb -> 'date_templates'
-		            								,fe.shipment_response::jsonb -> 'custom_dates')) el
+										coalesce(fexd._ship_response::jsonb -> 'date_templates'
+		            								,fexd._ship_response::jsonb -> 'custom_dates')) el
 						      where el ->> 'name' = 'Cargo Ready Date Actual')::date
 						,(select el ->> 'value'
 						      from jsonb_array_elements(
-										coalesce(fe.remote_shipment_response::jsonb -> 'date_templates'
-		            								,fe.remote_shipment_response::jsonb -> 'custom_dates')) el
+										coalesce(fexo._ship_response::jsonb -> 'date_templates'
+		            								,fexo._ship_response::jsonb -> 'custom_dates')) el
 						      where el ->> 'name' = 'Cargo Ready Date Actual')::date
 						,fe.cargo_ready_date_actual::date)																			_crd_actual
 				    ,coalesce(
 				    	(select el ->> 'value'
 						      from jsonb_array_elements(
-										coalesce(fe.shipment_response::jsonb -> 'custom_dates'
-		            								,fe.shipment_response::jsonb -> 'date_templates')) el
+										coalesce(fexd._ship_response::jsonb -> 'custom_dates'
+		            								,fexd._ship_response::jsonb -> 'date_templates')) el
 						      where el ->> 'name' = 'Cargo Ready Date Estimated')::date
 				    	,(select el ->> 'value'
 						      from jsonb_array_elements(
-										coalesce(fe.remote_shipment_response::jsonb -> 'custom_dates'
-		            								,fe.remote_shipment_response::jsonb -> 'date_templates')) el
+										coalesce(fexo._ship_response::jsonb -> 'custom_dates'
+		            								,fexo._ship_response::jsonb -> 'date_templates')) el
 						      where el ->> 'name' = 'Cargo Ready Date Estimated')::date
 						,fe.cargo_ready_date_estimates::date)																		_crd_estimated
 					,coalesce(
 						(select el ->> 'value'
 						      from jsonb_array_elements(
-										coalesce(fe.shipment_response::jsonb -> 'date_templates'
-		            								,fe.shipment_response::jsonb -> 'custom_dates')) el
+										coalesce(fexd._ship_response::jsonb -> 'date_templates'
+		            								,fexd._ship_response::jsonb -> 'custom_dates')) el
 						      where el ->> 'name' = 'Cargo Ready Date Actual')::date
 				    	,(select el ->> 'value'
 						      from jsonb_array_elements(
-										coalesce(fe.shipment_response::jsonb -> 'custom_dates'
-		            								,fe.shipment_response::jsonb -> 'date_templates')) el
+										coalesce(fexd._ship_response::jsonb -> 'custom_dates'
+		            								,fexd._ship_response::jsonb -> 'date_templates')) el
 						      where el ->> 'name' = 'Cargo Ready Date Estimated')::date
 						,(select el ->> 'value'
 						      from jsonb_array_elements(
-										coalesce(fe.remote_shipment_response::jsonb -> 'date_templates'
-		            								,fe.remote_shipment_response::jsonb -> 'custom_dates')) el
+										coalesce(fexo._ship_response::jsonb -> 'date_templates'
+		            								,fexo._ship_response::jsonb -> 'custom_dates')) el
 						      where el ->> 'name' = 'Cargo Ready Date Actual')::date
 				    	,(select el ->> 'value'
 						      from jsonb_array_elements(
-										coalesce(fe.remote_shipment_response::jsonb -> 'custom_dates'
-		            								,fe.remote_shipment_response::jsonb -> 'date_templates')) el
+										coalesce(fexo._ship_response::jsonb -> 'custom_dates'
+		            								,fexo._ship_response::jsonb -> 'date_templates')) el
 						      where el ->> 'name' = 'Cargo Ready Date Estimated')::date
-						,fe.cargo_ready_date_estimates::date
-						,fe.cargo_ready_date_actual::date)																			_crd
+						,fe.cargo_ready_date_actual::date
+						,fe.cargo_ready_date_estimates::date)																		_crd
 					,(select el ->> 'value'
 				      from jsonb_array_elements(
 								coalesce(feic._ship_response::jsonb -> 'date_templates'
@@ -391,8 +391,8 @@ from (
             								,feic._ship_response::jsonb -> 'custom_dates')) el
 				      where el ->> 'name' = 'Goods Cleared at Destination Customs')::date											_goods_cleared_destination
 				   	,coalesce(
-						(fe.shipment_response ->> 'pickup_date'::text)::date
-						,(fe.remote_shipment_response ->> 'pickup_date'::text)::date)												_pickup_date
+						(fexd._ship_response ->> 'pickup_date'::text)::date
+						,(fexo._ship_response ->> 'pickup_date'::text)::date)														_pickup_date
 					,case 
 						when (feic._ship_response ->> 'etd_preference') = 'etd_tracking'
 						and upper(split_part(coalesce(feic._ship_response ->> 'service',fe.service),'_',1)) = 'AIR'
@@ -416,8 +416,8 @@ from (
 					end																												_cargo_ho
 		-- eta date group
 					,coalesce(
-						(fe.shipment_response ->> 'eta_date'::text)::date
-						,(fe.remote_shipment_response ->> 'eta_date'::text)::date)													_eta_iss
+						(fexd._ship_response ->> 'eta_date'::text)::date
+						,(fexo._ship_response ->> 'eta_date'::text)::date)															_eta_iss
 					,case 
 						when (feic._ship_response ->> 'eta_preference') = 'eta_tracking'
 						and (feic._ship_response ->> 'eta_wakeo_date'::text)::date is null
@@ -447,16 +447,16 @@ from (
 						(feic._ship_response ->> 'pta_date__manual_'::text)::date
 						,(feic._ship_response ->> 'pta_date'::text)::date)::date)													_full_eta
 					,coalesce(
-						(fe.shipment_response ->> 'eta_date'::text)::date
-						,(fe.shipment_response ->> 'pta_date__manual_'::text)::date
-						,(fe.shipment_response ->> 'pta_date'::text)::date
-						,(fe.remote_shipment_response ->> 'eta_date'::text)::date
-						,(fe.remote_shipment_response ->> 'pta_date__manual_'::text)::date
-						,(fe.remote_shipment_response ->> 'pta_date'::text)::date)													_effective_eta
+						(fexd._ship_response ->> 'eta_date'::text)::date
+						,(fexd._ship_response ->> 'pta_date__manual_'::text)::date
+						,(fexd._ship_response ->> 'pta_date'::text)::date
+						,(fexo._ship_response ->> 'eta_date'::text)::date
+						,(fexo._ship_response ->> 'pta_date__manual_'::text)::date
+						,(fexo._ship_response ->> 'pta_date'::text)::date)															_effective_eta
 		-- etd date group
 					,coalesce(
-						(fe.shipment_response ->> 'etd_date'::text)::date
-						,(fe.remote_shipment_response ->> 'etd_date'::text)::date)													_etd_iss
+						(fexd._ship_response ->> 'etd_date'::text)::date
+						,(fexo._ship_response ->> 'etd_date'::text)::date)															_etd_iss
 					,case 
 						when (feic._ship_response ->> 'etd_preference') = 'etd_tracking'
 						and (feic._ship_response ->> 'etd_wakeo_date'::text)::date is null
@@ -486,15 +486,15 @@ from (
 							(feic._ship_response ->> 'ptd_date__manual_'::text)::date
 							,(feic._ship_response ->> 'ptd_date'::text)::date)::date)												_full_etd
 					,coalesce(
-						(fe.shipment_response ->> 'pta_date__manual_'::text)::date
-						,(fe.shipment_response ->> 'pta_date'::text)::date
-						,(fe.remote_shipment_response ->> 'pta_date__manual_'::text)::date
-						,(fe.remote_shipment_response ->> 'pta_date'::text)::date)													_pta
+						(fexd._ship_response ->> 'pta_date__manual_'::text)::date
+						,(fexd._ship_response ->> 'pta_date'::text)::date
+						,(fexo._ship_response ->> 'pta_date__manual_'::text)::date
+						,(fexo._ship_response ->> 'pta_date'::text)::date)															_pta
 					,coalesce(
-						(fe.shipment_response ->> 'ptd_date__manual_'::text)::date
-						,(fe.shipment_response ->> 'ptd_date'::text)::date
-						,(fe.remote_shipment_response ->> 'ptd_date__manual_'::text)::date
-						,(fe.remote_shipment_response ->> 'ptd_date'::text)::date)													_ptd
+						(fexd._ship_response ->> 'ptd_date__manual_'::text)::date
+						,(fexd._ship_response ->> 'ptd_date'::text)::date
+						,(fexo._ship_response ->> 'ptd_date__manual_'::text)::date
+						,(fexo._ship_response ->> 'ptd_date'::text)::date)															_ptd
 /*	
 		EDD dates:
 				1. PO line level
@@ -864,6 +864,51 @@ from (
 									and fer.remote_iss_domain = poc.iss_domain
 					) feic
 					on true
+-- added two new joins to dynamically fetch ORIGIN & DEST data from either SHIP_RESPONSE || REMOTE_SHIP_RESPONSE
+				left join lateral (
+								select 
+									*
+									,fem.shipment_response 						_ship_response
+									,fem.shipment_serial_no						_ship_serial
+									,fem.iss_domain 							_iss_dom
+								from portal.freight_unit_enrich fem
+								where 1=1
+									and fem.unit_no = fu.unit_no 
+									and fem.iss_domain <> poc.iss_domain 
+								union all
+								select 
+									*
+									,fer.remote_shipment_response				_ship_response
+									,fer.remote_shipment_serial_no 				_ship_serial
+									,fer.remote_iss_domain 						_iss_dom
+								from portal.freight_unit_enrich fer
+								where 1=1
+									and fer.unit_no = fu.unit_no 
+									and fer.remote_iss_domain <> poc.iss_domain
+					) fexo
+					on true
+				left join lateral (
+								select 
+									*
+									,fem.shipment_response 						_ship_response
+									,fem.shipment_serial_no						_ship_serial
+									,fem.iss_domain 							_iss_dom
+								from portal.freight_unit_enrich fem
+								where 1=1
+									and fem.unit_no = fu.unit_no 
+									and fem.iss_domain = poc.iss_domain 
+								union all
+								select 
+									*
+									,fer.remote_shipment_response				_ship_response
+									,fer.remote_shipment_serial_no 				_ship_serial
+									,fer.remote_iss_domain 						_iss_dom
+								from portal.freight_unit_enrich fer
+								where 1=1
+									and fer.unit_no = fu.unit_no 
+									and fer.remote_iss_domain = poc.iss_domain
+					) fexd
+					on true 
 				left join public.package_types_coms pkl
 					on pkl.code = coalesce(fe.package_type, feic.shipment_response -> 'cargo' -> 0 ->> 'package_type')	
 				left join (
