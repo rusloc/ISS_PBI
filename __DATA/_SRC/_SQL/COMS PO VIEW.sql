@@ -559,7 +559,7 @@ from (
 				    			then 'Pending'
 				    		else 'Received'
 				    end																												_po_status
-					,fe.status																										_status
+					,coalesce(fe.status,'Pending Booking')																			_status
 				    ,fe.grn_no																										_grn_no
 				    ,case 
 				    		when fe.grn_no is not null then 'Complete'
@@ -747,7 +747,7 @@ from (
 									else (feic._ship_response ->> 'arrival_date'::text)::date end
 						else 0 end																									_days_custom_clearance_lt
 					,case 
-					-- _ptd
+				-- _ptd
 						when coalesce(
 								(feic._ship_response ->> 'ptd_date__manual_'::text)::date
 								,(feic._ship_response ->> 'ptd_date'::text)::date) is not null  
@@ -1103,17 +1103,17 @@ from (
 				left join (
 									select 
 										t.serial_no 																		_ship_serial
-										,transshipment_locode
-										,transshipment_port_name
-										,transshipment_days
-										,current_vessel
-										,count(*) over()
+										,max(transshipment_locode)															transshipment_locode
+										,max(transshipment_port_name)														transshipment_port_name
+										,max(transshipment_days)															transshipment_days
+										,max(current_vessel)																current_vessel
 									from portal.materialized_view_shipments_tracker t
 									where 1=1
 										and (transshipment_locode is not null
 										or transshipment_port_name is not null
 										or transshipment_days is not null
 										or current_vessel is not null)
+									group by 1
 							) mt
 					on mt._ship_serial = feic._ship_response ->> 'serial_no'
 			/*
@@ -2048,7 +2048,7 @@ where 1=1
 								) rem 
 	) m 
 where 1=1
---	and _fo_serial= 'EMA000543'
+--	and _fo_serial= 'EMA000181'
 --	and _shipment_serial_iss_job = 'DXBSI26019582'
 --	and _shipment_serial_iss_job in ('DXBSI26013404-4', 'DXBSI26012839', 'DXBAI26010593', 'DXBSI26012679', 'DXBSI25032886', 'DXBSI26012878', 'DXBAI26014600', 'DXBAI26016898', 'DXBAI26007216')
 --	and _mbl_mawb = 'DXBSI26015914'
