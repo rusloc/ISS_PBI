@@ -28,6 +28,7 @@ $sql$
 					,encode(sha256((
 						coalesce(f.id::text,'NA'))::bytea),'hex')																	_fo_id
 					,fe.id																											_fe_id
+					,coalesce(fe.status,'Pending Booking')																			_status
 					,p.supplier_no		 																							_supplier_code
 				-- supplier name form the closest promised date of PO
 					,p.supplier_name 																								_supplier_name
@@ -907,17 +908,17 @@ $sql$
 				left join (
 									select 
 										t.serial_no 																		_ship_serial
-										,transshipment_locode
-										,transshipment_port_name
-										,transshipment_days
-										,current_vessel
-										,count(*) over()
+										,max(transshipment_locode)															transshipment_locode
+										,max(transshipment_port_name)														transshipment_port_name
+										,max(transshipment_days)															transshipment_days
+										,max(current_vessel)																current_vessel
 									from portal.materialized_view_shipments_tracker t
 									where 1=1
 										and (transshipment_locode is not null
 										or transshipment_port_name is not null
 										or transshipment_days is not null
 										or current_vessel is not null)
+									group by 1
 							) mt
 					on mt._ship_serial = feic._ship_response ->> 'serial_no'
 				where 1=1
@@ -1074,36 +1075,6 @@ $sql$
 				or (_days_total_comm_perf is null or _days_total_comm_perf = 0)
 					then null
 		    else null end																													_health_check
-		,case  
-										when (_response_shipment_id <> '' or _response_shipment_id is not null)
-											and regexp_match(_ship_focus_status,'cancel','i') is not null 
-												then 'Cancelled'
-										when (_response_shipment_id <> '' or _response_shipment_id is not null)
-											and _del <= now()::date
-												then 'Delivered'
-										when (_response_shipment_id <> '' or _response_shipment_id is not null)
-											and _arrival_date <= now()::date
-											and (_del is null or _del > now()::date)
-												then 'Arrived'
-										when (_response_shipment_id <> '' or _response_shipment_id is not null or _response_shipment_id is not null)
-											and (_arrival_date > now()::date or _arrival_date is null)
-											and _departure_date <= now()::date 
-												then 'In transit'
-										when (_response_shipment_id <> '' or _response_shipment_id is not null)
-											and (_full_etd is not null)
-												then 'Booked'
-										when (_response_shipment_id <> '' or _response_shipment_id is not null)
-											and (_full_etd is null)
-												then 'Pending Booking'
---										when (_response_shipment_id <> '' or _response_shipment_id is not null)
---											and (_full_etd is null or _full_eta is null)
---											and _pre_alert = 'No'
---											then 'Pending Quotation Approval'
---										when (_response_shipment_id = '' or _response_shipment_id is null)
---											and _fo_serial is not null
---											then 'Pending Quotation'
-										else 'Pending Booking'
-									end																											_status
     		,case 
 				when _e2e_total_lt > 0 and _days_total_comm_perf > 0
 					then 1 - abs((_e2e_total_lt - _days_total_comm_perf)::numeric
