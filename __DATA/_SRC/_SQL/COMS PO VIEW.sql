@@ -418,20 +418,31 @@ from (
 						(fexd._ship_response ->> 'eta_date'::text)::date
 						,(fexo._ship_response ->> 'eta_date'::text)::date)															_eta_iss
 					,case 
-						when (feic._ship_response ->> 'eta_preference') = 'eta_tracking'
-						and (feic._ship_response ->> 'eta_wakeo_date'::text)::date is null
-						and (feic._ship_response ->> 'eta_date'::text)::date is not null
+						when (fexd._ship_response ->> 'eta_preference') = 'eta_tracking'
+						and (fexd._ship_response ->> 'eta_wakeo_date'::text)::date is null
+						and (fexd._ship_response ->> 'eta_date'::text)::date is not null
 							then 'Manual'
-						when (feic._ship_response ->> 'eta_preference') = 'eta_tracking'
-						and (feic._ship_response ->> 'eta_date'::text)::date is not null
-						and (feic._ship_response -> 'wakeo_updates' -> 0 is null)::int = 0
+						when (fexd._ship_response ->> 'eta_preference') = 'eta_tracking'
+						and (fexd._ship_response ->> 'eta_date'::text)::date is not null
+						and (fexd._ship_response -> 'wakeo_updates' -> 0 is null)::int = 0
 							then 'Tracking'
-						when (feic._ship_response ->> 'eta_preference') = 'eta_tracking'
-						and (feic._ship_response ->> 'eta_date'::text)::date is not null
-						and (feic._ship_response -> 'wakeo_updates' -> 0 is null)::int = 1
+						when (fexd._ship_response ->> 'eta_preference') = 'eta_tracking'
+						and (fexd._ship_response ->> 'eta_date'::text)::date is not null
+						and (fexd._ship_response -> 'wakeo_updates' -> 0 is null)::int = 1
 							then 'Tracking (IC)'
-						when (feic._ship_response ->> 'eta_preference') = 'eta_standard'
-						and (feic._ship_response ->> 'eta_date'::text)::date is not null
+						when (fexd._ship_response ->> 'eta_preference') = 'eta_standard'
+						and (fexd._ship_response ->> 'eta_date'::text)::date is not null
+							then 'Manual'
+						when (fexo._ship_response ->> 'eta_preference') = 'eta_tracking'
+						and (fexo._ship_response ->> 'eta_wakeo_date'::text)::date is null
+						and (fexo._ship_response ->> 'eta_date'::text)::date is not null
+							then 'Manual'
+						when (fexo._ship_response ->> 'eta_preference') = 'eta_tracking'
+						and (fexo._ship_response ->> 'eta_date'::text)::date is not null
+						and (fexo._ship_response -> 'wakeo_updates' -> 0 is null)::int = 0
+							then 'Tracking'
+						when (fexo._ship_response ->> 'eta_preference') = 'eta_standard'
+						and (fexo._ship_response ->> 'eta_date'::text)::date is not null
 							then 'Manual'
 						else null end 																								_eta_source
 					,coalesce(
@@ -457,20 +468,31 @@ from (
 						(fexd._ship_response ->> 'etd_date'::text)::date
 						,(fexo._ship_response ->> 'etd_date'::text)::date)															_etd_iss
 					,case 
-						when (feic._ship_response ->> 'etd_preference') = 'etd_tracking'
-						and (feic._ship_response ->> 'etd_wakeo_date'::text)::date is null
-						and (feic._ship_response ->> 'etd_date'::text)::date is not null
+						when (fexd._ship_response ->> 'etd_preference') = 'etd_tracking'
+						and (fexd._ship_response ->> 'etd_wakeo_date'::text)::date is null
+						and (fexd._ship_response ->> 'etd_date'::text)::date is not null
 							then 'Manual'
-						when (feic._ship_response ->> 'etd_preference') = 'etd_tracking'
-						and (feic._ship_response ->> 'etd_date'::text)::date is not null
-						and (feic._ship_response -> 'wakeo_updates' -> 0 is null)::int = 0
+						when (fexd._ship_response ->> 'etd_preference') = 'etd_tracking'
+						and (fexd._ship_response ->> 'etd_date'::text)::date is not null
+						and (fexd._ship_response -> 'wakeo_updates' -> 0 is null)::int = 0
 							then 'Tracking'
-						when (feic._ship_response ->> 'etd_preference') = 'etd_tracking'
-						and (feic._ship_response ->> 'etd_date'::text)::date is not null
-						and (feic._ship_response -> 'wakeo_updates' -> 0 is null)::int = 1
+						when (fexd._ship_response ->> 'etd_preference') = 'etd_tracking'
+						and (fexd._ship_response ->> 'etd_date'::text)::date is not null
+						and (fexd._ship_response -> 'wakeo_updates' -> 0 is null)::int = 1
 							then 'Tracking (IC)'
-						when (feic._ship_response ->> 'etd_preference') = 'etd_standard'
-						and (feic._ship_response ->> 'etd_date'::text)::date is not null
+                                                when (fexd._ship_response ->> 'etd_preference') = 'etd_standard'
+						and (fexd._ship_response ->> 'etd_date'::text)::date is not null
+							then 'Manual'
+						when (fexo._ship_response ->> 'etd_preference') = 'etd_tracking'
+						and (fexo._ship_response ->> 'etd_wakeo_date'::text)::date is null
+						and (fexo._ship_response ->> 'etd_date'::text)::date is not null
+							then 'Manual'
+						when (fexo._ship_response ->> 'etd_preference') = 'etd_tracking'
+						and (fexo._ship_response ->> 'etd_date'::text)::date is not null
+						and (fexo._ship_response -> 'wakeo_updates' -> 0 is null)::int = 0
+							then 'Tracking'
+						when (fexo._ship_response ->> 'etd_preference') = 'etd_standard'
+						and (fexo._ship_response ->> 'etd_date'::text)::date is not null
 							then 'Manual'
 						else null end 																								_etd_source
 					,coalesce(
