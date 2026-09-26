@@ -880,8 +880,8 @@ from (
   					end																												_ontime_order_placement_perf	
   					,case 
   						when coalesce(fexd._ship_response ->> 'origin_country', fexo._ship_response ->> 'origin_country',fe.origin_country) is null
-  							or coalesce(fexd._ship_response ->> 'origin_port', fexo._ship_response ->> 'origin_port',fe.origin_country) is null 
-  							or coalesce(fexd._ship_response ->> 'origin_port', fexo._ship_response ->> 'origin_port',fe.origin_country) = ''
+  							or coalesce(fexd._ship_response ->> 'origin_port', fexo._ship_response ->> 'origin_port',fe.origin_port) is null 
+  							or coalesce(fexd._ship_response ->> 'origin_port', fexo._ship_response ->> 'origin_port',fe.origin_port) = ''
   							or coalesce(
 								regexp_match(fexd._ship_response ->> 'operational_status', 'cancel','i')
 								,regexp_match(fexo._ship_response ->> 'operational_status', 'cancel','i')) is not null
@@ -1559,6 +1559,7 @@ from (
 				when _pta is not null then _pta - _po_need_by_date
 				else null end																													_nbd_2_pta_status
 			,_etd_iss - _ptd																													_etd_2_ptd
+			,_eta_iss - _pta																													_eta_2_pta
 			,_del - _etd_iss																													_del_from_etd
 			,_po_need_by_date - _crd																											_crd_2_rdd
 			,_ptd - _crd																														_ptd_from_crd
@@ -2081,6 +2082,7 @@ where 1=1
 								,null::int 																						_pta_2_rdd
 								,null::int	 																					_nbd_2_pta_status
 								,null::int 																						_etd_2_ptd
+								,null::int 																						_eta_2_pta
 								,null::int 																						_del_from_etd
 								,null::int																						_crd_2_rdd
 								,null::int																						_ptd_from_crd
