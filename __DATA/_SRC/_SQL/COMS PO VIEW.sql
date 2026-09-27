@@ -1,3 +1,9 @@
+/*
+ * STATUS 2026-09-27: HISTORY ONLY, not used in prod.
+ * 		Prod source: "COMS PO VIEW optimized.sql" (perf rewrite, same columns and rows by design).
+ * 		Do not run the update at the end: it would put this old version back into sql_source (PO VIEW).
+ */
+
  
 /*
  * General SQL structure:
@@ -2161,6 +2167,7 @@ $sql$;
 
 
 -- update source code
+-- HISTORY ONLY: this update would overwrite the prod PO VIEW with this old version
 update sql_source 
 set _code = current_setting('dev.po_view') 
 	,_updated = 	now() 

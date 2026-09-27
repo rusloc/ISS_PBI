@@ -1,3 +1,9 @@
+/*
+ * STATUS 2026-09-27: HISTORY ONLY, not used in prod.
+ * 		Prod source: "COMS EK VIEW optmized.sql" (perf rewrite, same output).
+ * 		Do not run the update at the end: it would put this old version back into sql_source (EK VIEW).
+ */
+
 -------------------------------------------------------- SOURCE
 /*
  * 
@@ -1804,6 +1810,7 @@ $sql$;
 
 
 -- 2. run the update using that variable
+-- HISTORY ONLY: this update would overwrite the prod EK VIEW with this old version
 update sql_source 
 set _code = current_setting('dev.ek_view')
 	,_updated = now() 

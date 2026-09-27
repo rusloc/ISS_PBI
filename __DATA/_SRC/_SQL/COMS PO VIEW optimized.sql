@@ -1,3 +1,11 @@
+/*
+ * STATUS 2026-09-27: PROD, the live PO VIEW source (sql_source, _page 'PO VIEW').
+ * 		Replaces "COMS PO VIEW.sql" (kept for history).
+ * 		Changes vs the old file:
+ * 			* perf rewrite, same columns and rows by design: OPT (A) - (G), see the header below
+ * 			* focus__master_shipments schema-qualified (public)
+ */
+
  
 /*
  * General SQL structure:
@@ -31,7 +39,7 @@
  * 		* OPT (F) port names: one hash join instead of a full scan of the ports table per row
  * 		* OPT (G) SLA map: built once per company instead of once per row
  * 		* focus__master_shipments now schema-qualified (public)
- * 		* the "update sql_source" at the end is commented out: running this file never overwrites the live PO VIEW
+ * 		* the "update sql_source" at the end publishes this file as the live PO VIEW
  */
 
 
@@ -2259,8 +2267,7 @@ $sql$;
 
 
 -- update source code
--- DISABLED in the optimized version: nothing in this file writes to the DB.
--- To publish it, run the comparison below first, then uncomment and point it at dev.po_view_opt.
+-- LIVE: this update publishes this file as the prod PO VIEW.
 update sql_source
 set _code = current_setting('dev.po_view_opt')
 	,_updated = 	now()

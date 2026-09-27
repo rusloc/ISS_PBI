@@ -1,3 +1,13 @@
+/*
+ * STATUS 2026-09-27: PROD, the live EK VIEW source (sql_source, _page 'EK VIEW').
+ * 		Replaces "COMS EK VIEW.sql" (kept for history).
+ * 		Changes vs the old file:
+ * 			* perf rewrite, same output: OPT (A) - (G), see the header below
+ * 			* OPT (Q): p.id tie-break in _sort / _primary_po
+ * 			* FIX (1): numeric division in the remaining block's _ontime_order_placement_perf
+ * 		Checked 2026-09-27 against the old file (same OPT (Q) + FIX (1) applied): 1,336 rows, 0 differences; 2.6 s (old: ~7 min).
+ */
+
 -------------------------------------------------------- SOURCE
 /*
  * 
@@ -28,7 +38,7 @@
  * 		* OPT (Q) _sort / _primary_po: p.id added to the order, so the primary PO line is no longer arbitrary on equal promised dates
  * 		* FIX (1) remaining block, _ontime_order_placement_perf: numeric division as in the enriched block
  * 		          (integer division before: 7 days gave 1 - 1 = 0, now 1 - 1.4 = -0.4, same as the enriched block)
- * 		* the "update sql_source" at the end is commented out: running this file never overwrites the live EK VIEW
+ * 		* the "update sql_source" at the end publishes this file as the live EK VIEW
  * 		* a read-only comparison (DO block) against the original sits at the end of the file
  */
 
@@ -1892,12 +1902,11 @@ $sql$;
 
 -- 2. run the update using that variable
 -- 2. update the live source
--- DISABLED in the optimized version: nothing in this file writes to the DB.
--- To publish it, run the comparison below first, then uncomment.
---update sql_source
---set _code = current_setting('dev.ek_view_opt')
---	,_updated = now()
---where _page = 'EK VIEW' and _report = 'COMS';
+-- LIVE: this update publishes this file as the prod EK VIEW.
+update sql_source
+set _code = current_setting('dev.ek_view_opt')
+	,_updated = now()
+where _page = 'EK VIEW' and _report = 'COMS';
 
 
 
@@ -1983,16 +1992,6 @@ begin
 	into _only_old, _only_new;
 	raise notice 'rows only in original %, rows only in optimized %', _only_old, _only_new;
 end $$;
-
-/*
- * NOTE fixes:
- * 		1. APPLIED as FIX (1): remaining block, _ontime_order_placement_perf divided two integers (7 days -> 1, not 1.4).
- * 		   Now the same cast as the enriched block, both blocks return a decimal:
- * 		  			then 1 - abs((p.po_app_dt - p.req_app_dt)::numeric / 5)
- * 		2. NOT applied (left as is on request): calc, _dep_discrepancy_days / _arr_discrepancy_days and
- * 		   main, _ptd_discrepancy_days / _pta_discrepancy_days: "when _ptd is not null and _etd_iss is null then _etd_iss - _ptd"
- * 		   always returns NULL.
- */
 
 
 
