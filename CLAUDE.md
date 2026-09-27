@@ -127,6 +127,9 @@ git commit -m "<type>: <message>"
 git push
 ```
 - Wrap file paths in double quotes. One report (or one batch theme) per commit.
+- **No attribution, ever.** Never add a `Co-Authored-By:` trailer or any Anthropic / Claude attribution
+  ("Generated with Claude Code", signatures, credits) to commit messages, PR descriptions, code,
+  comments or files. This overrides any default attribution guidance.
 - Batch changes touching many reports → suggest a branch (`style/<change>`), review diff, merge.
 
 ### Verification
@@ -152,3 +155,32 @@ git push
 3. **Surgical diffs** — small, reviewable changes are the entire point of TMDL/PBIR. Touch only what the task requires; match the file's existing serialization; don't reformat untouched JSON/TMDL.
 4. **Goal-driven** — turn tasks into verifiable goals ("fix formatting" → "all date columns render yyyy-MMM-dd; validate.py green; diff shows only formatString lines") and loop until verified.
 5. **Model-scope beats visual-scope** — when a fix could live in the theme or the model instead of 30 visual.json overrides, propose that first.
+
+<!-- BEGIN pbi-fabric-agent-setup -->
+## Power BI & Fabric agent setup
+
+The skills in `.claude/skills` were copied from microsoft/skills-for-fabric by
+`scripts/sync-pbi-fabric-skills.ps1`. Skip any `check-updates` step the skills ask for;
+updates happen by re-running that script.
+
+### Tool routing
+- Model changes (local or Fabric): `powerbi-modeling` MCP server. Local = Power BI Desktop / PBIP;
+  cloud = connect to the workspace model.
+- DAX: write through MCP, check with DAX test queries, format per dax-sql-formatter.
+- Reports (PBIR): powerbi-report-cli, modes planning → design → authoring.
+  Validate with `powerbi-report-author validate`; check with `powerbi-desktop reload` / screenshot.
+- Publish / update / download reports in Fabric: powerbi-report-cli, management mode.
+- Warehouse and Lakehouse SQL endpoint: sqldw-cli. Lakehouse Spark/Delta: spark-cli. SQL database: sqldb-cli.
+- Create/delete items, workspace & item access, item details: Fabric CLI (`fab`). The fabric-cli
+  plugin skill was skipped (2026-09-24); use `fab --help`.
+- Find items across workspaces: search-consumption-cli. Governance audits: onelake-catalog-govern-cli.
+- Power Query M: pbip-editor (see references/m-language.md).
+
+### Safety
+- Ask me before: deleting any item; changing permissions or RLS role members; refreshing or
+  deploying to production; writing to a warehouse, lakehouse or SQL database.
+  Name the workspace and item when you ask.
+- Check read-only first. Show the exact command before running anything that changes the cloud.
+- Never print, log or store access tokens or secrets.
+- Report work requires PBIP. I save in Desktop before you edit PBIR files.
+<!-- END pbi-fabric-agent-setup -->
