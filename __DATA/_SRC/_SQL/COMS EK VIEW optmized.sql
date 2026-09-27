@@ -26,6 +26,8 @@
  * 		* OPT (G) port names: one hash join instead of a scan of the ports table per row (the two identical branches merged);
  * 		          country / region names: joins on the same (unique) keys instead of scalar subqueries
  * 		* OPT (Q) _sort / _primary_po: p.id added to the order, so the primary PO line is no longer arbitrary on equal promised dates
+ * 		* FIX (1) remaining block, _ontime_order_placement_perf: numeric division as in the enriched block
+ * 		          (integer division before: 7 days gave 1 - 1 = 0, now 1 - 1.4 = -0.4, same as the enriched block)
  * 		* the "update sql_source" at the end is commented out: running this file never overwrites the live EK VIEW
  * 		* a read-only comparison (DO block) against the original sits at the end of the file
  */
@@ -1834,7 +1836,7 @@ from (
 	  						and (p.po_app_dt - p.req_app_dt) <= 5
 	  							then 1
 							when p.po_app_dt is not null and (p.po_app_dt - p.req_app_dt) > 5
-	  							then 1-ABS((p.po_app_dt - p.req_app_dt)/5)
+	  							then 1 - abs((p.po_app_dt - p.req_app_dt)::numeric / 5)	-- FIX (1): numeric division, as in the enriched block (was integer division)
 	  						else 0
 	  					end																								_ontime_order_placement_perf
 					,case 
@@ -1907,8 +1909,8 @@ $sql$;
  * 		2. in this file: the "set dev.ek_view_opt = $sql$ ... $sql$;" statement
  * 		3. the DO block below. It only runs SELECTs and prints NOTICE lines; it writes nothing.
  * 		   The original runs once (~7 min), the optimized one twice.
- * Like for like: the original gets the same OPT (Q) tie-break (", p.id" in its two window orders) before it runs,
- * 		so both pick the same primary PO line.
+ * Like for like: the original gets the same OPT (Q) tie-break (", p.id" in its two window orders) and the same FIX (1)
+ * 		(numeric division in the remaining block) in memory before it runs; the file "COMS EK VIEW.sql" is not changed.
  * What it compares: every column; numbers rounded to 6 decimals (float sums depend on row order);
  * 		_aux_charge_type, _addl_issued_invoices, _addl_invoice_issue_date, _inner_qty compared as sorted lists
  * 		(string_agg without order by: element order depends on the plan).
@@ -1919,6 +1921,7 @@ $sql$;
 do $$
 declare
 	_pat		text := 'over(partition by f.id order by p.current_po_promised_dt)';
+	_pat_1		text := '1-ABS((p.po_app_dt - p.req_app_dt)/5)';
 	_old		text := current_setting('dev.ek_view');
 	_new		text := current_setting('dev.ek_view_opt');
 	_norm		text := $n$
@@ -1953,6 +1956,11 @@ begin
 		raise exception 'expected 2 window orders "%" in dev.ek_view', _pat;
 	end if;
 	_old := replace(_old, _pat, 'over(partition by f.id order by p.current_po_promised_dt, p.id)');
+	-- the original with FIX (1): exactly 1 place (remaining block)
+	if (length(_old) - length(replace(_old, _pat_1, ''))) / length(_pat_1) <> 1 then
+		raise exception 'expected 1 "%" in dev.ek_view', _pat_1;
+	end if;
+	_old := replace(_old, _pat_1, '1 - abs((p.po_app_dt - p.req_app_dt)::numeric / 5)');
 
 	-- timing of the optimized query: to_jsonb(q) makes it compute every column
 	_t0 := clock_timestamp();
@@ -1977,15 +1985,13 @@ begin
 end $$;
 
 /*
- * NOTE suggested fixes (NOT applied here, so the comparison stays like-for-like):
- * 		1. remaining block, _ontime_order_placement_perf: "(p.po_app_dt - p.req_app_dt)/5" divides two integers (7 days -> 1, not 1.4).
- * 		   Same cast as the enriched block, so both blocks return a decimal:
+ * NOTE fixes:
+ * 		1. APPLIED as FIX (1): remaining block, _ontime_order_placement_perf divided two integers (7 days -> 1, not 1.4).
+ * 		   Now the same cast as the enriched block, both blocks return a decimal:
  * 		  			then 1 - abs((p.po_app_dt - p.req_app_dt)::numeric / 5)
- * 		2. calc, _dep_discrepancy_days / _arr_discrepancy_days and main, _ptd_discrepancy_days / _pta_discrepancy_days:
- * 		   "when _ptd is not null and _etd_iss is null then _etd_iss - _ptd" always returns NULL. Intended: estimate minus plan when both exist:
- * 		  			when _ptd is not null and _etd_iss is not null
- * 		  				then _etd_iss - _ptd
- * 		  	(and _eta_iss / _pta the same way)
+ * 		2. NOT applied (left as is on request): calc, _dep_discrepancy_days / _arr_discrepancy_days and
+ * 		   main, _ptd_discrepancy_days / _pta_discrepancy_days: "when _ptd is not null and _etd_iss is null then _etd_iss - _ptd"
+ * 		   always returns NULL.
  */
 
 
