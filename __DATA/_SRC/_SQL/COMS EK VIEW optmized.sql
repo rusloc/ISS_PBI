@@ -94,7 +94,7 @@ $sql$
 								when jsonb_typeof(r._r) = 'object'
 									then r._r
 								else null
-							end) j(
+							end) j (
 								 arrival_date           text
 								,carrier                text
 								,chargeable_weight      text
@@ -259,9 +259,9 @@ $sql$
 						coalesce(f.id::text,'NA'))::bytea),'hex')																	_fo_id
 					,fe.id																											_fe_id
 					,coalesce(fe.status,'Pending Booking')																			_status
-					,p.supplier_no		 																							_supplier_code
+					,coalesce(slt.supplier_id, p.supplier_no)																		_supplier_code
 				-- supplier name form the closest promised date of PO
-					,p.supplier_name 																								_supplier_name
+					,coalesce(slt.supplier_name, p.supplier_name)																	_supplier_name
 				-- PO number of the closest by promised date
 					,p.po_no 																										_po_no_EKPOREF
 				-- agg remarks into one cell as well and description
@@ -1826,17 +1826,17 @@ from (
 				select
 					poc."id" 																							_client_id
 					,p."ship_to_location"																				_branch_bu
-					,p."id" 																								_pid
-					,p.supplier_no																						_supplier_code
-					,p.supplier_name																						_supplier_name
+					,p."id" 																							_pid
+					,coalesce(slt.supplier_id, p.supplier_no)															_supplier_code
+					,coalesce(slt.supplier_name, p.supplier_name)														_supplier_name
 					,p.po_no 																							_po_no_EKPOREF
-					,p.item_code																							_item_code
+					,p.item_code																						_item_code
 					,p.po_desc																							_po_desc
 					,p.po_remarks																						_po_remarks
 					,p.po_desc																							_commodity
 					,poc.company_name																					_client
 					,p.req_app_dt																						_pr_appr_date
-					,p.po_app_dt																							_po_app_date
+					,p.po_app_dt																						_po_app_date
 					,p.po_date																							_po_creation_date
 					,(p.po_app_dt + interval '2 days')::date 															_po_recd_date 
 					,p.current_po_promised_dt																			_po_need_by_date
@@ -1907,6 +1907,10 @@ update sql_source
 set _code = current_setting('dev.ek_view_opt')
 	,_updated = now()
 where _page = 'EK VIEW' and _report = 'COMS';
+
+
+
+
 
 
 
