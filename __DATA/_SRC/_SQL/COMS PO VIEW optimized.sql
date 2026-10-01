@@ -20,7 +20,6 @@
  * 			> adds Exception at PO level (master line)
  * 
  * Logic:
- * 
  * 		* PO lines are showing shipped & remaining
  * 		* shipped PO lines show all info for PO line + FO (shipment) line
  * 		* remainig PO lines show only remaning qnty (ordered qnty - shipped qnty)
@@ -344,7 +343,7 @@ from (
 					,current_vessel																									_tranship_vessel
 		-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> PURCHASEORDERLINE: fields from EK view (copy logic except one-line agg -> flat out)
 					,pol."ship_to_location" 																						_branch_bu
-					,coalesce(slt.supplier_id, pol.supplier_no)																	_supplier_code
+					,coalesce(slt.supplier_id, pol.supplier_no)																		_supplier_code
 					,coalesce(slt.supplier_name, pol.supplier_name)																	_supplier_name
 					,pol.po_no 																										_po_no_ekporef
 					,pol.po_remarks 																								_po_remarks
@@ -1956,9 +1955,9 @@ where 1=1
 								,null::int																						_tranship_days
 								,null																							_tranship_vessel
 		-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> PURCHASEORDERLINE: fields from EK view (copy logic except one-line agg -> flat out)
-								,pol."ship_to_location" 																			_branch_bu
-								,pol.supplier_no		 																			_supplier_code
-								,pol.supplier_name 																				_supplier_name
+								,pol."ship_to_location" 																		_branch_bu
+								,coalesce(slt.supplier_id, pol.supplier_no)														_supplier_code
+								,coalesce(slt.supplier_name, pol.supplier_name)													_supplier_name
 								,pol.po_no 																						_po_no_EKPOREF
 								,pol.po_remarks 																					_po_remarks
 								,pol.po_desc 																					_commodity
@@ -1985,30 +1984,30 @@ where 1=1
 										then 'Cancelled'
 									when regexp_match(pol.status, 'close','i') is not null
 										then 'Closed'
-									else initcap(pol.status) end																	_po_line_status
+									else initcap(pol.status) end																_po_line_status
 								,pol.item_code 																					_item_code
 								,pol.inco_term_po																				_incoterms
 								,pol.inco_term_desc_po																			_incoterms_desc
 								,pol.req_app_dt																					_pr_appr_date
 								,pol.po_app_dt																					_po_app_date
-								,pol.po_date																						_po_creation_date
+								,pol.po_date																					_po_creation_date
 								,(pol.po_app_dt + interval '2 days')::date 														_po_recd_date 
 								,pol.current_po_promised_dt																		_po_need_by_date
 					-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> FO LINES
-								,null::text 																						_mode
+								,null::text 																					_mode
 								,null::text																						_transport_mode
 								,null::text 																					_shipment_type
 								,null::text 																					_direction
 								,null::text 																					_lob
-								,null::text 																						_routed_by
-								,null::text 																						_ship_remarks_updates
-								,null::text 																						_ship_billing_remarks
+								,null::text 																					_routed_by
+								,null::text 																					_ship_remarks_updates
+								,null::text 																					_ship_billing_remarks
 								,null 																							_incoterms_fo
 								,null																							_shipment_serial_iss_job
 								,null																							_response_shipment_id
 								,null::int																						_focus_ship_id
-								,null::text 																						_inbound_iss_job_no
-								,null::text 																						_outbound_iss_job_no
+								,null::text 																					_inbound_iss_job_no
+								,null::text 																					_outbound_iss_job_no
 								,null																							_hbl_hawb
 								,null																							_mbl_mawb
 								,null::text 																					_container_no
@@ -2151,9 +2150,9 @@ where 1=1
 				  					end																							_ontime_order_placement_perf
 								,null::numeric																					_days_total_comm_perf
 								,null::text	 																					_ship_focus_status
-								,null::text 																						_pre_alert
-								,null::text 																						_dn
-								,null::jsonb																						_sla_map
+								,null::text 																					_pre_alert
+								,null::text 																					_dn
+								,null::jsonb																					_sla_map
 								,null::text 																					_focus_link
 								,null::date 																					_eta_last_change
 								,null::date 																					_etd_last_change
@@ -2243,6 +2242,7 @@ where 1=1
 								) rem 
 	) m 
 where 1=1
+--	and _po_no_ekporef = '425012937-2'
 --	and _fo_serial= 'EMA000181'
 --	and _shipment_serial_iss_job = 'DXBSI26019582'
 --	and _shipment_serial_iss_job in ('DXBSI26013404-4', 'DXBSI26012839', 'DXBAI26010593', 'DXBSI26012679', 'DXBSI25032886', 'DXBSI26012878', 'DXBAI26014600', 'DXBAI26016898', 'DXBAI26007216')
